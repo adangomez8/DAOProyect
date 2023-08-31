@@ -1,13 +1,9 @@
 package Factory;
 
-import Daos.ClienteDAO;
-import Daos.FacturaDAO;
-import Daos.Factura_ProductoDAO;
 import Daos.MYSQL.MYSQL_ClienteDAO;
 import Daos.MYSQL.MYSQL_FacturaDAO;
 import Daos.MYSQL.MYSQL_FacturaProductoDAO;
 import Daos.MYSQL.MYSQL_ProductoDAO;
-import Daos.ProductoDAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -50,23 +46,23 @@ public class MYSQL_FactoryDAO extends FactoryDAO{
 
 
     @Override
-    public ProductoDAO getProductoDAO() {
+    public MYSQL_ProductoDAO getProductoDAO() {
         return new MYSQL_ProductoDAO();
     }
 
     @Override
-    public ClienteDAO getClienteDAO() {
+    public MYSQL_ClienteDAO getClienteDAO() {
         return new MYSQL_ClienteDAO();
     }
 
     @Override
-    public Factura_ProductoDAO getFacturaProductoDAO() {
+    public MYSQL_FacturaProductoDAO getFacturaProductoDAO() {
         return new MYSQL_FacturaProductoDAO();
     }
 
     @Override
-    public FacturaDAO getFacturaDAO() {
-        return  new MYSQL_FacturaDAO();
+    public MYSQL_FacturaDAO getFacturaDAO() {
+        return new MYSQL_FacturaDAO();
     }
 
 }

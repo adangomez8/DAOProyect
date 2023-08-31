@@ -1,11 +1,12 @@
 package Daos.MYSQL;
 
-import Daos.ClienteDAO;
 import Entities.Cliente;
 import Factory.MYSQL_FactoryDAO;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+
+import DaoCrudInterface.DAOCrud;
 
 import java.io.FileReader;
 import java.sql.PreparedStatement;
@@ -13,7 +14,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MYSQL_ClienteDAO extends MYSQL_FactoryDAO implements ClienteDAO {
+public class MYSQL_ClienteDAO extends MYSQL_FactoryDAO implements DAOCrud<Cliente> {
 
     public MYSQL_ClienteDAO() {
         super();

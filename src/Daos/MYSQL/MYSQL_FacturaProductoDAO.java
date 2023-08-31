@@ -1,12 +1,12 @@
 package Daos.MYSQL;
 
-import Daos.Factura_ProductoDAO;
 import Entities.Factura_Producto;
-import Entities.Producto;
 import Factory.MYSQL_FactoryDAO;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+
+import DaoCrudInterface.DAOCrud;
 
 import java.io.FileReader;
 import java.sql.PreparedStatement;
@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MYSQL_FacturaProductoDAO extends MYSQL_FactoryDAO implements Factura_ProductoDAO {
+public class MYSQL_FacturaProductoDAO extends MYSQL_FactoryDAO implements DAOCrud<Factura_Producto> {
     public MYSQL_FacturaProductoDAO(){
         super();
     }

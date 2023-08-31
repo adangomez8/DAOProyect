@@ -1,17 +1,18 @@
-import Daos.ClienteDAO;
-import Daos.FacturaDAO;
-import Daos.Factura_ProductoDAO;
-import Daos.ProductoDAO;
-import Entities.Cliente;
+
+/*import Entities.Cliente;
 import Entities.Factura;
 import Entities.Factura_Producto;
-import Entities.Producto;
+import Entities.Producto;*/
+import Daos.MYSQL.MYSQL_ClienteDAO;
+import Daos.MYSQL.MYSQL_FacturaDAO;
+import Daos.MYSQL.MYSQL_FacturaProductoDAO;
+import Daos.MYSQL.MYSQL_ProductoDAO;
 import Factory.FactoryDAO;
 
 public class Main {
     public static void main(String[] args) {
         FactoryDAO factoryDAO = FactoryDAO.getFactoryDAO(1);
-        ClienteDAO clienteDAO = factoryDAO.getClienteDAO();
+        MYSQL_ClienteDAO clienteDAO= factoryDAO.getClienteDAO();
         clienteDAO.createTable();
        /*
         clienteDAO.insert(new Cliente(1,"Jose","joseguidi02@gmail.com"));
@@ -21,7 +22,7 @@ public class Main {
         clienteDAO.insert(new Cliente(5,"Emiliano","Emiliano@gmail.com"));
         */
 
-        ProductoDAO productoDAO = factoryDAO.getProductoDAO();
+        MYSQL_ProductoDAO productoDAO = factoryDAO.getProductoDAO();
         productoDAO.createTable();
        /*
         productoDAO.insert(new Producto(1,"Manteca",25));
@@ -30,7 +31,7 @@ public class Main {
         productoDAO.insert(new Producto(4,"Palta",250));
         */
 
-        FacturaDAO facturaDAO = factoryDAO.getFacturaDAO();
+        MYSQL_FacturaDAO facturaDAO = factoryDAO.getFacturaDAO();
         facturaDAO.createTable();
         /*
         facturaDAO.insert(new Factura(1,1));
@@ -40,7 +41,7 @@ public class Main {
         facturaDAO.insert(new Factura(1,5));
          */
 
-        Factura_ProductoDAO factura_productoDAO = factoryDAO.getFacturaProductoDAO();
+        MYSQL_FacturaProductoDAO factura_productoDAO = factoryDAO.getFacturaProductoDAO();
         factura_productoDAO.createTable();
         /*
         factura_productoDAO.insert(new Factura_Producto(1,4,3));
