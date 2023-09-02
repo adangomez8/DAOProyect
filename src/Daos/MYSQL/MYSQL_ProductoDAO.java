@@ -109,6 +109,41 @@ public class MYSQL_ProductoDAO extends MYSQL_FactoryDAO implements DAOCrud<Produ
             return false;
         }
     }
+
+
+    public void getProductoConMasRecaudacion(){
+
+        String sentencia = "SELECT p.idProducto, p.nombre, SUM(fp.cantidad * p.valor) AS recaudacion " +
+                "FROM producto p " +
+                "JOIN factura_producto fp ON p.idProducto = fp.idProducto " +
+                "GROUP BY p.idProducto, p.nombre " +
+                "ORDER BY recaudacion DESC " +
+                "LIMIT 1";
+
+        try {
+            this.createConnection();
+            PreparedStatement ps = conn.prepareStatement(sentencia);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int idProducto = rs.getInt("idProducto");
+                String nombreProducto = rs.getString("nombre");
+                double recaudacion = rs.getDouble("recaudacion");
+
+                System.out.println("Producto que más recaudó:");
+                System.out.println("ID: " + idProducto);
+                System.out.println("Nombre: " + nombreProducto);
+                System.out.println("Recaudación Total: " + recaudacion);
+            } else {
+                System.out.println("No se encontraron productos.");
+            }
+
+                this.closeConnection();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
     public void readCSV(){
         try {
             CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new

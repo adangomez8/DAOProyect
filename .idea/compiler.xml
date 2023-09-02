@@ -10,6 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="DAOProyect" target="19" />
       <module name="Integrador_Entregable" target="19" />
     </bytecodeTargetLevel>
   </component>
