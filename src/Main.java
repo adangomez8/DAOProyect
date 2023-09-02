@@ -23,6 +23,8 @@ public class Main {
         facturaDAO.createTable();
         factura_productoDAO.createTable();*/
 
-        productoDAO.getProductoConMasRecaudacion();
+        //productoDAO.getProductoConMasRecaudacion();
+
+        clienteDAO.getClientes();
     }
 }

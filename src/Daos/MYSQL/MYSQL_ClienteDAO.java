@@ -88,6 +88,36 @@ public class MYSQL_ClienteDAO extends MYSQL_FactoryDAO implements DAOCrud<Client
         }
     }
 
+    public void getClientes(){
+
+        String sentencia = "SELECT c.idCliente, c.nombre, SUM(fp.cantidad * p.valor) AS total_facturado "
+                + "FROM cliente c "
+                + "JOIN factura f ON c.idCliente = f.idCliente "
+                + "JOIN factura_producto fp ON f.idFactura = fp.idFactura "
+                + "JOIN producto p ON fp.idProducto = p.idProducto "
+                + "GROUP BY c.idCliente, c.nombre "
+                + "ORDER BY total_facturado DESC";
+
+        try {
+            this.createConnection();
+            PreparedStatement ps = conn.prepareStatement(sentencia);
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println("Lista de clientes ordenada por el total facturado:");
+
+            while (rs.next()) {
+                int idCliente = rs.getInt("idCliente");
+                String nombreCliente = rs.getString("nombre");
+                double totalFacturado = rs.getDouble("total_facturado");
+
+                System.out.println("ID Cliente: " + idCliente + ", Nombre: " + nombreCliente + ", Total Facturado: $" + totalFacturado);
+            }
+            this.closeConnection();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
     public void readCSV(){
         try {
             CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new
