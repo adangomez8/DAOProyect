@@ -30,7 +30,6 @@ public class MYSQL_FacturaDAO extends MYSQL_FactoryDAO implements DAOCrud<Factur
             this.createConnection();
             conn.prepareStatement(sentencia).execute();
             conn.commit();
-            this.readCSV();
             this.closeConnection();
         }catch (Exception e){
             System.out.println(e.getMessage());

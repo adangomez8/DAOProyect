@@ -26,7 +26,6 @@ public class MYSQL_ProductoDAO extends MYSQL_FactoryDAO implements DAOCrud<Produ
             this.createConnection();
             conn.prepareStatement(sentencia).execute();
             conn.commit();
-            this.readCSV();
             this.closeConnection();
         }catch (Exception e){
             System.out.println(e.getMessage());

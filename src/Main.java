@@ -1,8 +1,5 @@
 
-/*import Entities.Cliente;
-import Entities.Factura;
-import Entities.Factura_Producto;
-import Entities.Producto;*/
+
 import Daos.MYSQL.MYSQL_ClienteDAO;
 import Daos.MYSQL.MYSQL_FacturaDAO;
 import Daos.MYSQL.MYSQL_FacturaProductoDAO;
@@ -14,17 +11,25 @@ public class Main {
         FactoryDAO factoryDAO = FactoryDAO.getFactoryDAO(1);
 
         MYSQL_ClienteDAO clienteDAO= factoryDAO.getClienteDAO();
+        clienteDAO.createTable();
+        clienteDAO.readCSV();
+        
         MYSQL_ProductoDAO productoDAO = factoryDAO.getProductoDAO();
-        MYSQL_FacturaDAO facturaDAO = factoryDAO.getFacturaDAO();
-        MYSQL_FacturaProductoDAO factura_productoDAO = factoryDAO.getFacturaProductoDAO();
-
-        /*clienteDAO.createTable();
         productoDAO.createTable();
+        productoDAO.readCSV();
+        
+        MYSQL_FacturaDAO facturaDAO = factoryDAO.getFacturaDAO();
         facturaDAO.createTable();
-        factura_productoDAO.createTable();*/
+        facturaDAO.readCSV();
+        
+        MYSQL_FacturaProductoDAO factura_productoDAO = factoryDAO.getFacturaProductoDAO();
+        factura_productoDAO.createTable();
+        factura_productoDAO.readCSV();
 
         System.out.println(productoDAO.getProductoConMasRecaudacion());
+        
+        System.out.println("-----------");
 
-        //clienteDAO.getClientes();
+        clienteDAO.getClientesPorFacturacion();
     }
 }

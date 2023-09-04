@@ -33,7 +33,6 @@ public class MYSQL_FacturaProductoDAO extends MYSQL_FactoryDAO implements DAOCru
             this.createConnection();
             conn.prepareStatement(sentencia).execute();
             conn.commit();
-            this.readCSV();
             this.closeConnection();
         }catch (Exception e){
             System.out.println(e.getMessage());

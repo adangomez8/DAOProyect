@@ -27,7 +27,6 @@ public class MYSQL_ClienteDAO extends MYSQL_FactoryDAO implements DAOCrud<Client
             this.createConnection();
             conn.prepareStatement(sentencia).execute();
             conn.commit();
-            this.readCSV();
             this.closeConnection();
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -88,7 +87,7 @@ public class MYSQL_ClienteDAO extends MYSQL_FactoryDAO implements DAOCrud<Client
         }
     }
 
-    public void getClientes(){
+    public void getClientesPorFacturacion(){
 
         String sentencia = "SELECT c.idCliente, c.nombre, SUM(fp.cantidad * p.valor) AS total_facturado "
                 + "FROM cliente c "
