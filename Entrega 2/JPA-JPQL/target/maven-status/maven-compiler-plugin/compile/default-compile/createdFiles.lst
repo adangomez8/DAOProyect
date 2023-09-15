@@ -1,0 +1,6 @@
+CrudJPA\Insert.class
+Entities\Direccion.class
+Entities\Socio.class
+CrudJPA\Select.class
+Entities\Persona.class
+Entities\Turno.class
