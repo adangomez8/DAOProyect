@@ -19,8 +19,8 @@ public class InfoCarrera {
 	@JoinColumn(name="ID_Carrera")
 	private Carrera carrera;
 	
-	@Column
-	private boolean graduado=false;
+	@Column(nullable = false)
+	private boolean graduado;
 	
 	@Column
 	private int antiguedad;

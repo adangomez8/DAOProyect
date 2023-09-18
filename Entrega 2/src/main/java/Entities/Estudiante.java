@@ -4,11 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,7 +20,7 @@ public class Estudiante {
 	@Column
 	private String apellido;
 	
-	@Column
+	@Column(nullable = false)
 	private int nroLibreta;
 	
 	@OneToMany
@@ -32,6 +28,10 @@ public class Estudiante {
 	
 	@Column
 	private String localidad;
+
+	public int getNroDoc() {
+		return nroDoc;
+	}
 
 	public String getNombre() {
 		return nombre;
