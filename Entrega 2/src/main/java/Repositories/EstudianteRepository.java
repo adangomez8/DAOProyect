@@ -16,13 +16,13 @@ public class EstudianteRepository implements CRUDRepository<Estudiante>{
 		this.emf = emf;
 	}
 
-	@Override
+	
 	public Estudiante getById(int id) {
 		EntityManager em = emf.createEntityManager();
 		return em.find(Estudiante.class,id);
 	}
 
-	@Override
+	
 	public void create(Estudiante element) {
 
 		EntityManager em = emf.createEntityManager();
@@ -32,7 +32,7 @@ public class EstudianteRepository implements CRUDRepository<Estudiante>{
 		em.close();
 	}
 
-	@Override
+	
 	public void update(Estudiante element) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -45,7 +45,7 @@ public class EstudianteRepository implements CRUDRepository<Estudiante>{
 		em.close();
 	}
 
-	@Override
+	
 	public void delete(Estudiante element) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -67,11 +67,31 @@ public class EstudianteRepository implements CRUDRepository<Estudiante>{
 		EntityManager em = emf.createEntityManager();
 		Query consulta2D = em.createQuery("SELECT e FROM Estudiante e WHERE e.nroLibreta = ?1");
 		consulta2D.setParameter(1,nroLibreta);
+		@SuppressWarnings("unchecked")
 		List<Estudiante>resultados= consulta2D.getResultList();
 		if(resultados.isEmpty()){
 			return null;
 		}else{
 			return  resultados.get(0);
 		}
+	}
+	
+	public List<Estudiante> getEstudianteByGenero(String genero) {
+		EntityManager em= emf.createEntityManager();
+		Query jpql= em.createQuery("SELECT e FROM Estudiante e WHERE e.genero =?1");
+		jpql.setParameter(1, genero);
+		@SuppressWarnings("unchecked")
+		List<Estudiante>resultado= jpql.getResultList();
+		return resultado;
+	}
+	
+	public List<Estudiante> getEstudianteByCarreraAndLocalidad(String localidad, int id){
+		EntityManager em= emf.createEntityManager();
+		Query jpql= em.createQuery("SELECT e FROM Estudiante e JOIN e.carreras c WHERE c.id=?2 AND e.localidad=?1");
+		jpql.setParameter(1, localidad);
+		jpql.setParameter(2, id);
+		@SuppressWarnings("unchecked")
+		List<Estudiante>resultado= jpql.getResultList();
+		return resultado;
 	}
 }

@@ -1,7 +1,10 @@
 package Repositories;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 import Entities.Carrera;
 
@@ -34,7 +37,6 @@ public class CarreraRepository implements CRUDRepository<Carrera>{
 		em.close();
 	}
 
-	@Override
 	public void update(Carrera element) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -45,5 +47,15 @@ public class CarreraRepository implements CRUDRepository<Carrera>{
 		}
 		em.getTransaction().commit();
 		em.close();
+	}
+	
+	public List<Carrera> getCarreraByInscriptos(){
+		EntityManager em= emf.createEntityManager();
+		String jpql= "SELECT c FROM Carrera c WHERE SIZE(c.estudiantes) >0 ORDER BY SIZE(c.estudiantes)";
+		Query query=em.createQuery(jpql);
+		@SuppressWarnings("unchecked")
+		List<Carrera>resultado= query.getResultList();
+		return resultado;
+		
 	}
 }

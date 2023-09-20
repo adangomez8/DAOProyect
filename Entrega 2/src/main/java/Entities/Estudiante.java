@@ -20,6 +20,9 @@ public class Estudiante {
 	@Column
 	private String apellido;
 	
+	@Column
+	private String genero;
+	
 	@Column(nullable = false)
 	private int nroLibreta;
 	
@@ -74,13 +77,22 @@ public class Estudiante {
 		this.localidad = localidad;
 	}
 
-	public Estudiante(int nroDoc, String nombre, String apellido, int nroLibreta, String localidad) {
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public Estudiante(int nroDoc, String nombre, String apellido, int nroLibreta, String localidad, String genero) {
 		super();
 		this.nroDoc = nroDoc;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.nroLibreta = nroLibreta;
 		this.localidad = localidad;
+		this.genero=genero;
 	}
 
 	public Estudiante() {

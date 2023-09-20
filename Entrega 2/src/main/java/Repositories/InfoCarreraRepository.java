@@ -34,7 +34,7 @@ public class InfoCarreraRepository implements CRUDRepository<InfoCarrera>{
 		em.close();
 	}
 
-	@Override
+	
 	public void update(InfoCarrera element) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
