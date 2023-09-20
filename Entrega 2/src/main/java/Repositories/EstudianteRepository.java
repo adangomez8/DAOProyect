@@ -67,13 +67,7 @@ public class EstudianteRepository implements CRUDRepository<Estudiante>{
 		EntityManager em = emf.createEntityManager();
 		Query consulta2D = em.createQuery("SELECT e FROM Estudiante e WHERE e.nroLibreta = ?1");
 		consulta2D.setParameter(1,nroLibreta);
-		@SuppressWarnings("unchecked")
-		List<Estudiante>resultados= consulta2D.getResultList();
-		if(resultados.isEmpty()){
-			return null;
-		}else{
-			return  resultados.get(0);
-		}
+		return (Estudiante) consulta2D.getSingleResult();
 	}
 	
 	public List<Estudiante> getEstudianteByGenero(String genero) {
