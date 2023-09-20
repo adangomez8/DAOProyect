@@ -21,8 +21,7 @@ public class CarreraRepository implements CRUDRepository<Carrera>{
 	public void create(Carrera c) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		Carrera car= new Carrera(c.getNombre(),c.getDuracion());
-		em.persist(car);
+		em.persist(c);
 		em.getTransaction().commit();
 		em.close();
 	}

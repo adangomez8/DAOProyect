@@ -21,8 +21,7 @@ public class InfoCarreraRepository implements CRUDRepository<InfoCarrera>{
 	public void create(InfoCarrera inf) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		InfoCarrera i= new InfoCarrera(inf.getCarrera(),inf.isGraduado(),inf.getAntiguedad());
-		em.persist(i);
+		em.persist(inf);
 		em.getTransaction().commit();
 		em.close();
 	}

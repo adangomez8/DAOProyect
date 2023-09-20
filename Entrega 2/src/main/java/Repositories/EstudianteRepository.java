@@ -56,12 +56,22 @@ public class EstudianteRepository implements CRUDRepository<Estudiante>{
 	
 	public List<Estudiante> getEstudianteOrderByDoc() {
 		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
 		String jpql= "SELECT e FROM Estudiante e ORDER BY e.nroDoc ASC";
 		Query query=em.createQuery(jpql);
 		@SuppressWarnings("unchecked")
 		List<Estudiante>resultados= query.getResultList();
 		return resultados;
 	}
-	
+
+	public Estudiante getEstudianteByLibreta(int nroLibreta){
+		EntityManager em = emf.createEntityManager();
+		Query consulta2D = em.createQuery("SELECT e FROM Estudiante e WHERE e.nroLibreta = ?1");
+		consulta2D.setParameter(1,nroLibreta);
+		List<Estudiante>resultados= consulta2D.getResultList();
+		if(resultados.isEmpty()){
+			return null;
+		}else{
+			return  resultados.get(0);
+		}
+	}
 }
