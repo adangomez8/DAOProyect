@@ -1,4 +1,4 @@
-package main.java.Repositories;
+package Repositories;
 
 import javax.persistence.EntityManager;
 
@@ -26,4 +26,8 @@ public class InfoCarreraRepository implements CRUDRepository<InfoCarrera>{
 		em.remove(inf);
 	}
 
+	@Override
+	public void update(InfoCarrera element) {
+
+	}
 }
