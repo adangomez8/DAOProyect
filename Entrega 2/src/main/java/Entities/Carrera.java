@@ -1,12 +1,15 @@
 package Entities;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,9 +24,15 @@ public class Carrera {
 	@Column
 	private double duracion;
 	
-	@OneToMany
-	private List<Estudiante> estudiantes;
+	@OneToMany()
+        private List<Estudiante> estudiantes;
 
+    public int getId() {
+        return id;
+    }
+
+        
+        
 	public String getNombre() {
 		return nombre;
 	}
@@ -48,12 +57,27 @@ public class Carrera {
 		super();
 		this.nombre = nombre;
 		this.duracion = duracion;
+                estudiantes=new ArrayList();
 	}
 
 	public Carrera() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+        
+        public List<Estudiante> getEstudiantes(){
+            return new ArrayList(estudiantes);
+        }
+        
+        public boolean equals(Object o){
+            Carrera c=(Carrera)o;
+            return this.getId()==c.getId();
+        }
+        
+    @Override
+    public String toString() {
+        return "Carrera{" + "id=" + id + ", nombre=" + nombre + ", duracion=" + duracion + '}';
+    }
 	
 	
 	

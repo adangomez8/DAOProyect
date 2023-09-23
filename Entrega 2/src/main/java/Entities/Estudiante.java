@@ -1,6 +1,8 @@
 package Entities;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -16,6 +20,7 @@ public class Estudiante {
 
 	
 	@Id
+        @Column(name="nroDoc_estudiante")
 	private int nroDoc;
 	
 	@Column
@@ -27,12 +32,19 @@ public class Estudiante {
 	@Column
 	private int nroLibreta;
 	
-	@OneToMany
-	private List<InfoCarrera> carreras;
-	
+        @OneToMany
+        private List<InfoCarrera> infoCarreras = new ArrayList<>();
+
 	@Column
 	private String localidad;
 
+    @Override
+    public String toString() {
+        return "Estudiante{" + "nroDoc=" + nroDoc + ", nombre=" + nombre + ", apellido=" + apellido + ", nroLibreta=" + nroLibreta + ", localidad=" + localidad + '}';
+    }
+
+        
+        
 	public String getNombre() {
 		return nombre;
 	}
@@ -57,15 +69,15 @@ public class Estudiante {
 		this.nroLibreta = nroLibreta;
 	}
 
-	public List<InfoCarrera> getCarreras() {
-		return carreras;
-	}
 
-	public void addCarrera(Carrera carrera,boolean graduado, int antiguedad) {
-		InfoCarrera c=new InfoCarrera(carrera,graduado,antiguedad);
-		carreras.add(c);
-	}
-
+       public void addInfoCarrera(InfoCarrera c){
+           infoCarreras.add(c);
+       }
+        
+       
+       public List<InfoCarrera>getInfoCarreras(){
+           return new ArrayList(this.infoCarreras);
+       }
 	public String getLocalidad() {
 		return localidad;
 	}
@@ -81,6 +93,7 @@ public class Estudiante {
 		this.apellido = apellido;
 		this.nroLibreta = nroLibreta;
 		this.localidad = localidad;
+               
 	}
 
 	public Estudiante() {
