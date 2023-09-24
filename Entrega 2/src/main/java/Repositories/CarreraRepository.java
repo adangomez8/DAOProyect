@@ -43,7 +43,7 @@ public class CarreraRepository implements CRUDRepository<Carrera>{
 	public void update(Carrera element) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		if(em.contains(element)){
+		if(em.find(Carrera.class,element.getId()) != null){
 			em.merge(element);
 		}else{
 			// si no esta no quiero agregarlo

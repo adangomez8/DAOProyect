@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
+import Entities.Carrera;
 import Entities.Estudiante;
 
 public class EstudianteRepository implements CRUDRepository<Estudiante>{
@@ -24,10 +25,6 @@ public class EstudianteRepository implements CRUDRepository<Estudiante>{
 
 	
 	public void create(Estudiante element) {
-<<<<<<< HEAD
-
-=======
->>>>>>> experimental
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(element);
@@ -39,7 +36,7 @@ public class EstudianteRepository implements CRUDRepository<Estudiante>{
 	public void update(Estudiante element) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		if(em.contains(element)){
+		if(em.find(Estudiante.class,element.getNroDoc()) != null){
 			em.merge(element);
 		}else{
 			// si no esta no quiero agregarlo
@@ -82,11 +79,11 @@ public class EstudianteRepository implements CRUDRepository<Estudiante>{
 		return resultado;
 	}
 	
-	public List<Estudiante> getEstudianteByCarreraAndLocalidad(String localidad, int id){
+	public List<Estudiante> getEstudianteByCarreraAndLocalidad(String localidad, Carrera car){
 		EntityManager em= emf.createEntityManager();
-		Query jpql= em.createQuery("SELECT e FROM Estudiante e JOIN e.carreras c WHERE c.id=?2 AND e.localidad=?1");
-		jpql.setParameter(1, localidad);
-		jpql.setParameter(2, id);
+		Query jpql = em.createQuery("SELECT e FROM Estudiante e JOIN e.infoCarreras ic WHERE e.localidad = ?1 AND ic.carrera = ?2");
+		jpql.setParameter(1,localidad);
+		jpql.setParameter(2,car);
 		@SuppressWarnings("unchecked")
 		List<Estudiante>resultado= jpql.getResultList();
 		return resultado;

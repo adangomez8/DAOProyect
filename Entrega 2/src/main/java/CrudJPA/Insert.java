@@ -34,7 +34,7 @@ public class Insert {
     public static void main(String[] args){
         
     
-        EntityManagerFactory emf= Persistence.createEntityManagerFactory("ejemplito");
+       /* EntityManagerFactory emf= Persistence.createEntityManagerFactory("ejemplito");
         EntityManager em=emf.createEntityManager();
         em.getTransaction().begin();
        
@@ -61,6 +61,6 @@ public class Insert {
         
         em.getTransaction().commit();
         em.close();
-        emf.close();
+        emf.close();*/
     }
 }

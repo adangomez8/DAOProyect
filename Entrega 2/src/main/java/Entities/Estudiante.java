@@ -36,13 +36,26 @@ public class Estudiante {
 	@Column
 	private String localidad;
 
-    @Override
-    public String toString() {
-        return "Estudiante{" + "nroDoc=" + nroDoc + ", nombre=" + nombre + ", apellido=" + apellido + ", nroLibreta=" + nroLibreta + ", localidad=" + localidad + '}';
-    }
+	@Column
+	private String genero;
 
-        
-        
+	@Override
+	public String toString() {
+		return "Estudiante{" +
+				"nroDoc=" + nroDoc +
+				", nombre='" + nombre + '\'' +
+				", apellido='" + apellido + '\'' +
+				", nroLibreta=" + nroLibreta +
+				", infoCarreras=" + infoCarreras +
+				", localidad='" + localidad + '\'' +
+				", genero='" + genero + '\'' +
+				'}';
+	}
+
+	public int getNroDoc() {
+		return nroDoc;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -87,13 +100,14 @@ public class Estudiante {
 	}
 
 
-	public Estudiante(int nroDoc, String nombre, String apellido, int nroLibreta, String localidad) {
+	public Estudiante(int nroDoc, String nombre, String apellido, int nroLibreta, String localidad,String g) {
 		super();
 		this.nroDoc = nroDoc;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.nroLibreta = nroLibreta;
 		this.localidad = localidad;
+		genero = g;
 	}
 
 	public Estudiante() {

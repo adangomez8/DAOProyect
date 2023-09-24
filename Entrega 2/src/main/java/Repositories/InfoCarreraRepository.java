@@ -3,6 +3,7 @@ package Repositories;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import Entities.Carrera;
 import Entities.InfoCarrera;
 
 public class InfoCarreraRepository implements CRUDRepository<InfoCarrera>{
@@ -38,7 +39,7 @@ public class InfoCarreraRepository implements CRUDRepository<InfoCarrera>{
 	public void update(InfoCarrera element) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		if(em.contains(element)){
+		if(em.find(InfoCarrera.class,element.getId()) != null){
 			em.merge(element);
 		}else{
 			// si no esta no quiero agregarlo
