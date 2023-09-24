@@ -32,8 +32,8 @@ public class Estudiante {
 	@Column
 	private int nroLibreta;
 	
-        @OneToMany
-        private List<InfoCarrera> infoCarreras = new ArrayList<>();
+    @OneToMany
+    private List<InfoCarrera> infoCarreras = new ArrayList<>();
 
 	@Column
 	private String localidad;
@@ -70,15 +70,17 @@ public class Estudiante {
 	}
 
 
-       public void addInfoCarrera(InfoCarrera c){
+     public void addInfoCarrera(InfoCarrera c){
            infoCarreras.add(c);
-       }
+     }
         
        
-       public List<InfoCarrera>getInfoCarreras(){
+     @SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<InfoCarrera>getInfoCarreras(){
            return new ArrayList(this.infoCarreras);
-       }
-	public String getLocalidad() {
+     }
+	
+     public String getLocalidad() {
 		return localidad;
 	}
 
@@ -100,7 +102,4 @@ public class Estudiante {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
 }

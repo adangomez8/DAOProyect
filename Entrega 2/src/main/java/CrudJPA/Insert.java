@@ -32,8 +32,8 @@ public class Insert {
 	}
 	
     public static void main(String[] args){
-        /*
-    }
+        
+    
         EntityManagerFactory emf= Persistence.createEntityManagerFactory("ejemplito");
         EntityManager em=emf.createEntityManager();
         em.getTransaction().begin();
@@ -41,7 +41,7 @@ public class Insert {
         EstudianteRepository repoE=new EstudianteRepository(emf);
         CarreraRepository repoC=new CarreraRepository(emf);
         InfoCarreraRepository repoI=new InfoCarreraRepository(emf);
-        /*Estudiante nico=new Estudiante(42542399,"Nico","ilari",250425,"Tandil");
+        Estudiante nico=new Estudiante(42542399,"Nico","ilari",250425,"Tandil");
         repoE.create(nico);
         Estudiante tomi=new Estudiante(43542399,"Tomi","ilari",250435,"Tandil");
         repoE.create(tomi);
@@ -50,11 +50,6 @@ public class Insert {
         repoC.create(sistemas);
         Carrera tudai=new Carrera("Tudai",3);
         repoC.create(tudai);
-        
-        Estudiante nico=repoE.getById(42542399);
-        Estudiante tomi=repoE.getById(43542399);
-        Carrera tudai=repoC.getById(2);
-        Carrera sistemas=repoC.getById(1);
         
         InfoCarrera iNico=repoI.getById(1);
         InfoCarrera iTomi=repoI.getById(2);
@@ -66,6 +61,6 @@ public class Insert {
         
         em.getTransaction().commit();
         em.close();
-        emf.close();*/
+        emf.close();
     }
 }
