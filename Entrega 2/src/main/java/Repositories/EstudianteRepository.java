@@ -24,7 +24,10 @@ public class EstudianteRepository implements CRUDRepository<Estudiante>{
 
 	
 	public void create(Estudiante element) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> experimental
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(element);
