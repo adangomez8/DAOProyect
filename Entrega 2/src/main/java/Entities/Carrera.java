@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+
 
 @Entity
 public class Carrera {
@@ -24,7 +24,7 @@ public class Carrera {
 	@Column
 	private double duracion;
 	
-	@OneToMany()
+	@ManyToMany()
         private List<Estudiante> estudiantes;
 
     public int getId() {
