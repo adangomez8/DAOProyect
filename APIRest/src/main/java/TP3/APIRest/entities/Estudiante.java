@@ -10,7 +10,7 @@ import jakarta.persistence.OneToMany;
 public class Estudiante {
 	
 	@Id
-	private int nroLibreta;
+	private Integer nroLibreta;
 	
 	private  int dni;
 	private String nombre;

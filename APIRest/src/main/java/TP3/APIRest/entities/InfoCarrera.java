@@ -9,7 +9,7 @@ import jakarta.persistence.ManyToOne;
 public class InfoCarrera {
 	
 	@Id
-	private int id;
+	private Integer id;
 	
 	private boolean graduado;
 	private int antiguedad;

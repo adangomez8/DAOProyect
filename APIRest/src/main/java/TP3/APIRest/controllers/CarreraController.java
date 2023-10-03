@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import TP3.APIRest.entities.Carrera;
 import TP3.APIRest.repositories.CarreraRepository;
 
 @RestController
+@RequestMapping("api")
 public class CarreraController {
 	
 	@Autowired
@@ -25,8 +27,8 @@ public class CarreraController {
 		this.repository=repository;
 	}
 	
-	@GetMapping("/api/carrera/{id}")
-	public ResponseEntity<Carrera> SearchById(@PathVariable int id) {
+	@GetMapping("/carrera/{id}")
+	public ResponseEntity<Carrera> SearchById(@PathVariable Integer id) {
 		
 		Optional<Carrera> carrera= repository.findById(id);
 		
@@ -38,14 +40,14 @@ public class CarreraController {
 		}
 	}
 	
-	@PostMapping("/api/carrera")
+	@PostMapping("/carrera")
 	public ResponseEntity<Carrera> persist(@RequestBody Carrera c) {
 		repository.save(c);
 		return ResponseEntity.ok().build();
 	}
 	
-	@DeleteMapping("/api/carrera/{id}")
-	public ResponseEntity<Carrera> delete(@PathVariable int id) {
+	@DeleteMapping("/carrera/{id}")
+	public ResponseEntity<Carrera> deleteById(@PathVariable Integer id) {
 		
 		if(repository.existsById(id)) {
 			repository.deleteById(id);
@@ -56,7 +58,8 @@ public class CarreraController {
 		}
 	}
 	
-	public List<Carrera> getAll(){
+	@GetMapping("/carrera/")
+	public List<Carrera>findAll(){
 		return repository.findAll();
 	}
 

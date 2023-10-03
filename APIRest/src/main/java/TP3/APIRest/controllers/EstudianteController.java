@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import TP3.APIRest.entities.Estudiante;
 import TP3.APIRest.repositories.EstudianteRepository;
 
 @RestController
+@RequestMapping("api")
 public class EstudianteController {
 	
 	@Autowired
@@ -25,8 +27,8 @@ public class EstudianteController {
 		this.repository=repository;
 	}
 	
-	@GetMapping("/api/estudiante/{id}")
-	public ResponseEntity<Estudiante> SearchById(@PathVariable int id) {
+	@GetMapping("/estudiante/{id}")
+	public ResponseEntity<Estudiante> SearchById(@PathVariable Integer id) {
 		
 		Optional<Estudiante> estudiante= repository.findById(id);
 		
@@ -38,14 +40,14 @@ public class EstudianteController {
 		}
 	}
 	
-	@PostMapping("/api/estudiante")
+	@PostMapping("/estudiante")
 	public ResponseEntity<Estudiante> persist(@RequestBody Estudiante e) {
 		repository.save(e);
 		return ResponseEntity.ok().build();
 	}
 	
-	@DeleteMapping("/api/estudiante/{id}")
-	public ResponseEntity<Estudiante> delete(@PathVariable int id) {
+	@DeleteMapping("/estudiante/{id}")
+	public ResponseEntity<Estudiante> delete(@PathVariable Integer id) {
 		
 		if(repository.existsById(id)) {
 			repository.deleteById(id);
@@ -56,7 +58,8 @@ public class EstudianteController {
 		}
 	}
 	
-	public List<Estudiante> getAll(){
+	@GetMapping("/estudiantes/")
+	public List<Estudiante>findAll(){
 		return repository.findAll();
 	}
 

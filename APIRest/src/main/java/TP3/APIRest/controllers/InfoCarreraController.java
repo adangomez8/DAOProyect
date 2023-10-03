@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import TP3.APIRest.entities.InfoCarrera;
 import TP3.APIRest.repositories.InfoCarreraRepository;
 
 @RestController
+@RequestMapping("api")
 public class InfoCarreraController {
 	
 	@Autowired
@@ -25,8 +27,8 @@ public class InfoCarreraController {
 		this.repository=repository;
 	}
 	
-	@GetMapping("/api/icarrera/{id}")
-	public ResponseEntity<InfoCarrera> SearchById(@PathVariable int id) {
+	@GetMapping("/icarrera/{id}")
+	public ResponseEntity<InfoCarrera> SearchById(@PathVariable Integer id) {
 		
 		Optional<InfoCarrera> icarrera= repository.findById(id);
 		
@@ -38,14 +40,14 @@ public class InfoCarreraController {
 		}
 	}
 	
-	@PostMapping("/api/icarrera")
+	@PostMapping("/icarrera")
 	public ResponseEntity<InfoCarrera> persist(@RequestBody InfoCarrera c) {
 		repository.save(c);
 		return ResponseEntity.ok().build();
 	}
 	
-	@DeleteMapping("/api/icarrera/{id}")
-	public ResponseEntity<InfoCarrera> delete(@PathVariable int id) {
+	@DeleteMapping("/icarrera/{id}")
+	public ResponseEntity<InfoCarrera> delete(@PathVariable Integer id) {
 		
 		if(repository.existsById(id)) {
 			repository.deleteById(id);
@@ -56,7 +58,8 @@ public class InfoCarreraController {
 		}
 	}
 	
-	public List<InfoCarrera> getAll(){
+	@GetMapping("/icarreras/")
+	public List<InfoCarrera>getAlls(){
 		return repository.findAll();
 	}
 
