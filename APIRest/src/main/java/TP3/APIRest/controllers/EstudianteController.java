@@ -3,64 +3,70 @@ package TP3.APIRest.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import TP3.APIRest.services.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import TP3.APIRest.entities.Estudiante;
 import TP3.APIRest.repositories.EstudianteRepository;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/estudiante")
 public class EstudianteController {
 	
 	@Autowired
-	private EstudianteRepository repository;
+	private EstudianteService estudianteService;
 	
-	public EstudianteController(EstudianteRepository repository) {
-		this.repository=repository;
+	public EstudianteController(EstudianteService estudianteService) {
+		this.estudianteService=estudianteService;
 	}
 	
-	@GetMapping("/estudiante/{id}")
-	public ResponseEntity<Estudiante> SearchById(@PathVariable Integer id) {
-		
-		Optional<Estudiante> estudiante= repository.findById(id);
-		
-		if(estudiante.isPresent()) {
-			return ResponseEntity.ok(estudiante.get());
-		}
-		else {
-			return ResponseEntity.notFound().build();
+	@GetMapping("/{id}")
+	public ResponseEntity<?> SearchById(@PathVariable Integer id) {
+		try{
+			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.findById(id));
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{Error. No se encontro el estudiante buscado}");
 		}
 	}
 	
-	@PostMapping("/estudiante")
-	public ResponseEntity<Estudiante> persist(@RequestBody Estudiante e) {
-		repository.save(e);
-		return ResponseEntity.ok().build();
-	}
-	
-	@DeleteMapping("/estudiante/{id}")
-	public ResponseEntity<Estudiante> delete(@PathVariable Integer id) {
-		
-		if(repository.existsById(id)) {
-			repository.deleteById(id);
-			return ResponseEntity.noContent().build();
-		}
-		else {
-			return ResponseEntity.notFound().build();
+	@PostMapping("")
+	public ResponseEntity<?> persist(@RequestBody Estudiante est) {
+		try{
+			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.save(est));
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo insertar, complete los datos correctamente");
 		}
 	}
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update(@PathVariable Long id,@RequestBody Estudiante entity){
+		try{
+			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.save(entity));
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo editar, complete los datos correctamente.");
+		}
+	}
 	
-	@GetMapping("/estudiantes/")
-	public List<Estudiante>findAll(){
-		return repository.findAll();
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable Integer id) {
+		try{
+			estudianteService.deleteById(id);
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Se borró el estudiante con ID "+id);
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. no se pudo eliminar intente nuevamente.}");
+		}
+
+	}
+
+	@GetMapping("")
+	public ResponseEntity<?> findAll(){
+		try{
+			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.findAll());
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error. Por favor intente más tarde.");
+		}
 	}
 
 }
