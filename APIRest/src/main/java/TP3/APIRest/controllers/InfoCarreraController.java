@@ -17,7 +17,7 @@ import TP3.APIRest.entities.InfoCarrera;
 import TP3.APIRest.repositories.InfoCarreraRepository;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("icarreras")
 public class InfoCarreraController {
 	
 	@Autowired
@@ -27,7 +27,7 @@ public class InfoCarreraController {
 		this.repository=repository;
 	}
 	
-	@GetMapping("/icarrera/{id}")
+	@GetMapping("/byId/{id}")
 	public ResponseEntity<InfoCarrera> SearchById(@PathVariable Integer id) {
 		
 		Optional<InfoCarrera> icarrera= repository.findById(id);
@@ -46,7 +46,7 @@ public class InfoCarreraController {
 		return ResponseEntity.ok().build();
 	}
 	
-	@DeleteMapping("/icarrera/{id}")
+	@DeleteMapping("/byId/{id}")
 	public ResponseEntity<InfoCarrera> delete(@PathVariable Integer id) {
 		
 		if(repository.existsById(id)) {
@@ -58,7 +58,7 @@ public class InfoCarreraController {
 		}
 	}
 	
-	@GetMapping("/icarreras/")
+	@GetMapping("")
 	public List<InfoCarrera>getAlls(){
 		return repository.findAll();
 	}

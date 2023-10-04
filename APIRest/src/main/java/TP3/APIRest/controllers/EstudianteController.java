@@ -1,8 +1,5 @@
 package TP3.APIRest.controllers;
 
-import java.util.List;
-import java.util.Optional;
-
 import TP3.APIRest.services.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,10 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import TP3.APIRest.entities.Estudiante;
-import TP3.APIRest.repositories.EstudianteRepository;
 
 @RestController
-@RequestMapping("api/estudiante")
+@RequestMapping("estudiantes")
 public class EstudianteController {
 	
 	@Autowired
@@ -23,7 +19,7 @@ public class EstudianteController {
 		this.estudianteService=estudianteService;
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("byId/{id}")
 	public ResponseEntity<?> SearchById(@PathVariable Integer id) {
 		try{
 			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.findById(id));
@@ -40,7 +36,7 @@ public class EstudianteController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo insertar, complete los datos correctamente");
 		}
 	}
-	@PutMapping("/{id}")
+	@PutMapping("byId/{id}")
 	public ResponseEntity<?> update(@PathVariable Long id,@RequestBody Estudiante entity){
 		try{
 			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.save(entity));
@@ -49,7 +45,7 @@ public class EstudianteController {
 		}
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("byId/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id) {
 		try{
 			estudianteService.deleteById(id);
@@ -61,12 +57,29 @@ public class EstudianteController {
 	}
 
 	@GetMapping("")
-	public ResponseEntity<?> findAll(){
-		try{
+	public ResponseEntity<?> findAll() {
+		try {
 			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.findAll());
-		}catch (Exception e){
+		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error. Por favor intente más tarde.");
 		}
 	}
 
+	@GetMapping("/byNroLibreta/{nro_libreta}")
+	public ResponseEntity<?> getEstudianteByLibreta(@PathVariable int nro_libreta) {
+		try{
+			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.getEstudianteByLibreta(nro_libreta));
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{Error. No se encontro el estudiante buscado}");
+		}
+	}
+
+	@GetMapping("/byGenero/{genero}")
+	public ResponseEntity<?> getEstudianteByGenero(@PathVariable String genero) {
+		try{
+			return ResponseEntity.status(HttpStatus.OK).body(estudianteService.getEstudianteByGenero(genero));
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{Error. No se encontro el estudiante buscado}");
+		}
+	}
 }

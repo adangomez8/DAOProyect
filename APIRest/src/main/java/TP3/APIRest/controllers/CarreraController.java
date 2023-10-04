@@ -3,7 +3,9 @@ package TP3.APIRest.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import TP3.APIRest.services.CarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,50 +19,62 @@ import TP3.APIRest.entities.Carrera;
 import TP3.APIRest.repositories.CarreraRepository;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("carreras")
 public class CarreraController {
 	
 	@Autowired
-	private CarreraRepository repository;
+	private CarreraService carreraService;
 	
-	public CarreraController(CarreraRepository repository) {
-		this.repository=repository;
+	public CarreraController(CarreraService carreraService) {
+		this.carreraService=carreraService;
 	}
 	
-	@GetMapping("/carrera/{id}")
-	public ResponseEntity<Carrera> SearchById(@PathVariable Integer id) {
-		
-		Optional<Carrera> carrera= repository.findById(id);
-		
-		if(carrera.isPresent()) {
-			return ResponseEntity.ok(carrera.get());
-		}
-		else {
-			return ResponseEntity.notFound().build();
+	@GetMapping("/byId/{id}")
+	public ResponseEntity<?> SearchById(@PathVariable Integer id) throws Exception {
+
+		try{
+			return ResponseEntity.status(HttpStatus.OK).body(carreraService.findById(id));
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{Error. No se encontro el estudiante buscado}");
 		}
 	}
 	
 	@PostMapping("/carrera")
-	public ResponseEntity<Carrera> persist(@RequestBody Carrera c) {
-		repository.save(c);
-		return ResponseEntity.ok().build();
-	}
-	
-	@DeleteMapping("/carrera/{id}")
-	public ResponseEntity<Carrera> deleteById(@PathVariable Integer id) {
-		
-		if(repository.existsById(id)) {
-			repository.deleteById(id);
-			return ResponseEntity.noContent().build();
-		}
-		else {
-			return ResponseEntity.notFound().build();
+	public ResponseEntity<?> persist(@RequestBody Carrera c) {
+		try{
+			return ResponseEntity.status(HttpStatus.OK).body(carreraService.save(c));
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo insertar, complete los datos correctamente");
 		}
 	}
 	
-	@GetMapping("/carrera/")
-	public List<Carrera>findAll(){
-		return repository.findAll();
+	@DeleteMapping("/byId/{id}")
+	public ResponseEntity<?> deleteById(@PathVariable Integer id) {
+
+		try{
+			carreraService.deleteById(id);
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Se borró la carrera con ID "+id);
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. no se pudo eliminar intente nuevamente.}");
+		}
+	}
+	
+	@GetMapping("")
+	public ResponseEntity<?>findAll(){
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(carreraService.findAll());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error. Por favor intente más tarde.");
+		}
+	}
+
+	@GetMapping("/byCantInscriptos")
+	public ResponseEntity<?> getCarrerasOrderByInscriptos() {
+		try{
+			return ResponseEntity.status(HttpStatus.OK).body(carreraService.getCarrerasOrderByInscriptos());
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{Error. No se encontro la carrera buscada}");
+		}
 	}
 
 }

@@ -1,16 +1,16 @@
 package TP3.APIRest.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 @Entity
 public class Estudiante {
 	
 	@Id
-	private Integer nroLibreta;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int nroLibreta;
 	
 	private  int dni;
 	private String nombre;
@@ -25,8 +25,7 @@ public class Estudiante {
 		
 	}
 
-	public Estudiante(int dni, String nombre, String apellido, int edad, String genero, String ciudad,
-			List<Carrera> carreras) {
+	public Estudiante(int dni, String nombre, String apellido, int edad, String genero, String ciudad) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -34,8 +33,9 @@ public class Estudiante {
 		this.edad = edad;
 		this.genero = genero;
 		this.ciudad = ciudad;
-		this.carreras = carreras;
+		this.carreras = new ArrayList<>();
 	}
+
 
 	public int getDni() {
 		return dni;
@@ -83,14 +83,6 @@ public class Estudiante {
 
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
-	}
-
-	public List<Carrera> getCarreras() {
-		return carreras;
-	}
-
-	public void setCarreras(List<Carrera> carreras) {
-		this.carreras = carreras;
 	}
 
 	public int getNroLibreta() {
