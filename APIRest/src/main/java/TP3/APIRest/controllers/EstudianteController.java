@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import TP3.APIRest.entities.Estudiante;
 import TP3.APIRest.repositories.EstudianteRepository;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/estudiante")
 public class EstudianteController {
 	
 	@Autowired
@@ -27,7 +28,7 @@ public class EstudianteController {
 		this.repository=repository;
 	}
 	
-	@GetMapping("/estudiante/{id}")
+	@GetMapping("/id={id}")
 	public ResponseEntity<Estudiante> SearchById(@PathVariable Integer id) {
 		
 		Optional<Estudiante> estudiante= repository.findById(id);
@@ -40,25 +41,29 @@ public class EstudianteController {
 		}
 	}
 	
-	@PostMapping("/estudiante")
-	public ResponseEntity<Estudiante> persist(@RequestBody Estudiante e) {
-		repository.save(e);
-		return ResponseEntity.ok().build();
+	@PostMapping()
+	public ResponseEntity<?> persist(@RequestBody Estudiante e) {
+		if(repository.findById(e.getNroLibreta()).isEmpty()) {
+			repository.save(e);
+			return ResponseEntity.status(HttpStatus.CREATED).body(e);
+		}else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya hay un estudiante con esa libreta");
+		}
 	}
 	
-	@DeleteMapping("/estudiante/{id}")
-	public ResponseEntity<Estudiante> delete(@PathVariable Integer id) {
-		
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable int id) {
 		if(repository.existsById(id)) {
 			repository.deleteById(id);
-			return ResponseEntity.noContent().build();
+			//cambiar
+			return ResponseEntity.status(HttpStatus.OK).body("borrado");
 		}
 		else {
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 		}
 	}
 	
-	@GetMapping("/estudiantes/")
+	@GetMapping()
 	public List<Estudiante>findAll(){
 		return repository.findAll();
 	}

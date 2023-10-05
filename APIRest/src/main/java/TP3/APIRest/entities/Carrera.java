@@ -1,6 +1,10 @@
 package TP3.APIRest.entities;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,20 +18,22 @@ public class Carrera {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nombre;
 	private int duracion;
-	@OneToMany(mappedBy = "carreras")
-	private List<Estudiante>estudiantes;
+	@OneToMany(mappedBy="carrera")
+	@JsonIgnore
+	private List<InfoCarrera>infoCarreras=new ArrayList<InfoCarrera>();
 	
 	public Carrera() {
 		
 	}
 
-	public Carrera(String nombre, int duracion, List<Estudiante> estudiantes) {
+	public Carrera(String nombre, int duracion) {
 		super();
 		this.nombre = nombre;
 		this.duracion = duracion;
-		this.estudiantes = estudiantes;
+
 	}
 
 	public String getNombre() {
@@ -47,12 +53,13 @@ public class Carrera {
 	}
 
 	public List<Estudiante> getEstudiantes() {
+		List<Estudiante> estudiantes=new ArrayList();
+		for(InfoCarrera i:this.infoCarreras) {
+			estudiantes.add(i.getEstudiante());
+		}
 		return estudiantes;
 	}
 
-	public void setEstudiantes(List<Estudiante> estudiantes) {
-		this.estudiantes = estudiantes;
-	}
 
 	public int getId() {
 		return id;
@@ -60,7 +67,7 @@ public class Carrera {
 
 	@Override
 	public String toString() {
-		return "Carrera [id=" + id + ", nombre=" + nombre + ", duracion=" + duracion + ", estudiantes=" + estudiantes
+		return "Carrera [id=" + id + ", nombre=" + nombre + ", duracion=" + duracion 
 				+ "]";
 	}
 

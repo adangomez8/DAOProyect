@@ -1,6 +1,10 @@
 package TP3.APIRest.entities;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -18,15 +22,16 @@ public class Estudiante {
 	private int edad;
 	private String genero;
 	private String ciudad;
-	@OneToMany
-	private List<Carrera>carreras;
+	@OneToMany(mappedBy="estudiante")
+	@JsonIgnore
+	private List<InfoCarrera>carreras;
 	
 	public Estudiante() {
 		
 	}
 
-	public Estudiante(int dni, String nombre, String apellido, int edad, String genero, String ciudad,
-			List<Carrera> carreras) {
+	public Estudiante(int dni, String nombre, String apellido, int edad, String genero, String ciudad
+			) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
@@ -34,7 +39,10 @@ public class Estudiante {
 		this.edad = edad;
 		this.genero = genero;
 		this.ciudad = ciudad;
-		this.carreras = carreras;
+		this.carreras = new ArrayList();
+	}
+	public void addCarrera(InfoCarrera c){
+		this.carreras.add(c);
 	}
 
 	public int getDni() {
@@ -85,11 +93,11 @@ public class Estudiante {
 		this.ciudad = ciudad;
 	}
 
-	public List<Carrera> getCarreras() {
+	public List<InfoCarrera> getCarreras() {
 		return carreras;
 	}
 
-	public void setCarreras(List<Carrera> carreras) {
+	public void setCarreras(List<InfoCarrera> carreras) {
 		this.carreras = carreras;
 	}
 
@@ -97,6 +105,8 @@ public class Estudiante {
 		return nroLibreta;
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "Estudiante [nroLibreta=" + nroLibreta + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido

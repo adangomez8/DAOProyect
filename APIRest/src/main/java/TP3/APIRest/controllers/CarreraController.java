@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,54 +14,55 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import DTOS.CarreraDTO;
+import TP3.API.Services.CarreraService;
 import TP3.APIRest.entities.Carrera;
-import TP3.APIRest.repositories.CarreraRepository;
+
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/carrera")
 public class CarreraController {
 	
 	@Autowired
-	private CarreraRepository repository;
+	private CarreraService service;
 	
-	public CarreraController(CarreraRepository repository) {
-		this.repository=repository;
-	}
 	
-	@GetMapping("/carrera/{id}")
-	public ResponseEntity<Carrera> SearchById(@PathVariable Integer id) {
+	@GetMapping("/{id}")
+	public ResponseEntity<?> searchById(@PathVariable Integer id) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(service.searchById(id));
+		}
+		catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No se encuentra el objeto buscado" +
+                    ".\"}");
+		}
 		
-		Optional<Carrera> carrera= repository.findById(id);
-		
-		if(carrera.isPresent()) {
-			return ResponseEntity.ok(carrera.get());
+	}
+	
+	@PostMapping()
+	public ResponseEntity<?> persist(@RequestBody Carrera c) {
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(service.save(c));
 		}
-		else {
-			return ResponseEntity.notFound().build();
+		catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("asegure de mandar bien el formato");
 		}
 	}
 	
-	@PostMapping("/carrera")
-	public ResponseEntity<Carrera> persist(@RequestBody Carrera c) {
-		repository.save(c);
-		return ResponseEntity.ok().build();
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteById(@PathVariable int id) {
+	    CarreraDTO carreraDTO = service.deleteCarreraById(id);
+	    if (carreraDTO != null) {
+	        return ResponseEntity.status(HttpStatus.OK).body(carreraDTO);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No encontrado");
+	    }
 	}
+
 	
-	@DeleteMapping("/carrera/{id}")
-	public ResponseEntity<Carrera> deleteById(@PathVariable Integer id) {
-		
-		if(repository.existsById(id)) {
-			repository.deleteById(id);
-			return ResponseEntity.noContent().build();
-		}
-		else {
-			return ResponseEntity.notFound().build();
-		}
-	}
-	
-	@GetMapping("/carrera/")
-	public List<Carrera>findAll(){
-		return repository.findAll();
+	@GetMapping()
+	public ResponseEntity<?> findAll(){
+		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
 	}
 
 }
