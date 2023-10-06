@@ -1,9 +1,12 @@
 package TP3.APIRest.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import DTOS.IcarreraDTO;
+import TP3.API.Services.InfoCarreraService;
 import TP3.APIRest.entities.Carrera;
 import TP3.APIRest.entities.Estudiante;
 import TP3.APIRest.entities.InfoCarrera;
@@ -26,65 +30,45 @@ import TP3.APIRest.repositories.InfoCarreraRepository;
 public class InfoCarreraController {
 	
 	@Autowired
-	private EstudianteRepository erepository;
-	@Autowired
-	private CarreraRepository crepository;
-	@Autowired
-	private InfoCarreraRepository repository;
-	
-	public InfoCarreraController(InfoCarreraRepository repository) {
-		this.repository=repository;
-	}
+	private InfoCarreraService service;
 	
 	@GetMapping("/icarrera/{id}")
-	public ResponseEntity<InfoCarrera> SearchById(@PathVariable Integer id) {
-		
-		Optional<InfoCarrera> icarrera= repository.findById(id);
-		
-		if(icarrera.isPresent()) {
-			return ResponseEntity.ok(icarrera.get());
+	public ResponseEntity<?> SearchById(@PathVariable Integer id) {
+		InfoCarrera i=service.SearchById(id);
+		if(i!=null) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(i);
 		}
-		else {
-			return ResponseEntity.notFound().build();
-		}
+		else
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
 	
 	@PostMapping("/icarrera")
-	public ResponseEntity<InfoCarrera> persist(@RequestBody IcarreraDTO c) {
-		System.out.println(c);
-		if((erepository.existsById(c.getEstudiante()))&&(crepository.existsById(c.getCarrera()))) {
-			Optional<Estudiante> e=erepository.findById(c.getEstudiante());
-			Optional<Carrera> ca=crepository.findById(c.getCarrera());
-			if(e.isPresent()&&ca.isPresent()) {
-				InfoCarrera i=new InfoCarrera(c.isGraduado(),c.getAntiguedad(),ca.get(),e.get());
-				repository.save(i);
-				return ResponseEntity.ok().build();
-			}
-			else {
-				ResponseEntity.notFound().build();
-			}
+	public ResponseEntity<?> persist(@RequestBody IcarreraDTO c) {
+		InfoCarrera i=service.persist(c);
+		if(i!=null) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(i);
 		}
-		else {
-			ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.notFound().build();
+		else
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error revisar formato");
 	}
 	
 	@DeleteMapping("/icarrera/{id}")
-	public ResponseEntity<InfoCarrera> delete(@PathVariable Integer id) {
+	public ResponseEntity<?> delete(@PathVariable Integer id) {
 		
-		if(repository.existsById(id)) {
-			repository.deleteById(id);
-			return ResponseEntity.noContent().build();
+		IcarreraDTO i=service.delete(id);
+		if(i!=null) {
+			Map<String, Object> response = new HashMap<>();
+	        response.put("message", "borrado");
+	        response.put("info carrera ", i);
+			return ResponseEntity.status(HttpStatus.OK).body(response);
 		}
-		else {
-			return ResponseEntity.notFound().build();
-		}
+		else
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
 	
 	@GetMapping("/icarrera")
-	public List<InfoCarrera>getAlls(){
-		return repository.findAll();
+	public ResponseEntity<?> getAlls(){
+		return ResponseEntity.status(HttpStatus.OK).body(service.getAlls());
 	}
 
 }

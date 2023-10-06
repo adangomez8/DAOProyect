@@ -1,10 +1,13 @@
 package TP3.API.Services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,15 +24,15 @@ public class CarreraService {
 	private CarreraRepository repository;
 	
 	@Transactional
-	public ResponseEntity<Carrera> searchById(@PathVariable Integer id) {
+	public Carrera searchById(@PathVariable Integer id) {
 			
 			Optional<Carrera> carrera= repository.findById(id);
 			
 			if(carrera.isPresent()) {
-				return ResponseEntity.ok(carrera.get());
+				return carrera.get();
 			}
 			else {
-				return ResponseEntity.notFound().build();
+				return null;
 			}
 		}
 	@Transactional
@@ -42,20 +45,18 @@ public class CarreraService {
 	}
 	@Transactional
 	public CarreraDTO deleteCarreraById(@PathVariable int id) {
-	    try {
+	    
 	        Optional<Carrera> optionalCarrera = repository.findById(id);
 
 	        if (optionalCarrera.isPresent()) {
 	            Carrera carrera = optionalCarrera.get();
 	            repository.deleteById(id);
 	            CarreraDTO carreraDTO = new CarreraDTO(carrera.getId(),carrera.getNombre(),carrera.getDuracion());
-	            return carreraDTO;
+		        return carreraDTO;
 	        } else {
-	            return null;
+	        	return null;
 	        }
-	    } catch (Exception e) {
-	        return null;
-	    }
+
 	}
 
 	@Transactional

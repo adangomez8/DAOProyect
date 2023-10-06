@@ -1,10 +1,13 @@
 package TP3.APIRest.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,14 +32,12 @@ public class CarreraController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> searchById(@PathVariable Integer id) {
-		try {
-			return ResponseEntity.status(HttpStatus.OK).body(service.searchById(id));
+		Carrera c=service.searchById(id);
+		if(c!=null) {
+			return ResponseEntity.status(HttpStatus.OK).body(c);
 		}
-		catch(Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. No se encuentra el objeto buscado" +
-                    ".\"}");
-		}
-		
+		else
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
 	
 	@PostMapping()
@@ -51,12 +52,16 @@ public class CarreraController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable int id) {
-	    CarreraDTO carreraDTO = service.deleteCarreraById(id);
-	    if (carreraDTO != null) {
-	        return ResponseEntity.status(HttpStatus.OK).body(carreraDTO);
-	    } else {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No encontrado");
-	    }
+		CarreraDTO ca=service.deleteCarreraById(id);
+		if(ca!=null) {
+			Map<String, Object> response = new HashMap<>();
+	        response.put("message", "borrado");
+	        response.put("carrera", ca);
+		    return ResponseEntity.status(HttpStatus.OK).body(response);
+		}
+		else
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
+		
 	}
 
 	
