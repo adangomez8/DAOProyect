@@ -1,5 +1,6 @@
 package TP3.API.Services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import DTOS.IcarreraDTO;
+import DTOS.IcarreraRespuestaDTO;
 import TP3.APIRest.entities.Carrera;
 import TP3.APIRest.entities.Estudiante;
 import TP3.APIRest.entities.InfoCarrera;
@@ -33,24 +35,23 @@ public class InfoCarreraService {
 	private EstudianteService servicioEstudiante;
 	
 	@Transactional
-	public InfoCarrera SearchById(@PathVariable Integer id) {
+	public IcarreraRespuestaDTO SearchById(@PathVariable Integer id) {
 		Optional<InfoCarrera> icarrera= repository.findById(id);
-		
 		if(icarrera.isPresent()) {
-			return icarrera.get();
+			return this.transformOne(icarrera.get());
 		}
 		else {
 			return null;
 		}
 	}
 	@Transactional
-	public InfoCarrera persist(@RequestBody IcarreraDTO c) {
-		Carrera ca=servicioCarrera.searchById(c.getCarrera());
-		Estudiante e=servicioEstudiante.SearchById(c.getEstudiante());
+	public IcarreraRespuestaDTO persist(@RequestBody IcarreraDTO c) {
+		Carrera ca=servicioCarrera.searchByIdCARRERA(c.getCarrera());
+		Estudiante e=servicioEstudiante.SearchByIdESTUDIANTE(c.getEstudiante());
 		if((ca!=null)&&(e!=null)) {
 			InfoCarrera i=new InfoCarrera(c.isGraduado(),c.getAntiguedad(),ca,e);
 			repository.save(i);
-			return i;
+			return this.transformOne(i);
 		}
 		
 		return null;
@@ -58,12 +59,12 @@ public class InfoCarreraService {
 	}
 	
 	@Transactional
-	public IcarreraDTO delete(@PathVariable Integer id) {
+	public IcarreraRespuestaDTO delete(@PathVariable Integer id) {
 		Optional<InfoCarrera>optionalIcarrera=repository.findById(id);
 		
 		if(optionalIcarrera.isPresent()) {
 			InfoCarrera info=optionalIcarrera.get();
-			IcarreraDTO infocDTO=new IcarreraDTO(info.isGraduado(),info.getAntiguedad(),info.getCarrera().getId(),info.getEstudiante().getNroLibreta());
+			IcarreraRespuestaDTO infocDTO=this.transformOne(info);
 			repository.deleteById(id);
 			
 	        return infocDTO;
@@ -73,7 +74,19 @@ public class InfoCarreraService {
 		}
 	}
 	
-	public List<InfoCarrera>getAlls(){
-		return repository.findAll();
+	public List<IcarreraRespuestaDTO>getAlls(){
+		return this.transformDTO(repository.findAll());
+	}
+	
+	private IcarreraRespuestaDTO transformOne(InfoCarrera i) {
+		return (new IcarreraRespuestaDTO(i.isGraduado(),i.getAntiguedad(),i.getCarrera(),i.getEstudiante()));
+	}
+	
+	private List<IcarreraRespuestaDTO>transformDTO(List<InfoCarrera>infos){
+		List<IcarreraRespuestaDTO>infoDTO=new ArrayList();
+		for(InfoCarrera i:infos) {
+			infoDTO.add(this.transformOne(i));
+		}
+		return infoDTO;
 	}
 }

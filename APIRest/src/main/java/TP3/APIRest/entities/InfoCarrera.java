@@ -1,5 +1,6 @@
 package TP3.APIRest.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +15,7 @@ public class InfoCarrera {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private boolean graduado;
+    @Column(nullable = false)
 	private int antiguedad;
 	@ManyToOne
 	@JoinColumn(name = "id_carrera")

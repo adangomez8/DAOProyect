@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import DTOS.IcarreraDTO;
+import DTOS.IcarreraRespuestaDTO;
 import TP3.API.Services.InfoCarreraService;
 import TP3.APIRest.entities.Carrera;
 import TP3.APIRest.entities.Estudiante;
@@ -34,7 +35,7 @@ public class InfoCarreraController {
 	
 	@GetMapping("/icarrera/{id}")
 	public ResponseEntity<?> SearchById(@PathVariable Integer id) {
-		InfoCarrera i=service.SearchById(id);
+		IcarreraRespuestaDTO i=service.SearchById(id);
 		if(i!=null) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(i);
 		}
@@ -44,7 +45,7 @@ public class InfoCarreraController {
 	
 	@PostMapping("/icarrera")
 	public ResponseEntity<?> persist(@RequestBody IcarreraDTO c) {
-		InfoCarrera i=service.persist(c);
+		IcarreraRespuestaDTO i=service.persist(c);
 		if(i!=null) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(i);
 		}
@@ -55,7 +56,7 @@ public class InfoCarreraController {
 	@DeleteMapping("/icarrera/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id) {
 		
-		IcarreraDTO i=service.delete(id);
+		IcarreraRespuestaDTO i=service.delete(id);
 		if(i!=null) {
 			Map<String, Object> response = new HashMap<>();
 	        response.put("message", "borrado");

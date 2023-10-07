@@ -70,5 +70,9 @@ public class Carrera {
 		return "Carrera [id=" + id + ", nombre=" + nombre + ", duracion=" + duracion 
 				+ "]";
 	}
-
+	@Override
+	public boolean equals(Object o) {
+		Carrera c=(Carrera)o;
+		return ((this.nombre.equals(c.nombre))&&(this.duracion==c.duracion));
+	}
 }

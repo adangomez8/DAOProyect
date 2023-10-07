@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import DTOS.EstudianteDTO;
@@ -30,17 +31,38 @@ public class EstudianteController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> SearchById(@PathVariable int id) {
-		Estudiante e=service.SearchById(id);
+		EstudianteDTO e=service.SearchById(id);
 		if(e!=null) {
 			return ResponseEntity.status(HttpStatus.OK).body(e);
 		}
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
-	
+	@GetMapping("/genre={genre}")
+	public ResponseEntity<?> SearchByGenre(@PathVariable String genre) {
+
+		List<EstudianteDTO> e=service.findByGenre(genre);
+		if(!e.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.OK).body(e);
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
+	}
+	@GetMapping("/carrera-ciudad")
+	public ResponseEntity<?> searchByCareerAndCity(
+	    @RequestParam(name = "carrera") String carrera,
+	    @RequestParam(name = "ciudad") String ciudad) {
+	    
+	    List<EstudianteDTO> estudiantes = service.findByCarreerAndCity(carrera, ciudad);
+	    
+	    if (!estudiantes.isEmpty()) {
+	        return ResponseEntity.status(HttpStatus.OK).body(estudiantes);
+	    }
+	    
+	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No encontrado");
+	}
 	@PostMapping()
 	public ResponseEntity<?> persist(@RequestBody Estudiante e) {
-		Estudiante estudiante=service.persist(e);
+		EstudianteDTO estudiante=service.persist(e);
 		if(estudiante!=null) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(estudiante);
 		}
@@ -60,6 +82,10 @@ public class EstudianteController {
 	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
 
+	@GetMapping("/orderby={order}")
+	public ResponseEntity<?>findAllOrderBy(@PathVariable String order){
+		return ResponseEntity.status(HttpStatus.OK).body(service.findAllOrder(order));
+	}
 	
 	@GetMapping()
 	public ResponseEntity<?>findAll(){

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import DTOS.CarreraDTO;
+import DTOS.ReporteCarreraDTO;
 import TP3.API.Services.CarreraService;
 import TP3.APIRest.entities.Carrera;
 
@@ -32,14 +33,31 @@ public class CarreraController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> searchById(@PathVariable Integer id) {
-		Carrera c=service.searchById(id);
+		CarreraDTO c=service.searchById(id);
 		if(c!=null) {
 			return ResponseEntity.status(HttpStatus.OK).body(c);
 		}
 		else
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
-	
+	@GetMapping("/conestudiantesordenada")
+	public ResponseEntity<?> searchByWithStudentsOrder() {
+		List<?> c=service.findAllWithStudents();
+		if(!c.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.OK).body(c);
+		}
+		else
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
+	}
+	@GetMapping("/reporte")
+	public ResponseEntity<?> generateReportCareers() {
+		List<ReporteCarreraDTO> c=service.generateReport();
+		if(!c.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.OK).body(c);
+		}
+		else
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
+	}
 	@PostMapping()
 	public ResponseEntity<?> persist(@RequestBody Carrera c) {
 		try {

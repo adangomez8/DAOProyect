@@ -1,5 +1,7 @@
 package DTOS;
 
+
+//se usa para que puedas hacer un post mas comodamente sin tener que mandar objetos solo los id
 public class IcarreraDTO {
 	private boolean graduado;
 	private int antiguedad;

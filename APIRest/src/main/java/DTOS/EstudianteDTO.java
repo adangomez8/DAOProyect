@@ -8,6 +8,7 @@ public class EstudianteDTO {
 	private int edad;
 	private String genero;
 	private String nombre;
+	
 	public int getLibreta() {
 		return libreta;
 	}
