@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import DTOS.CarreraDTO;
@@ -40,15 +41,7 @@ public class CarreraController {
 		else
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
-	@GetMapping("/conestudiantesordenada")
-	public ResponseEntity<?> searchByWithStudentsOrder() {
-		List<?> c=service.findAllWithStudents();
-		if(!c.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.OK).body(c);
-		}
-		else
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
-	}
+
 	@GetMapping("/reporte")
 	public ResponseEntity<?> generateReportCareers() {
 		List<ReporteCarreraDTO> c=service.generateReport();
@@ -82,10 +75,19 @@ public class CarreraController {
 		
 	}
 
-	
 	@GetMapping()
-	public ResponseEntity<?> findAll(){
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
+	public ResponseEntity<?> findAll(@RequestParam(name="orderWithStudent", required=false)Boolean order){
+		if(order!=null&&order==true) {
+			List<?> c=service.findAllWithStudents();
+			if(!c.isEmpty()&&c!=null) {
+				return ResponseEntity.status(HttpStatus.OK).body(c);
+			}
+			else
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
+		}
+		else {			
+			return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
+		}
+		
 	}
-
 }

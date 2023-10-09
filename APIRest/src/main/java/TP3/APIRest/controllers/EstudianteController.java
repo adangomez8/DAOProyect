@@ -38,28 +38,7 @@ public class EstudianteController {
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
-	@GetMapping("/genre={genre}")
-	public ResponseEntity<?> SearchByGenre(@PathVariable String genre) {
 
-		List<EstudianteDTO> e=service.findByGenre(genre);
-		if(!e.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.OK).body(e);
-		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
-	}
-	@GetMapping("/carrera-ciudad")
-	public ResponseEntity<?> searchByCareerAndCity(
-	    @RequestParam(name = "carrera") String carrera,
-	    @RequestParam(name = "ciudad") String ciudad) {
-	    
-	    List<EstudianteDTO> estudiantes = service.findByCarreerAndCity(carrera, ciudad);
-	    
-	    if (!estudiantes.isEmpty()) {
-	        return ResponseEntity.status(HttpStatus.OK).body(estudiantes);
-	    }
-	    
-	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No encontrado");
-	}
 	@PostMapping()
 	public ResponseEntity<?> persist(@RequestBody Estudiante e) {
 		EstudianteDTO estudiante=service.persist(e);
@@ -81,15 +60,33 @@ public class EstudianteController {
 		
 	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
-
-	@GetMapping("/orderby={order}")
-	public ResponseEntity<?>findAllOrderBy(@PathVariable String order){
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAllOrder(order));
-	}
 	
 	@GetMapping()
-	public ResponseEntity<?>findAll(){
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
+	public ResponseEntity<?>findAll(@RequestParam(name = "carrera",required = false) String carrera,
+									@RequestParam(name="ciudad", required=false) String ciudad,
+									@RequestParam(name="genre",required=false) String genre,
+									@RequestParam(name="orderby", required=false)String orderby){
+		if(genre!=null&&carrera==null&&ciudad==null&&orderby==null) {
+			List<EstudianteDTO> e=service.findByGenre(genre);
+			if(!e.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.OK).body(e);
+			}
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
+		}
+		else if(carrera!=null&&ciudad!=null&&genre==null&&orderby==null){
+			List<EstudianteDTO> estudiantes = service.findByCarreerAndCity(carrera, ciudad);
+		    
+		    if (!estudiantes.isEmpty()) {
+		        return ResponseEntity.status(HttpStatus.OK).body(estudiantes);
+		    }
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No encontrado");
+		}
+		else if(genre==null&&carrera==null&&ciudad==null&&orderby!=null) {
+			return ResponseEntity.status(HttpStatus.OK).body(service.findAllOrder(orderby));
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
+		}
 	}
 
 }
