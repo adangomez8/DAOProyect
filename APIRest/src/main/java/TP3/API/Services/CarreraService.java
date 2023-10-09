@@ -39,8 +39,9 @@ public class CarreraService {
 		@Transactional
 		public Carrera searchByIdCARRERA(@PathVariable Integer id) {
 				Optional<Carrera> carrera= repository.findById(id);
+
 				if(carrera.isPresent()) {
-					carrera.get();
+					return carrera.get();
 				}
 				return null;
 			}

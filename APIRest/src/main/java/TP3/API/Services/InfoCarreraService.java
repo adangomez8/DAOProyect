@@ -48,6 +48,8 @@ public class InfoCarreraService {
 	public IcarreraRespuestaDTO persist(@RequestBody IcarreraDTO c) {
 		Carrera ca=servicioCarrera.searchByIdCARRERA(c.getCarrera());
 		Estudiante e=servicioEstudiante.SearchByIdESTUDIANTE(c.getEstudiante());
+
+
 		if((ca!=null)&&(e!=null)) {
 			InfoCarrera i=new InfoCarrera(c.isGraduado(),c.getAntiguedad(),ca,e);
 			repository.save(i);

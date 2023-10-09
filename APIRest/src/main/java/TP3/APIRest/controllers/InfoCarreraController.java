@@ -27,13 +27,13 @@ import TP3.APIRest.repositories.EstudianteRepository;
 import TP3.APIRest.repositories.InfoCarreraRepository;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/icarrera")
 public class InfoCarreraController {
 	
 	@Autowired
 	private InfoCarreraService service;
 	
-	@GetMapping("/icarrera/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> SearchById(@PathVariable Integer id) {
 		IcarreraRespuestaDTO i=service.SearchById(id);
 		if(i!=null) {
@@ -43,7 +43,7 @@ public class InfoCarreraController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
 	
-	@PostMapping("/icarrera")
+	@PostMapping("")
 	public ResponseEntity<?> persist(@RequestBody IcarreraDTO c) {
 		IcarreraRespuestaDTO i=service.persist(c);
 		if(i!=null) {
@@ -53,7 +53,7 @@ public class InfoCarreraController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error revisar formato");
 	}
 	
-	@DeleteMapping("/icarrera/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id) {
 		
 		IcarreraRespuestaDTO i=service.delete(id);
@@ -67,7 +67,7 @@ public class InfoCarreraController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
 	
-	@GetMapping("/icarrera")
+	@GetMapping("")
 	public ResponseEntity<?> getAlls(){
 		return ResponseEntity.status(HttpStatus.OK).body(service.getAlls());
 	}
