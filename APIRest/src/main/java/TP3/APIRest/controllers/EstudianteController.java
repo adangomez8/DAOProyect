@@ -55,6 +55,7 @@ public class EstudianteController {
 			Map<String, Object> response = new HashMap<>();
 	        response.put("message", "borrado");
 	        response.put("estudiante", e);
+
 	        return ResponseEntity.status(HttpStatus.OK).body(response);
 		}
 		

@@ -75,26 +75,43 @@ public class EstudianteService {
 	
 	@Transactional
 	public List<EstudianteDTO>findAll(String carrera,String ciudad,String genre,String orderby){
-		
-		if(((carrera!=null)&&(!carrera.isEmpty()))||((ciudad!=null)&&(!ciudad.isEmpty()))||((genre!=null)&&(!genre.isEmpty()))||((orderby!=null)&&(!orderby.isEmpty()))) {
-			if(carrera==null || carrera.isEmpty())
-				carrera=null;
-			if(ciudad==null || ciudad.isEmpty())
-				ciudad=null;
-			if(genre==null || genre.isEmpty())
-				genre=null;
-			if(orderby==null || orderby.isEmpty())
-				orderby=null;
+
+		/*if(((carrera!=null)&&(!carrera.isEmpty()))||((ciudad!=null)&&(!ciudad.isEmpty()))||((genre!=null)&&(!genre.isEmpty()))||((orderby!=null)&&(!orderby.isEmpty()))) {
+
+			if(carrera==null || carrera.isEmpty()) {
+				carrera = null;
+			}
+			if(ciudad==null || ciudad.isEmpty()) {
+				ciudad = null;
+			}
+			if(genre==null || genre.isEmpty()) {
+				genre = null;
+			}
+			if(orderby==null || orderby.isEmpty()) {
+				orderby = null;
+			}
+			System.out.println(carrera + " - " + ciudad + " - " + genre);
 			List<Estudiante> estudiantes = repository.findAll(carrera, ciudad, genre);
+
 	        if ((orderby != null)&&(!orderby.isEmpty())) {
 	        	
 	            estudiantes = ordenarEstudiantes(estudiantes, orderby);
 	        }
 	        return this.transformDTO(estudiantes);
 			}
-			
-		return this.transformDTO(repository.findAll());
+
+		return this.transformDTO(repository.findAll());*/
+		if(carrera != null || ciudad != null || genre != null || orderby != null){
+			List<Estudiante> estudiantes = repository.findAllParams(ciudad,genre,carrera);
+			if ((orderby != null)) {
+				estudiantes = ordenarEstudiantes(estudiantes, orderby);
+			}
+			return transformDTO(estudiantes);
+		}else{
+			return transformDTO(repository.findAll());
 		}
+	}
+
 	
 	private List<Estudiante> ordenarEstudiantes(List<Estudiante> estudiantes, String orderby) {
 	    switch (orderby) {
