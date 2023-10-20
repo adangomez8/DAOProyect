@@ -66,27 +66,12 @@ public class EstudianteController {
 									@RequestParam(name="ciudad", required=false) String ciudad,
 									@RequestParam(name="genre",required=false) String genre,
 									@RequestParam(name="orderby", required=false)String orderby){
-		if(genre!=null&&carrera==null&&ciudad==null&&orderby==null) {
-			List<EstudianteDTO> e=service.findByGenre(genre);
-			if(!e.isEmpty()) {
-				return ResponseEntity.status(HttpStatus.OK).body(e);
-			}
+		List<EstudianteDTO>e=service.findAll(carrera,ciudad,genre,orderby);
+		if(e!=null) {
+			return ResponseEntity.status(HttpStatus.OK).body(e);
+		}
+		else
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
-		}
-		else if(carrera!=null&&ciudad!=null&&genre==null&&orderby==null){
-			List<EstudianteDTO> estudiantes = service.findByCarreerAndCity(carrera, ciudad);
-		    
-		    if (!estudiantes.isEmpty()) {
-		        return ResponseEntity.status(HttpStatus.OK).body(estudiantes);
-		    }
-		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No encontrado");
-		}
-		else if(genre==null&&carrera==null&&ciudad==null&&orderby!=null) {
-			return ResponseEntity.status(HttpStatus.OK).body(service.findAllOrder(orderby));
-		}
-		else {
-			return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
-		}
 	}
 
 }

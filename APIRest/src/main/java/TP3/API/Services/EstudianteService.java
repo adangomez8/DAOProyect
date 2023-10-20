@@ -1,6 +1,7 @@
 package TP3.API.Services;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,6 @@ public class EstudianteService {
 	}
 	@Transactional
 	public Estudiante SearchByIdESTUDIANTE(@PathVariable int id) {
-		
 		Optional<Estudiante> estudiante= repository.findById(id);
 		
 		if(estudiante.isPresent()) {
@@ -72,51 +72,49 @@ public class EstudianteService {
 	    	return null;
 	    }
 	}
+	
 	@Transactional
-	public List<EstudianteDTO>findByGenre(String genre){
-		return this.transformDTO(repository.getEstudiantePorGenero(genre));
-	}
-	@Transactional
-	public List<EstudianteDTO>findByCarreerAndCity(String carrera,String ciudad){
-		return this.transformDTO(repository.getEstudiantesPorCarreraYCiudad(carrera,ciudad));
-	}
-	@Transactional
-	public List<EstudianteDTO>findAll(){
-		return this.transformDTO(repository.findAll());
-	}
-	@Transactional
-	public List<EstudianteDTO>findAllOrder(String order){
-		List<Estudiante>estudiantes= repository.findAll();
-		estudiantes.sort((estudiante1, estudiante2) -> {
-	        switch (order) {
-	            case "nombre":
-	                return estudiante1.getNombre().compareTo(estudiante2.getNombre());
-	            case "ciudad":
-	                return estudiante1.getCiudad().compareTo(estudiante2.getCiudad());
-	            case "apellido":
-	            	return estudiante1.getApellido().compareTo(estudiante2.getApellido());
-	            case "genero":
-	            	return estudiante1.getGenero().compareTo(estudiante2.getGenero());
-	            case "dni":
-	            	int result=estudiante1.getDni()-estudiante2.getDni();
-	            	if(result<0)
-	            		return -1;
-	            	else if(result>0)
-	            		return 1;
-    				return 0;
-	            case "edad":
-	            	int result2=estudiante1.getEdad()-estudiante2.getEdad();
-	            	if(result2<0)
-	            		return -1;
-	            	else if(result2>0)
-	            		return 1;
-    				return 0;
-	            default:
-	                return 0; 
+	public List<EstudianteDTO>findAll(String carrera,String ciudad,String genre,String orderby){
+		
+		if(((carrera!=null)&&(!carrera.isEmpty()))||((ciudad!=null)&&(!ciudad.isEmpty()))||((genre!=null)&&(!genre.isEmpty()))||((orderby!=null)&&(!orderby.isEmpty()))) {
+			if(carrera==null || carrera.isEmpty())
+				carrera=null;
+			if(ciudad==null || ciudad.isEmpty())
+				ciudad=null;
+			if(genre==null || genre.isEmpty())
+				genre=null;
+			if(orderby==null || orderby.isEmpty())
+				orderby=null;
+			List<Estudiante> estudiantes = repository.findAll(carrera, ciudad, genre);
+	        if ((orderby != null)&&(!orderby.isEmpty())) {
+	        	
+	            estudiantes = ordenarEstudiantes(estudiantes, orderby);
 	        }
-	    });
-		return this.transformDTO(estudiantes);
+	        return this.transformDTO(estudiantes);
+			}
+			
+		return this.transformDTO(repository.findAll());
+		}
+	
+	private List<Estudiante> ordenarEstudiantes(List<Estudiante> estudiantes, String orderby) {
+	    switch (orderby) {
+	        case "ciudad":
+	            estudiantes.sort(Comparator.comparing(Estudiante::getCiudad));
+	            break;
 
+	        case "nroLibreta":
+	            estudiantes.sort(Comparator.comparing(Estudiante::getNroLibreta));
+	            break;
+
+	        case "nombre":
+	            estudiantes.sort(Comparator.comparing(Estudiante::getNombre));
+	            break;
+
+	        case "genero":
+	            estudiantes.sort(Comparator.comparing(Estudiante::getGenero));
+	            break;
+	    }
+	    return estudiantes;
 	}
 	
 	private List<EstudianteDTO> transformDTO(List<Estudiante>estudiantes){
