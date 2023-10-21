@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -39,7 +38,7 @@ public class Estudiante {
 		this.edad = edad;
 		this.genero = genero;
 		this.ciudad = ciudad;
-		this.carreras = new ArrayList();
+		this.carreras = new ArrayList<>();
 	}
 	public void addCarrera(InfoCarrera c){
 		this.carreras.add(c);

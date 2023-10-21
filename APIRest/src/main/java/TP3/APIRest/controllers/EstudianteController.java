@@ -3,7 +3,6 @@ package TP3.APIRest.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import DTOS.EstudianteDTO;
 import TP3.API.Services.EstudianteService;
 import TP3.APIRest.entities.Estudiante;
-import TP3.APIRest.repositories.EstudianteRepository;
 
 @RestController
 @RequestMapping("api/estudiante")
@@ -35,8 +33,11 @@ public class EstudianteController {
 		if(e!=null) {
 			return ResponseEntity.status(HttpStatus.OK).body(e);
 		}
+		else {
+			return ResponseEntity.status(HttpStatus.OK).body("No se encontraron resultados");
+
+		}
 		
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
 	}
 
 	@PostMapping()

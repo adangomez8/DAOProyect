@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import DTOS.CarreraDTO;
-import DTOS.ReporteCarreraDTO;
 import TP3.APIRest.entities.Carrera;
 
 public interface CarreraRepository extends JpaRepository<Carrera, Integer> {

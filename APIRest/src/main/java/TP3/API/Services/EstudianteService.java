@@ -2,9 +2,7 @@ package TP3.API.Services;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import DTOS.EstudianteDTO;
-import TP3.APIRest.entities.Carrera;
 import TP3.APIRest.entities.Estudiante;
 import TP3.APIRest.repositories.EstudianteRepository;
 import jakarta.transaction.Transactional;
@@ -135,7 +132,7 @@ public class EstudianteService {
 	}
 	
 	private List<EstudianteDTO> transformDTO(List<Estudiante>estudiantes){
-		List<EstudianteDTO>estudiantesDto=new ArrayList();
+		List<EstudianteDTO>estudiantesDto=new ArrayList<>();
 		for(Estudiante e:estudiantes) {
 			estudiantesDto.add(this.transformOne(e));
 		}

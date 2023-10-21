@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -53,7 +52,7 @@ public class Carrera {
 	}
 
 	public List<Estudiante> getEstudiantes() {
-		List<Estudiante> estudiantes=new ArrayList();
+		List<Estudiante> estudiantes=new ArrayList<>();
 		for(InfoCarrera i:this.infoCarreras) {
 			estudiantes.add(i.getEstudiante());
 		}

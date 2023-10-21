@@ -1,9 +1,7 @@
 package TP3.APIRest.controllers;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import DTOS.IcarreraDTO;
 import DTOS.IcarreraRespuestaDTO;
 import TP3.API.Services.InfoCarreraService;
-import TP3.APIRest.entities.Carrera;
-import TP3.APIRest.entities.Estudiante;
-import TP3.APIRest.entities.InfoCarrera;
-import TP3.APIRest.repositories.CarreraRepository;
-import TP3.APIRest.repositories.EstudianteRepository;
-import TP3.APIRest.repositories.InfoCarreraRepository;
+
 
 @RestController
 @RequestMapping("api/icarrera")
@@ -40,7 +33,7 @@ public class InfoCarreraController {
 			return ResponseEntity.status(HttpStatus.CREATED).body(i);
 		}
 		else
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
+			return ResponseEntity.status(HttpStatus.OK).body("no se encontraron resultados");
 	}
 	
 	@PostMapping("")
