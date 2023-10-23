@@ -98,8 +98,11 @@ public class EstudianteService {
 			}
 
 		return this.transformDTO(repository.findAll());*/
+
 		if(carrera != null || ciudad != null || genre != null || orderby != null){
+			System.out.println("ciudad"+ciudad+" genre "+genre+" carrera "+carrera+" orderby "+orderby);
 			List<Estudiante> estudiantes = repository.findAllParams(ciudad,genre,carrera);
+			System.out.println(estudiantes);
 			if ((orderby != null)) {
 				estudiantes = ordenarEstudiantes(estudiantes, orderby);
 			}
