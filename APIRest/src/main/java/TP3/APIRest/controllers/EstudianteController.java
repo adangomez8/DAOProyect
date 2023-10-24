@@ -34,7 +34,7 @@ public class EstudianteController {
 			return ResponseEntity.status(HttpStatus.OK).body(e);
 		}
 		else {
-			return ResponseEntity.status(HttpStatus.OK).body("No se encontraron resultados");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron resultados");
 
 		}
 		
