@@ -5,6 +5,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/APIRest/pom.xml" />
+        <option value="$PROJECT_DIR$/Microservicios/microservicio-monopatines/src/pom.xml" />
+        <option value="$PROJECT_DIR$/Microservicios/microservicio-cuenta/src/pom.xml" />
+        <option value="$PROJECT_DIR$/Microservicios/microservicio-viaje/src/pom.xml" />
       </list>
     </option>
   </component>

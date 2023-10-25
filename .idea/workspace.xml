@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fcd839bd-d5c2-4ac4-ad93-5ea041bdc97d" name="Changes" comment="" />
+    <list default="true" id="fcd839bd-d5c2-4ac4-ad93-5ea041bdc97d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Microservicios/microservicio-cuenta/src/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Microservicios/microservicio-monopatines/src/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Microservicios/microservicio-viaje/src/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservicios/microservicio-cuenta/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/microservicio-cuenta/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservicios/microservicio-monopatines/src/main/java/com/app/monopatin/dtos/ParadaDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservicios/microservicio-monopatines/src/main/java/com/app/monopatin/models/entitys/Parada.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservicios/microservicio-monopatines/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/microservicio-monopatines/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservicios/microservicio-viaje/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/microservicio-viaje/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,19 +38,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Usuario/IdeaProjects/DAOProyect/Microservicios/microservicio-viaje/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Usuario\IdeaProjects\DAOProyect\Microservicios\microservicio-viaje\src" />
+      <recent name="C:\Users\Usuario\IdeaProjects\DAOProyect\Microservicios\microservicio-cuenta\src" />
+      <recent name="C:\Users\Usuario\IdeaProjects\DAOProyect\Microservicios\microservicio-monopatines\src" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="ApiRestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -58,6 +79,7 @@
       <updated>1698085190242</updated>
       <workItem from="1698085193944" duration="1895000" />
       <workItem from="1698134748389" duration="6434000" />
+      <workItem from="1698241308067" duration="2352000" />
     </task>
     <servers />
   </component>

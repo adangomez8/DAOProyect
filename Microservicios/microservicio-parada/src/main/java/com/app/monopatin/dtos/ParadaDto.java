@@ -1,14 +1,9 @@
 package com.app.monopatin.dtos;
 
-import com.app.monopatin.models.entitys.Monopatin;
-import jakarta.persistence.OneToMany;
-
-import java.util.ArrayList;
 
 public class ParadaDto {
 
     private int id;
-
     private String coordenadas;
     private int cantMonopatines;
 

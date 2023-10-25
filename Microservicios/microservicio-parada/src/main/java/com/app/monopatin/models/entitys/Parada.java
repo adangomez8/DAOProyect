@@ -1,8 +1,11 @@
 package com.app.monopatin.models.entitys;
 
 
+import com.app.monopatin.models.clases.Monopatin;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 
@@ -17,10 +20,9 @@ public class Parada {
     private String coordenadas;
 
     @OneToMany(mappedBy="parada")
-    private ArrayList<Monopatin> monopatines;
+    private HttpEntity<Monopatin> monopatines;
 
     public Parada() {
-        this.monopatines = new ArrayList<>();
     }
 
     public Parada(int id, String coordenadas) {
