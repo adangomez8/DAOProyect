@@ -3,9 +3,10 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/APIRest/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservicios/Microservicio-Users/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Microservicios/Microservicio-monopatin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Microservicios/Microservicio-Viaje/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Microservicios/Microservicio-Viaje/src/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservicios/microservicio-cuenta/src/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Microservicios/microservicio-monopatin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Microservicios/microservicio-monopatines/src/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Microservicios/microservicio-viaje/src/src/main/java" charset="UTF-8" />
   </component>
 </project>
