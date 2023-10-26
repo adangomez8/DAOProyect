@@ -3,6 +3,8 @@ package com.MicroservicioViaje.controllers;
 import com.MicroservicioViaje.Dto.ViajeDto;
 import com.MicroservicioViaje.entities.Viaje;
 import com.MicroservicioViaje.services.ViajeService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,15 +28,14 @@ public class ViajeController {
         }
     }
     @GetMapping("/{id}")
+
     public ResponseEntity<?> getByID(@PathVariable int id){
 
         ViajeDto aux = viajeService.getById(id);
 
         if(aux != null){
             return ResponseEntity.status(HttpStatus.OK).body(aux);
-
         }else{
-
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Viaje no encontrado");
         }
     }
@@ -65,4 +66,5 @@ public class ViajeController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El viaje no existe");
         }
     }
+    
 }

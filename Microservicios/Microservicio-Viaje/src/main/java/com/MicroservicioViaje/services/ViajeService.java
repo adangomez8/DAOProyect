@@ -18,7 +18,7 @@ public class ViajeService {
     private ViajeRepository viajeRepository;
 
     @Transactional
-    public ViajeDto getById(@PathVariable Integer id){
+    public ViajeDto     getById(@PathVariable Integer id){
         Optional<Viaje> v = viajeRepository.findById(id);
         if(v.isPresent()){
             return transformDTO(v.get());
