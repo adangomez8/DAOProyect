@@ -19,7 +19,7 @@ public class Parada {
 
     private String longitud;
 
-    @OneToMany
+    @OneToMany(mappedBy = "parada")
     private List<Monopatin> monopatines;
 
     public Parada() {
