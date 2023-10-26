@@ -1,54 +1,80 @@
 package com.app.monopatin.controllers;
 
 import com.app.monopatin.dtos.MonopatinDto;
-import com.app.monopatin.models.entitys.Monopatin;
+import com.app.monopatin.entitys.Monopatin;
 import com.app.monopatin.services.MonopatinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("monopatin")
 public class MonopatinController {
 
     @Autowired
-    private MonopatinService monopatinService;
+    private MonopatinService service;
+
+    @GetMapping("")
+    public ResponseEntity<?>getAll(){
+
+        List<MonopatinDto> dto=service.getAll();
+
+        if(dto!=null) {
+            return ResponseEntity.status(HttpStatus.OK).body(dto);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al listar monopatines");
+        }
+    }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> searchById(@PathVariable Integer id) {
-        MonopatinDto m = monopatinService.searchById(id);
+    public ResponseEntity<?>getById(@PathVariable Integer id){
+
+        MonopatinDto m= service.getById(id);
+
         if(m!=null) {
             return ResponseEntity.status(HttpStatus.OK).body(m);
         }
-        else
-            return ResponseEntity.status(HttpStatus.OK).body("no se encontraron resultados");
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+        }
     }
 
-    @PostMapping()
-    public ResponseEntity<?> persist(@RequestBody Monopatin m) {
+    @PostMapping("")
+    public ResponseEntity<?>create(@RequestBody MonopatinDto m){
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(monopatinService.save(m));
+            service.create(new Monopatin(m.getId(), m.getEstado(), m.getLatitud(), m.getLongitud()));
+            return ResponseEntity.status(HttpStatus.CREATED).body(m);
         }
         catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("asegure de mandar bien el formato");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al dar de alta.Verifique de ingresar todos los campos requeridos");
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?>update(@PathVariable Integer id, @RequestBody MonopatinDto m){
+
+        try {
+            service.update(id, m);
+            return ResponseEntity.status(HttpStatus.OK).body(m);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("Error al modificar.Verifique que el monopatin exista");
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable int id) {
-        MonopatinDto m = monopatinService.deleteById(id);
-        if(m!=null) {
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", "borrado");
-            response.put("monopatin", m);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
+    public ResponseEntity<?>delete(@PathVariable Integer id){
+
+        try {
+            service.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Monopatin eliminado");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. El monopatin que desea eliminar no existe");
         }
-        else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("no encontrado");
     }
 
 }

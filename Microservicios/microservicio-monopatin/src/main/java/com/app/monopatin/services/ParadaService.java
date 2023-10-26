@@ -1,27 +1,28 @@
 package com.app.monopatin.services;
 
 import com.app.monopatin.dtos.ParadaDto;
-import com.app.monopatin.models.entitys.Parada;
+import com.app.monopatin.entitys.Parada;
 import com.app.monopatin.repositorys.ParadaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ParadaService {
 
     @Autowired
-    private ParadaRepository paradaRepository;
+    private ParadaRepository repository;
+
 
     @Transactional
-    public ParadaDto searchById(@PathVariable Integer id) {
+    public ParadaDto getById(@PathVariable Integer id) {
 
-        Optional<Parada> parada= paradaRepository.findById(id);
+        Optional<Parada> parada= repository.findById(id);
 
         if(parada.isPresent()) {
             return (this.convertDto(parada.get()));
@@ -32,9 +33,9 @@ public class ParadaService {
     }
 
     @Transactional
-    public ParadaDto save(Parada parada) throws Exception {
+    public ParadaDto create(Parada parada) throws Exception {
         try{
-            paradaRepository.save(parada);
+            repository.save(parada);
             return this.convertDto(parada);
         }catch (Exception e){
             throw new Exception(e.getMessage());
@@ -42,36 +43,47 @@ public class ParadaService {
     }
 
     @Transactional
-    public ParadaDto deleteById(@PathVariable int id) {
+    public ParadaDto delete(@PathVariable int id) {
 
-        Optional<Parada> optionalMonopatin = paradaRepository.findById(id);
+        Optional<Parada> optionalParada = repository.findById(id);
 
-        if (optionalMonopatin.isPresent()) {
-            Parada parada = optionalMonopatin.get();
-            paradaRepository.deleteById(id);
+        if (optionalParada.isPresent()) {
+            Parada parada = optionalParada.get();
+            repository.deleteById(id);
             return this.convertDto(parada);
         } else {
             return null;
         }
     }
 
-    @Transactional
-    public List<ParadaDto> findAll(){
-        return this.convertListDto(paradaRepository.findAll());
 
+    @Transactional
+    public List<ParadaDto>getAll(){
+        List<Parada> paradas = repository.findAll();
+
+        List<ParadaDto> dtos = paradas.stream()
+                .map(parada -> new ParadaDto(parada.getId(), parada.getLatitud(), parada.getLongitud(), parada.getMonopatines().size()))
+                .collect(Collectors.toList());
+
+        return dtos;
     }
 
-    private List<ParadaDto> convertListDto(List<Parada> paradas) {
+    @Transactional
+    public void update(int id, ParadaDto paradaDto) {
 
-        List<ParadaDto> monopatinDtos = new ArrayList<>();
-        for(Parada p : paradas){
-            monopatinDtos.add(convertDto(p));
+        Optional<Parada> optionalParada = repository.findById(id);
+
+        if(optionalParada!=null) {
+            Parada parada = optionalParada.get();
+            parada.setLatitud(paradaDto.getLatitud());
+            parada.setLongitud(paradaDto.getLongitud());
+
+            repository.save(parada);
         }
-        return monopatinDtos;
     }
 
     private ParadaDto convertDto(Parada parada) {
 
-        return new ParadaDto(parada.getId(), parada.getCoordenadas(), parada.getMonopatines().size());
+        return new ParadaDto(parada.getId(), parada.getLatitud(), parada.getLongitud(), parada.getMonopatines().size());
     }
 }

@@ -4,34 +4,55 @@ import lombok.Getter;
 
 public class MonopatinDto {
 
-    @Getter
-    private int id;
+    private Integer id;
 
-    @Getter
     private String estado;
 
-    @Getter
     private int kilometros;
 
-    @Getter
-    private boolean enMantenimiento;
+    private String latitud;
 
-    public MonopatinDto(int id, String estado, int kilometros, boolean enMantenimiento) {
+    private String longitud;
+
+    private int tiempoEnUso;
+
+    private int tiempoEnPausa;
+
+    public MonopatinDto(Integer id, String estado, int kilometros, String latitud, String longitud, int tiempoEnUso, int tiempoEnPausa) {
         this.id = id;
         this.estado = estado;
         this.kilometros = kilometros;
-        this.enMantenimiento = enMantenimiento;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.tiempoEnUso = tiempoEnUso;
+        this.tiempoEnPausa = tiempoEnPausa;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public Integer getId() {
+        return id;
     }
 
-    public void setKilometros(int kilometros) {
-        this.kilometros = kilometros;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setEnMantenimiento(boolean enMantenimiento) {
-        this.enMantenimiento = enMantenimiento;
+    public int getKilometros() {
+        return kilometros;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public int getTiempoEnUso() {
+        return tiempoEnUso;
+    }
+
+    public int getTiempoEnPausa() {
+        return tiempoEnPausa;
     }
 }

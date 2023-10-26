@@ -1,10 +1,10 @@
-package com.example.microservicioparada;
+package com.example.microservicio;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MicroservicioParadaApplicationTests {
+class MicroservicioApplicationTests {
 
     @Test
     void contextLoads() {

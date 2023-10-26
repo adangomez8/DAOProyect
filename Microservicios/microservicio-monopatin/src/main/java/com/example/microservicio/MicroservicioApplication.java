@@ -1,13 +1,13 @@
-package com.example.microservicioparada;
+package com.example.microservicio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MicroservicioParadaApplication {
+public class MicroservicioApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MicroservicioParadaApplication.class, args);
+        SpringApplication.run(MicroservicioApplication.class, args);
     }
 
 }
