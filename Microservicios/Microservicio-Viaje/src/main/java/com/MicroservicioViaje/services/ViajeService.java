@@ -1,5 +1,7 @@
 package com.MicroservicioViaje.services;
 
+import com.MicroservicioViaje.Dto.DtoCuenta;
+import com.MicroservicioViaje.Dto.MonopatinDto;
 import com.MicroservicioViaje.Dto.ViajeDto;
 import com.MicroservicioViaje.entities.Viaje;
 import com.MicroservicioViaje.repositories.ViajeRepository;
@@ -7,6 +9,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +20,12 @@ public class ViajeService {
     @Autowired
     private ViajeRepository viajeRepository;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
+
     @Transactional
-    public ViajeDto     getById(@PathVariable Integer id){
+    public ViajeDto getById(@PathVariable Integer id){
         Optional<Viaje> v = viajeRepository.findById(id);
         if(v.isPresent()){
             return transformDTO(v.get());
@@ -37,10 +44,15 @@ public class ViajeService {
 
     @Transactional
     public ViajeDto create(Viaje v){
+        DtoCuenta response_cuenta = restTemplate.getForObject("http://localhost:8080/api/cuenta/"+v.getId_cuenta(),DtoCuenta.class);
+        MonopatinDto response_monopatin = restTemplate.getForObject("http://localhost:8081/monopatin/"+v.getId_monopatin(),MonopatinDto.class);
         try{
+            v.setId_monopatin(response_monopatin.getId());
+            v.setId_cuenta(response_cuenta.getIdCuenta());
             viajeRepository.save(v);
             return transformDTO(v);
         }catch (Exception exc){
+            System.out.println();
             return null;
         }
     }

@@ -66,5 +66,5 @@ public class ViajeController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El viaje no existe");
         }
     }
-    
+
 }
