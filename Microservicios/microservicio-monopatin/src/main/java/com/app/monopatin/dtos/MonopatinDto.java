@@ -18,6 +18,7 @@ public class MonopatinDto {
 
     private int tiempoEnPausa;
 
+
     public MonopatinDto(Integer id, String estado, int kilometros, String latitud, String longitud, int tiempoEnUso, int tiempoEnPausa) {
         this.id = id;
         this.estado = estado;
@@ -55,4 +56,5 @@ public class MonopatinDto {
     public int getTiempoEnPausa() {
         return tiempoEnPausa;
     }
+
 }

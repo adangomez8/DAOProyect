@@ -44,13 +44,12 @@ public class MonopatinController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?>create(@RequestBody MonopatinDto m){
-        try {
-            service.create(new Monopatin(m.getId(), m.getEstado(), m.getLatitud(), m.getLongitud()));
-            return ResponseEntity.status(HttpStatus.CREATED).body(m);
-        }
-        catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al dar de alta.Verifique de ingresar todos los campos requeridos");
+    public ResponseEntity<?>create(@RequestBody Monopatin m) throws Exception {
+        MonopatinDto aux = service.create(m);
+        if(aux!=null){
+            return ResponseEntity.status(HttpStatus.CREATED).body(aux);
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear monopatin, ingrese campos correctos");
         }
     }
 

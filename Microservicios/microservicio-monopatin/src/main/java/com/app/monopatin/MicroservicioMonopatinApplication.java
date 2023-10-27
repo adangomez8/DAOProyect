@@ -11,8 +11,8 @@ public class MicroservicioMonopatinApplication {
         SpringApplication.run(MicroservicioMonopatinApplication.class, args);
 
         MonopatinService monopatinService = new MonopatinService();
-        CargaDeDatos  cg = new CargaDeDatos(monopatinService);
-        cg.readCSV();
+//        CargaDeDatos  cg = new CargaDeDatos(monopatinService);
+//        cg.readCSV();
     }
 
 }

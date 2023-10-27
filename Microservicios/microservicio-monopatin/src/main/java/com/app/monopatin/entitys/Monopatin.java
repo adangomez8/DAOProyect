@@ -30,7 +30,7 @@ public class Monopatin {
 
     }
 
-    public Monopatin(int id, String estado, String latitud, String longitud) {
+    public Monopatin(int id, String estado, String latitud, String longitud, Parada parada) {
         this.id = id;
         this.estado = estado;
         this.kilometros = 0;
@@ -38,6 +38,7 @@ public class Monopatin {
         this.longitud = longitud;
         this.tiempoEnUso = 0;
         this.tiempoEnPausa = 0;
+        this.parada = parada;
     }
 
 
