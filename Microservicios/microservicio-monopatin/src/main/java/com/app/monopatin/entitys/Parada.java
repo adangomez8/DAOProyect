@@ -31,5 +31,39 @@ public class Parada {
         this.monopatines = new ArrayList<>();
     }
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getLatitud() {
+		return latitud;
+	}
+
+	public void setLatitud(String latitud) {
+		this.latitud = latitud;
+	}
+
+	public String getLongitud() {
+		return longitud;
+	}
+
+	public void setLongitud(String longitud) {
+		this.longitud = longitud;
+	}
+
+	public List<Monopatin> getMonopatines() {
+		return monopatines;
+	}
+
+	public void setMonopatines(List<Monopatin> monopatines) {
+		this.monopatines = monopatines;
+	}
+    
+    
+
 
 }

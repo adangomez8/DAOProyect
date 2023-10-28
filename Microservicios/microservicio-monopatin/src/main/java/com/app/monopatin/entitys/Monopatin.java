@@ -41,5 +41,71 @@ public class Monopatin {
         this.parada = parada;
     }
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public int getKilometros() {
+		return kilometros;
+	}
+
+	public void setKilometros(int kilometros) {
+		this.kilometros = kilometros;
+	}
+
+	public String getLatitud() {
+		return latitud;
+	}
+
+	public void setLatitud(String latitud) {
+		this.latitud = latitud;
+	}
+
+	public String getLongitud() {
+		return longitud;
+	}
+
+	public void setLongitud(String longitud) {
+		this.longitud = longitud;
+	}
+
+	public int getTiempoEnUso() {
+		return tiempoEnUso;
+	}
+
+	public void setTiempoEnUso(int tiempoEnUso) {
+		this.tiempoEnUso = tiempoEnUso;
+	}
+
+	public int getTiempoEnPausa() {
+		return tiempoEnPausa;
+	}
+
+	public void setTiempoEnPausa(int tiempoEnPausa) {
+		this.tiempoEnPausa = tiempoEnPausa;
+	}
+
+	public Parada getParada() {
+		return parada;
+	}
+
+	public void setParada(Parada parada) {
+		this.parada = parada;
+	}
+    
+    
+
 
 }
