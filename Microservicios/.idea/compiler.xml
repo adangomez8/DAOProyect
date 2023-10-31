@@ -11,11 +11,13 @@
         <module name="Microservicios" />
         <module name="demo" />
         <module name="Microservicio-Viaje" />
+        <module name="Mantenimiento" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Mantenimiento" options="-parameters" />
       <module name="Microservicio-Viaje" options="-parameters" />
       <module name="Microservicio-monopatin" options="-parameters" />
       <module name="demo" options="-parameters" />
