@@ -1,9 +1,6 @@
 package com.Microservicios.Mantenimiento.Services;
 
-import com.Microservicios.Mantenimiento.Dto.DtoMonopatin;
-import com.Microservicios.Mantenimiento.Dto.ReporteKM;
-import com.Microservicios.Mantenimiento.Dto.ReporteWithPause;
-import com.Microservicios.Mantenimiento.Dto.ReporteWithoutPause;
+import com.Microservicios.Mantenimiento.Dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -19,33 +16,34 @@ public class MantenimientoService {
     @Autowired
     RestTemplate template;
 
-    public List<ReporteKM> generateReportByKM(){
-        List<ReporteKM> aux = new ArrayList<>();
 
-        List<DtoMonopatin> ldm = getAllMonopatines();
-        for(DtoMonopatin dm: ldm){
-            aux.add(new ReporteKM(dm.getId(),dm.getKilometros()));
+    public List<Reporte> generateReport(boolean incluyePausa){
+        List<DtoMonopatin> monopatinList = getAllMonopatines();
+        List<Reporte> aux = new ArrayList<>();
+        if(incluyePausa){
+            System.out.println("hla");
+            for(DtoMonopatin dm:monopatinList){
+                aux.add(new ReporteConPausa(dm.getId(),dm.getKilometros(),dm.getTiempoEnUso(),dm.getTiempoEnPausa()));
+            }
+        }else{
+            for(DtoMonopatin dm:monopatinList){
+                aux.add(new Reporte(dm.getId(),dm.getKilometros(),dm.getTiempoEnUso()));
+            }
         }
         return aux;
     }
-    public List<ReporteWithPause> generateReportWithPause(){
-        List<ReporteWithPause> aux = new ArrayList<>();
-        List<DtoMonopatin> monopatines = getAllMonopatines();
-
-        for(DtoMonopatin dm: monopatines){
-            aux.add(new ReporteWithPause(dm.getId(),dm.getTiempoEnPausa()));
+    public DtoMonopatin changeStatus(String newStatus,Integer idMono){
+        String url = "http://localhost:8081/monopatin/";
+        DtoMonopatin d = template.getForObject(url+idMono, DtoMonopatin.class);
+        if(d != null){
+            d.setEstado(newStatus);
+            template.put(url+idMono,d);
+            return d;
+        }else{
+            return null;
         }
-        return aux;
     }
-    public List<ReporteWithoutPause> generateReportWithoutPause(){
-        List<ReporteWithoutPause> aux = new ArrayList<>();
-        List<DtoMonopatin> monopatines = getAllMonopatines();
 
-        for(DtoMonopatin dm: monopatines){
-            aux.add(new ReporteWithoutPause(dm.getId(),dm.getTiempoEnUso()));
-        }
-        return aux;
-    }
     private List<DtoMonopatin> getAllMonopatines(){
         String url = "http://localhost:8081/monopatin";
         ResponseEntity<List<DtoMonopatin>> response = template.exchange(
