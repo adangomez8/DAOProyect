@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Microservicio-monopatin" />
+        <module name="Microservicio-admin" />
         <module name="Microservicios" />
         <module name="demo" />
         <module name="Microservicio-Viaje" />
@@ -19,6 +20,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Mantenimiento" options="-parameters" />
       <module name="Microservicio-Viaje" options="-parameters" />
+      <module name="Microservicio-admin" options="-parameters" />
       <module name="Microservicio-monopatin" options="-parameters" />
       <module name="demo" options="-parameters" />
     </option>
