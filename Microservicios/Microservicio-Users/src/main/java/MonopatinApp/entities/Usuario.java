@@ -80,6 +80,9 @@ public class Usuario {
 		return idUsuario;
 	}
 
+	public void agregarCuenta(Cuenta c){
+		cuentas.add(c);
+	}
 	@Override
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", mail=" + mail

@@ -17,14 +17,19 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Component
 public class CargaDeDatos {
     @Autowired
    private final CuentaRepository cuentaRepository;
     @Autowired
+    private final UsuarioRepository usuarioRepository;
+    @Autowired
     private CuentaService cuentaService;
-    public CargaDeDatos(CuentaRepository n ) {
+    public CargaDeDatos(CuentaRepository n,UsuarioRepository u )
+    {
+        this.usuarioRepository = u;
         this.cuentaRepository = n;
     }
     @PostConstruct
@@ -41,6 +46,25 @@ public class CargaDeDatos {
                Cuenta c = new Cuenta(Double.parseDouble(column1),LocalDate.parse(column2));
                 cuentaRepository.save(c);
             }
+
+            FileReader fileReaderUs = new FileReader("C:\\Users\\joseg\\IdeaProjects\\Arquitecturas\\DAOProyect\\Microservicios\\Microservicio-Users\\src\\main\\resources\\usuarios.csv");
+            CSVParser csvParserUs = new CSVParser(fileReaderUs, CSVFormat.DEFAULT.withHeader());
+            for(CSVRecord r:csvParserUs){
+                String n = r.get("nombre");
+                String a = r.get("apellido");
+                String e = r.get("mail");
+                int num = Integer.parseInt(r.get("numTelefono"));
+                //Optional<Cuenta> c = cuentaRepository.findById(Integer.parseInt(r.get("idCuenta")));
+
+                Usuario aux = new Usuario(n,a,e,num);
+                /*if(c.isPresent()){
+                    aux.agregarCuenta(c.get());
+                }*/
+                usuarioRepository.save(aux);
+
+            }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
