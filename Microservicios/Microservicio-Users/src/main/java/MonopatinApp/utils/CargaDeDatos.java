@@ -54,12 +54,12 @@ public class CargaDeDatos {
                 String a = r.get("apellido");
                 String e = r.get("mail");
                 int num = Integer.parseInt(r.get("numTelefono"));
-                //Optional<Cuenta> c = cuentaRepository.findById(Integer.parseInt(r.get("idCuenta")));
+                Optional<Cuenta> c = cuentaRepository.findById(Integer.parseInt(r.get("idCuenta")));
 
                 Usuario aux = new Usuario(n,a,e,num);
-                /*if(c.isPresent()){
+                if(c.isPresent()){
                     aux.agregarCuenta(c.get());
-                }*/
+                }
                 usuarioRepository.save(aux);
 
             }

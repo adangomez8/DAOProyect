@@ -54,8 +54,9 @@ public class CargaDeDatos {
                 String lon = record.get("longitud");
                 String tiempoUso = record.get("tiempoEnUso");
                 String tiempoPausa = record.get("tiempoEnPausa");
-
+                Parada p = paradaRepository.findById(Integer.parseInt(record.get("idParada"))).get();
                 Monopatin m = new Monopatin(Integer.parseInt(id),estado,lat,lon,paradaAleatoria);
+                m.setParada(p);
                 m.setKilometros(Integer.parseInt(kilometros));
                 m.setTiempoEnPausa(Integer.parseInt(tiempoPausa));
                 m.setTiempoEnUso(Integer.parseInt(tiempoUso));
