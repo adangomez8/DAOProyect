@@ -1,14 +1,22 @@
 package Microservicioadmin.Security.JWT;
 
 import io.jsonwebtoken.*;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Component
 public class TokenUtilJWT {
@@ -19,6 +27,10 @@ public class TokenUtilJWT {
 
     @Value("600000") //10 min
     private int jwtExpirationMs;
+
+    private static final String AUTHORITIES_KEY = "auth";
+    private JwtParser jwtParser;
+
 
     public String generateToken(Authentication auth){
         UserDetails principal = (UserDetails) auth.getPrincipal(); //dealles del usuario a autenticado
@@ -56,5 +68,20 @@ public class TokenUtilJWT {
             log.error("Token nulo o vacio", iE.getMessage());
         }
         return false;
+    }
+
+    public Authentication getAuthentication(String token){
+
+        Claims claims = jwtParser.parseClaimsJws(token).getBody();
+
+        Collection<? extends GrantedAuthority> authorities = Arrays
+                .stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+                .filter(auth -> !auth.trim().isEmpty())
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+
+        User principal = new User(claims.getSubject(), "", authorities);
+
+        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 }

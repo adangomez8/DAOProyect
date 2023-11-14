@@ -1,65 +1,67 @@
 package Microservicioadmin.Config;
 
 import Microservicioadmin.Security.JWT.AuthEntryPointJWT;
+import Microservicioadmin.Security.JWT.ConfigurerJWT;
 import Microservicioadmin.Security.JWT.RequestFilterJWT;
+import Microservicioadmin.Security.JWT.TokenUtilJWT;
 import Microservicioadmin.Security.Services.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Component;
 
 
+@Component
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private UserDetailsServiceImpl userDetailsService;
-    private AuthEntryPointJWT authEntryPointJWT;
+@EnableMethodSecurity
+@RequiredArgsConstructor
+public class SecurityConfig {
 
-    @Autowired
-    public SecurityConfig(UserDetailsServiceImpl u,AuthEntryPointJWT a){
-        userDetailsService = u;
-        authEntryPointJWT = a;
-    }
+    private final TokenUtilJWT tokenUtilJWT;
+
+
 
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+    private ConfigurerJWT securityConfigurerAdapter(){
+        return new ConfigurerJWT(tokenUtilJWT);
+    }
+
+
+
+
     @Bean
-    public RequestFilterJWT authenticationTokenFilter(){
-        return new RequestFilterJWT();
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        System.out.println("HOLAA");
+        http
+                .apply(securityConfigurerAdapter());
+        http.csrf(AbstractHttpConfigurer::disable)
+                .anonymous(AbstractHttpConfigurer::disable)
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.httpBasic(Customizer.withDefaults());
+        return http.build();
     }
 
     @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(authEntryPointJWT).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().anyRequest().authenticated(); //todas las solicitudes tienen que estar auth
-        //http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationToken.class);
+    public ResourceDatabasePopulator databasePopulator() {
+        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+        populator.addScript(new ClassPathResource("db_auth.sql"));
+        return populator;
     }
 }
