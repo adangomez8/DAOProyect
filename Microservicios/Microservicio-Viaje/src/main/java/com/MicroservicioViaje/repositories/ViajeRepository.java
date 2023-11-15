@@ -13,9 +13,9 @@ import org.springframework.data.repository.query.Param;
 public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
 
 	
-	@Query("SELECT SUM(v.precio) FROM Viaje v"+
-			"WHERE YEAR(v.fecha_fin)= :anio"+
-			"AND MONTH(v.fecha_fin) BETWEEN :mesIni AND :mesFin")
+	@Query("SELECT SUM((v.precio * v.km_recorridos)+ v.tarifa_extra) FROM Viaje v "+
+			"WHERE YEAR(v.fecha_fin)= :anio "+
+			"AND MONTH(v.fecha_fin) BETWEEN :mesIni AND :mesFin ")
 	static
 	double getRecaudacion(@Param("anio") Date anio,@Param("mesIni")Date mesIni,@Param("mesFin")Date mesFin) {
 		// TODO Auto-generated method stub
