@@ -6,6 +6,8 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 public class Parada {
@@ -17,8 +19,9 @@ public class Parada {
     private String latitud;
 
     private String longitud;
-
-    @OneToMany(mappedBy = "parada")
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "_parada")
     private List<Monopatin> monopatines;
 
     public Parada() {

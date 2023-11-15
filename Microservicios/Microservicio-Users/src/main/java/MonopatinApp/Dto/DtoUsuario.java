@@ -1,5 +1,10 @@
 package MonopatinApp.Dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import MonopatinApp.entities.Cuenta;
+
 public class DtoUsuario {
 	
 	private Integer idUsuario;
@@ -7,14 +12,16 @@ public class DtoUsuario {
 	private String apellido;
 	private String mail;
 	private int numTelefono;
+	private List<Cuenta>cuentas;
 	
-	public DtoUsuario(Integer idUsuario, String nombre, String apellido, String mail, int numTelefono) {
+	public DtoUsuario(Integer idUsuario, String nombre, String apellido, String mail, int numTelefono, List<Cuenta>cuentas) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.mail = mail;
 		this.numTelefono = numTelefono;
+		this.cuentas=new ArrayList<>();
 	}
 
 	public Integer getIdUsuario() {
@@ -55,6 +62,10 @@ public class DtoUsuario {
 
 	public void setNumTelefono(int numTelefono) {
 		this.numTelefono = numTelefono;
+	}
+
+	public List<Cuenta> getCuentas() {
+		return cuentas;
 	}
 
 	@Override

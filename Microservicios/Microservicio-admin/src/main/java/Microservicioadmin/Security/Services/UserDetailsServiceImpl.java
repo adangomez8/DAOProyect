@@ -23,6 +23,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Optional<SistemUser> sistemUser = Optional.ofNullable(repository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado.")));
 
-        return new User(sistemUser.get().getUsername(), sistemUser.get().getPassword(),new ArrayList<>());
+        return new User(((UserDetails) sistemUser.get()).getUsername(), ((UserDetails) sistemUser.get()).getPassword(),new ArrayList<>());
     }
 }

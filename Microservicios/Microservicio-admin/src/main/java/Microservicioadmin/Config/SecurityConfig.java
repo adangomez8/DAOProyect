@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final TokenUtilJWT tokenUtilJWT;
+    private  TokenUtilJWT tokenUtilJWT;
 
 
 

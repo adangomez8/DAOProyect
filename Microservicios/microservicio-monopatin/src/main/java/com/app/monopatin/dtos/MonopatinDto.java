@@ -1,5 +1,7 @@
 package com.app.monopatin.dtos;
 
+import com.app.monopatin.entitys.Parada;
+
 import lombok.Getter;
 
 public class MonopatinDto {
@@ -17,9 +19,11 @@ public class MonopatinDto {
     private int tiempoEnUso;
 
     private int tiempoEnPausa;
+    
+    private Parada parada;
 
 
-    public MonopatinDto(Integer id, String estado, int kilometros, String latitud, String longitud, int tiempoEnUso, int tiempoEnPausa) {
+    public MonopatinDto(Integer id, String estado, int kilometros, String latitud, String longitud, int tiempoEnUso, int tiempoEnPausa,Parada parada) {
         this.id = id;
         this.estado = estado;
         this.kilometros = kilometros;
@@ -27,6 +31,7 @@ public class MonopatinDto {
         this.longitud = longitud;
         this.tiempoEnUso = tiempoEnUso;
         this.tiempoEnPausa = tiempoEnPausa;
+        this.parada=parada;
     }
 
     public Integer getId() {
@@ -57,4 +62,8 @@ public class MonopatinDto {
         return tiempoEnPausa;
     }
 
+	public Parada get_parada() {
+		return parada;
+	}
+    
 }

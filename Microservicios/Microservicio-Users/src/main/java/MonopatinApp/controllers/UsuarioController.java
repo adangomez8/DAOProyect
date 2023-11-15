@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import MonopatinApp.Dto.DtoUsuario;
+import MonopatinApp.entities.Cuenta;
 import MonopatinApp.entities.Usuario;
 import MonopatinApp.services.UsuarioService;
 
@@ -79,13 +80,12 @@ public class UsuarioController {
 	public ResponseEntity<?> delete(@PathVariable Integer id){
 		
 		try {
-			service.delete(id);;
+			service.delete(id);
 			return ResponseEntity.status(HttpStatus.OK).body("Usuario eliminado");
 			
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.El usuario que desea eliminar no existe");
 		}
 	}
-
 
 }

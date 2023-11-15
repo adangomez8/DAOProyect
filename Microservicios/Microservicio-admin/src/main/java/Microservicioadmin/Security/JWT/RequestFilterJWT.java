@@ -29,8 +29,13 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class RequestFilterJWT extends GenericFilterBean {
     public static final String AUTHORIZATION_HEADER = "Authorization";
-    private final TokenUtilJWT tokenProvider;
+    private TokenUtilJWT tokenProvider;
     public static final String BEARER = "Bearer ";
+    
+    public RequestFilterJWT(TokenUtilJWT tokenProvider) {
+    	this.tokenProvider=tokenProvider;
+    }
+    
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;

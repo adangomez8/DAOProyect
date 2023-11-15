@@ -1,5 +1,9 @@
 package com.app.monopatin.entitys;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,15 +26,21 @@ public class Monopatin {
     private int tiempoEnUso;
 
     private int tiempoEnPausa;
-
+    
+    @JsonIgnore
     @ManyToOne
-    private Parada parada;
+    @JoinColumn(name="parada_id")
+    private Parada _parada;
+    
+    @ElementCollection
+    @JoinColumn(name="viaje_id")
+    List<Integer>id_viaje;
 
     public Monopatin(){
 
     }
 
-    public Monopatin(int id, String estado, String latitud, String longitud, Parada parada) {
+    public Monopatin(int id, String estado, String latitud, String longitud, Parada _parada) {
         this.id = id;
         this.estado = estado;
         this.kilometros = 0;
@@ -38,7 +48,7 @@ public class Monopatin {
         this.longitud = longitud;
         this.tiempoEnUso = 0;
         this.tiempoEnPausa = 0;
-        this.parada = parada;
+        this._parada = _parada;
     }
 
 	public Integer getId() {
@@ -98,14 +108,19 @@ public class Monopatin {
 	}
 
 	public Parada getParada() {
-		return parada;
+		return _parada;
 	}
 
 	public void setParada(Parada parada) {
-		this.parada = parada;
+		this._parada = parada;
 	}
-    
-    
+	
+	public List<Integer> getViajeIds() {
+	    return id_viaje;
+	}
 
+	public void setViajeIds(List<Integer> viajeIds) {
+	    this.id_viaje = viajeIds;
+	}
 
 }

@@ -82,11 +82,13 @@ public class Usuario {
 
 	public void agregarCuenta(Cuenta c){
 		cuentas.add(c);
+		c.getUsuarios().add(this);
 	}
 	@Override
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", mail=" + mail
 				+ ", numTelefono=" + numTelefono + ", cuentas=" + cuentas + "]";
 	}
+	
 	
 }

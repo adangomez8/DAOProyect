@@ -77,4 +77,24 @@ public class Viaje implements Serializable {
                 ", tarifa_extra=" + tarifa_extra +
                 '}';
     }
+
+	public void setId_monopatin(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setId_cuenta(Integer idCuenta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setKm_recorridos(double kmRec) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setFecha_fin(Date fFin) {
+		// TODO Auto-generated method stub
+		
+	}
 }

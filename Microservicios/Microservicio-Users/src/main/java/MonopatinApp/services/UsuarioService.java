@@ -1,5 +1,6 @@
 package MonopatinApp.services;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import MonopatinApp.Dto.DtoUsuario;
+import MonopatinApp.entities.Cuenta;
 import MonopatinApp.entities.Usuario;
+import MonopatinApp.repositories.CuentaRepository;
 import MonopatinApp.repositories.UsuarioRepository;
 import jakarta.transaction.Transactional;
 
@@ -18,6 +21,10 @@ import jakarta.transaction.Transactional;
 public class UsuarioService {
 	@Autowired
 	UsuarioRepository repository;
+	
+	@Autowired
+	CuentaRepository cRepository;
+
 
 	public UsuarioService(UsuarioRepository repository) {
 		super();
@@ -32,7 +39,7 @@ public class UsuarioService {
 		
 		for(int i=0;i<u.size();i++) {
 			Usuario us= u.get(i);
-			DtoUsuario a= new DtoUsuario(us.getIdUsuario(),us.getNombre(),us.getApellido(),us.getMail(),us.getNumTelefono());
+			DtoUsuario a= new DtoUsuario(us.getIdUsuario(),us.getNombre(),us.getApellido(),us.getMail(),us.getNumTelefono(),us.getCuentas());
 			dto.add(a);
 		}
 		return dto;
@@ -45,7 +52,7 @@ public class UsuarioService {
 		
 		if(usuario.isPresent()) {
 			Usuario us=usuario.get();
-			DtoUsuario user= new DtoUsuario(us.getIdUsuario(),us.getNombre(),us.getApellido(),us.getMail(),us.getNumTelefono());
+			DtoUsuario user= new DtoUsuario(us.getIdUsuario(),us.getNombre(),us.getApellido(),us.getMail(),us.getNumTelefono(),us.getCuentas());
 			return user;
 		}
 		else {
@@ -56,8 +63,8 @@ public class UsuarioService {
 	@Transactional
 	public void create(@RequestBody Usuario u) {
 		
-		if(!repository.existsById(u.getIdUsuario())) {	
-			repository.save(u);		
+		if(!repository.existsById(u.getIdUsuario())) {
+			repository.save(u);
 		}
 	}
 	
