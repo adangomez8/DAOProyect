@@ -1,11 +1,10 @@
 package com.app.monopatin.dtos;
 
-<<<<<<< HEAD
+
 import com.app.monopatin.entitys.Parada;
 
-=======
+
 import lombok.Data;
->>>>>>> 34311474fef081243ba347389b80b53d1d074ae3
 import lombok.Getter;
 
 @Data

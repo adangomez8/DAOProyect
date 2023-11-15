@@ -19,10 +19,6 @@ public class DtoMonopatin {
 
     private int tiempoEnPausa;
     private int idParada;
-<<<<<<< HEAD
-=======
-
->>>>>>> 34311474fef081243ba347389b80b53d1d074ae3
 
 
     public Integer getId() {

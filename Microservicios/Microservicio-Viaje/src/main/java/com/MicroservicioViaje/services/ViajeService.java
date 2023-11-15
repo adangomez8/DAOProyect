@@ -21,7 +21,17 @@ public class ViajeService {
     @Autowired
     private RestTemplate restTemplate;
 
-
+    
+    @Transactional
+    public double getRecaudacion(Date anio,Date mesIni,Date mesFin) {
+    	try {
+			return  ViajeRepository.getRecaudacion(anio,mesIni,mesFin);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+    }
+    
     @Transactional
     public ViajeDto getById(@PathVariable Integer id){
         Optional<Viaje> v = viajeRepository.findById(id);

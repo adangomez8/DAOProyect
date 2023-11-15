@@ -1,6 +1,7 @@
 package Microservicioadmin.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
@@ -44,6 +45,18 @@ public class AdminService {
 	public void deleteCuenta(Integer id) {
 		
 		template.delete("http://localhost:8080/api/cuenta/"+id);
+	}
+	
+	public double getRecaudacion() {
+		ResponseEntity<Double>response= template.getForEntity("http://localhost:8082/api/viaje/recaudacion",Double.class);
+		
+		if(response.getStatusCode().is2xxSuccessful()) {
+			Double recaudacion= response.getBody();
+			return recaudacion;
+		}
+		else {
+			return 0;
+		}
 	}
 	
 	

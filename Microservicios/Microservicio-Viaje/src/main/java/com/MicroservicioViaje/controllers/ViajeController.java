@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,6 +28,18 @@ public class ViajeController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al listar todos los viajes");
         }
     }
+    
+    @GetMapping("/recaudacion")
+    public ResponseEntity<?>getRecaudacion(@RequestParam(name="anio")Date anio,@RequestParam(name="mesIni")Date mesIni,@RequestParam(name="mesFin")Date mesFin){
+    	try {
+    		double recaudacion= viajeService.getRecaudacion(anio, mesIni, mesFin);
+    		return ResponseEntity.status(HttpStatus.OK).body(recaudacion);
+    	}
+    	catch(Exception e) {
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error en generar la consulta");
+    	}
+    }
+    
     @GetMapping("/{id}")
 
     public ResponseEntity<?> getByID(@PathVariable int id){
