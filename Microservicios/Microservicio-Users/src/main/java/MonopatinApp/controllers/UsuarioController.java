@@ -88,4 +88,15 @@ public class UsuarioController {
 		}
 	}
 
+	@GetMapping("/monopatinesCercanos/{id}/{distancia}")
+	public ResponseEntity<?> getMonopatinesCercanosAMonopatin(@PathVariable Integer id, @PathVariable double distancia) {
+		ResponseEntity<?> responseEntity = service.getMonopatinesCercanosAMonopatin(id, distancia);
+
+		if (responseEntity.getStatusCode() == HttpStatus.OK) {
+			return ResponseEntity.status(HttpStatus.OK).body(responseEntity.getBody());
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontraron monopatines cerca");
+		}
+	}
+
 }

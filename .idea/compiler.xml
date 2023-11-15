@@ -19,6 +19,7 @@
       <module name="APIRest (1)" target="17" />
       <module name="APIRest (2)" target="17" />
       <module name="Microservicio" target="17" />
+      <module name="Microservicio-admin" target="17" />
       <module name="Microservicio-parada" target="17" />
     </bytecodeTargetLevel>
   </component>

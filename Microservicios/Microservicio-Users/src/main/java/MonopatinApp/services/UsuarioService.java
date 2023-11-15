@@ -1,11 +1,10 @@
 package MonopatinApp.services;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +15,7 @@ import MonopatinApp.entities.Usuario;
 import MonopatinApp.repositories.CuentaRepository;
 import MonopatinApp.repositories.UsuarioRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class UsuarioService {
@@ -25,10 +25,12 @@ public class UsuarioService {
 	@Autowired
 	CuentaRepository cRepository;
 
+	RestTemplate template;
 
 	public UsuarioService(UsuarioRepository repository) {
 		super();
 		this.repository = repository;
+		this.template = new RestTemplate();
 	}
 	
 	@Transactional
@@ -84,5 +86,18 @@ public class UsuarioService {
 			Usuario us= user.get();
 			repository.delete(us);
 		}
+	}
+
+	@Transactional
+	public ResponseEntity<?> getMonopatinesCercanosAMonopatin(int id, double distancia){
+
+		String url = "http://localhost:8081/monopatin//cercanos/{id}/{distancia}";
+
+		Map<String, Object> urlVariables = new HashMap<>();
+		urlVariables.put("id", id);
+		urlVariables.put("distancia", distancia);
+		ResponseEntity<?> responseEntity = template.getForEntity(url, Object.class, urlVariables);
+
+		return responseEntity;
 	}
 }
