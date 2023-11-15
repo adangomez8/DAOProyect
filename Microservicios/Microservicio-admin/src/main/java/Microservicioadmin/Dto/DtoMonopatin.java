@@ -1,5 +1,8 @@
 package Microservicioadmin.Dto;
 
+import lombok.Data;
+
+@Data
 public class DtoMonopatin {
 	
 	private Integer id;
@@ -15,16 +18,9 @@ public class DtoMonopatin {
     private int tiempoEnUso;
 
     private int tiempoEnPausa;
+    private int idParada;
 
-    public DtoMonopatin(Integer id, String estado, int kilometros, String latitud, String longitud, int tiempoEnUso, int tiempoEnPausa) {
-        this.id = id;
-        this.estado = estado;
-        this.kilometros = kilometros;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.tiempoEnUso = tiempoEnUso;
-        this.tiempoEnPausa = tiempoEnPausa;
-    }
+
 
     public Integer getId() {
         return id;

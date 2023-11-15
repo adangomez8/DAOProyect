@@ -48,12 +48,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        System.out.println("HOLAA");
+        String hash = passwordEncoder().encode("admin");
+        System.out.println(hash);
         http
                 .apply(securityConfigurerAdapter());
         http.csrf(AbstractHttpConfigurer::disable)
                 .anonymous(AbstractHttpConfigurer::disable)
-                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeRequests().requestMatchers("/api/admin/login").permitAll()
+
+        ;
         http.httpBasic(Customizer.withDefaults());
         return http.build();
     }
