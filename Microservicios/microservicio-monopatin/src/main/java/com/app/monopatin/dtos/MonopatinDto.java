@@ -1,9 +1,14 @@
 package com.app.monopatin.dtos;
 
+<<<<<<< HEAD
 import com.app.monopatin.entitys.Parada;
 
+=======
+import lombok.Data;
+>>>>>>> 34311474fef081243ba347389b80b53d1d074ae3
 import lombok.Getter;
 
+@Data
 public class MonopatinDto {
 
     private Integer id;
@@ -22,6 +27,7 @@ public class MonopatinDto {
     
     private Parada parada;
 
+    private int idParada;
 
     public MonopatinDto(Integer id, String estado, int kilometros, String latitud, String longitud, int tiempoEnUso, int tiempoEnPausa,Parada parada) {
         this.id = id;

@@ -16,7 +16,8 @@ public class AdminService {
 	RestTemplate template;
 	
 	public void saveMonopatin(@RequestBody DtoMonopatin monopatin) {
-		
+
+
 		template.postForObject("http://localhost:8081/monopatin", monopatin, DtoMonopatin.class);
 	}
 	
