@@ -59,6 +59,27 @@ public class AdminService {
 		}
 	}
 	
+	public int getCantMonopatinDisponible() {
+		ResponseEntity<Integer>response= template.getForEntity("http://localhost:8081/monopatin/disponibles", Integer.class);
+		
+		if(response.getStatusCode().is2xxSuccessful()) {
+			Integer cantidad= response.getBody();
+			return cantidad;
+		}
+		else {
+			return -1;
+		}
+	}
 	
-
+	public int getCantMonopatinMantenimiento() {
+		ResponseEntity<Integer>response= template.getForEntity("http://localhost:8081/monopatin/mantenimiento", Integer.class);
+		
+		if(response.getStatusCode().is2xxSuccessful()) {
+			Integer cantidad= response.getBody();
+			return cantidad;
+		}
+		else {
+			return -1;
+		}
+	}
 }

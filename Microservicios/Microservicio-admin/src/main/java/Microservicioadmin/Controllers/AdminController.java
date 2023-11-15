@@ -38,6 +38,18 @@ public class AdminController {
 	@Autowired
 	private TokenUtilJWT tokenUtilJWT;
 	
+	@GetMapping("/monopatin/reporte")
+	public ResponseEntity<?>getEstadoMonopatin(){
+		try {
+			int disponible= service.getCantMonopatinDisponible();
+			int mantenimiento=service.getCantMonopatinMantenimiento();
+			return ResponseEntity.status(HttpStatus.OK).body("Hay "+disponible+" monopatines disponibles y "+mantenimiento+" en mantenimiento");
+		}
+		catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error en realizar la consulta");
+		}
+	}
+	
 	@GetMapping("/viaje/recaudacion")
 	public ResponseEntity<?> getRecaudacion(){
 		try {

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,14 +41,24 @@ public class MonopatinService {
     			repository.save(m);
     		}
     	}
-    	
-    	
     }
     
     @Transactional
     
     public List<Monopatin> monopatinByViaje(int cantidad) {
     	return repository.findMonopatinesOrderByCantidadViajes(cantidad);
+    }
+    
+    @Transactional
+    
+    public Integer getCantMonopatinDisponible() {
+    	return repository.getCantMonopatinDisponible();
+    }
+    
+    @Transactional
+    
+    public int getCantMonopatinMantenimiento() {
+    	return repository.getCantMonopatinMantenimiento();
     }
 
     @Transactional

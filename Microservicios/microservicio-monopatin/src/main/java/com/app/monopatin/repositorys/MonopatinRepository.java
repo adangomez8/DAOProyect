@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.app.monopatin.dtos.MonopatinDto;
 import java.util.*;
 
 public interface MonopatinRepository extends JpaRepository<Monopatin, Integer> {
@@ -16,4 +15,10 @@ public interface MonopatinRepository extends JpaRepository<Monopatin, Integer> {
 	    		"HAVING SIZE(m.id_viaje) >= :cantidad ")
 	    
      List<Monopatin> findMonopatinesOrderByCantidadViajes(@Param("cantidad")int cantidad);
+	 
+	 @Query("SELECT COUNT(m) FROM Monopatin m WHERE m.estado='Disponible'")   
+	 Integer getCantMonopatinDisponible();
+	 
+	 @Query("SELECT COUNT(m) FROM Monopatin m WHERE m.estado='Mantenimiento'")
+	 int getCantMonopatinMantenimiento();
 }

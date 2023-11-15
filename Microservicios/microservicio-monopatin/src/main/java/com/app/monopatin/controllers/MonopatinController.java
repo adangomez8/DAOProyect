@@ -44,6 +44,31 @@ public class MonopatinController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al realizar la consulta");
     	}
     }
+    
+    @GetMapping("/disponibles")
+    
+    public ResponseEntity<?>getCantMonopatinDisponible(){
+    	try {
+    		Integer cantidad=service.getCantMonopatinDisponible();
+    		return ResponseEntity.status(HttpStatus.OK).body(cantidad);
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error en realizar la consulta");
+    	}
+    }
+    
+    @GetMapping("/mantenimiento")
+    
+    public ResponseEntity<?>getCantMonopatinMantenimiento(){
+    	try {
+    		int cantidad=service.getCantMonopatinMantenimiento();
+    		return ResponseEntity.status(HttpStatus.OK).body(cantidad);
+    	}
+    	catch(Exception e) {
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error en realizar la consulta");
+    	}
+    }
 
     @GetMapping("")
     public ResponseEntity<?>getAll(){
