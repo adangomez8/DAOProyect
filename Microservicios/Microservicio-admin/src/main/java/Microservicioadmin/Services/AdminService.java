@@ -51,7 +51,7 @@ public class AdminService {
 	}
 	
 	public void updatePrecio(double precio,Date fecha) {
-		template.put("http://localhost:8082/api/viaje/actualizar?precio="+precio+"&fecha="+fecha,null);
+		template.put("http://localhost:8082/api/viaje/actualizar?precio="+precio+"&fecha='"+fecha+"'",null);
 	}
 	
 	public double getRecaudacion() {
