@@ -30,4 +30,9 @@ public interface MonopatinRepository extends JpaRepository<Monopatin, Integer> {
 			"(SELECT longitud FROM Monopatin WHERE id = :idMonopatin))) < :distancia " +
 			"AND m.id <> :idMonopatin")
 	List<Monopatin> getMonopatinesCercanosAMonopatin(@Param("idMonopatin")int idMonopatin, @Param("distancia") double distancia);
+
+	@Query(
+			"SELECT m FROM Monopatin m WHERE m.id IN :listaID"
+	)
+	List<Monopatin> getAllInList(@Param("listaID") List<Integer> listaID);
 }

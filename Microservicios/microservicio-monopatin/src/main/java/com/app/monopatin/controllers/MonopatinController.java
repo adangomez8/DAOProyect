@@ -14,7 +14,7 @@ import java.sql.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("monopatin")
+@RequestMapping("/monopatin")
 public class MonopatinController {
 
     @Autowired
@@ -144,5 +144,10 @@ public class MonopatinController {
             }
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al listar monopatines");
+    }
+    @PostMapping("/inlist")
+    public ResponseEntity<?> getMonopatinesInList(@RequestBody List<Integer> list){
+        List<MonopatinDto> listaDTO = service.getAllIn(list);
+        return ResponseEntity.status(HttpStatus.OK).body(listaDTO);
     }
 }

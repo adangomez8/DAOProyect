@@ -1,5 +1,6 @@
 package com.MicroservicioViaje.controllers;
 
+import com.MicroservicioViaje.Dto.MonopatinDto;
 import com.MicroservicioViaje.Dto.ViajeDto;
 import com.MicroservicioViaje.entities.Viaje;
 import com.MicroservicioViaje.services.ViajeService;
@@ -95,4 +96,14 @@ public class ViajeController {
         }
     }
 
+    @GetMapping("/year/{year}")
+    public ResponseEntity<?> getInYear(@PathVariable int year,@RequestParam(name = "cantidad") int cant){
+        List<Integer> list = viajeService.getAllViajesInYear(year, cant);
+        if(list.isEmpty()){
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay viajes que cumplan la condicion");
+        }else{
+            List<MonopatinDto> listMonopatin = viajeService.getAllMonopatines(list);
+            return ResponseEntity.status(HttpStatus.OK).body(listMonopatin);
+        }
+    }
 }

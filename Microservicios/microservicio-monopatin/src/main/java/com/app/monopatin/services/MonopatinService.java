@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -154,5 +155,14 @@ public class MonopatinService {
     	
 
         return new MonopatinDto(monopatin.getId(), monopatin.getEstado(), monopatin.getKilometros() ,monopatin.getLatitud(), monopatin.getLongitud(), monopatin.getTiempoEnUso(), monopatin.getTiempoEnPausa(),monopatin.getParada());
+    }
+
+    public List<MonopatinDto> getAllIn(List<Integer> listaID) {
+        List<Monopatin> monopatines = repository.getAllInList(listaID);
+        List<MonopatinDto> aux = new ArrayList<>();
+        for(Monopatin m:monopatines){
+            aux.add(convertDto(m));
+        }
+        return aux;
     }
 }

@@ -100,4 +100,15 @@ public class ViajeService {
                 v.getKm_recorridos(),v.getPrecio(),v.getTarifa_extra());
 
     }
+
+    public List<Integer> getAllViajesInYear(int year, int cant) {
+        List<Integer> list = new ArrayList<>();
+        list.addAll(viajeRepository.getAllIn(year,cant));
+        return list;
+    }
+
+    public List<MonopatinDto> getAllMonopatines(List<Integer> list) {
+        List<MonopatinDto> listaMonopatin = restTemplate.postForObject("http://localhost:8081/monopatin/inlist", list, List.class);
+        return listaMonopatin;
+    }
 }
