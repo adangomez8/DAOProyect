@@ -30,26 +30,6 @@ public class MonopatinService {
     @Autowired
     RestTemplate template;
     
-    public void asociarViajeMonopatin(ViajeDto viaje,Integer viajeId,Integer monopatinId) {
-    	ResponseEntity<?>response= template.getForEntity("http://localhost:8082/api/viaje/"+viajeId, ViajeDto.class,viajeId);
-    	if(response.getStatusCode().is2xxSuccessful()) {
-    		viaje= (ViajeDto) response.getBody();
-    		Optional<Monopatin> monopatin= repository.findById(monopatinId);
-    		
-    		if(monopatin.isPresent()) {
-    			Monopatin m=monopatin.get(); 
-    			m.getViajeIds().add(viaje.getId_viaje());
-    			repository.save(m);
-    		}
-    	}
-    }
-    
-    @Transactional
-    
-    public List<Monopatin> monopatinByViaje(int cantidad) {
-    	return repository.findMonopatinesOrderByCantidadViajes(cantidad);
-    }
-    
     @Transactional
     
     public Integer getCantMonopatinDisponible() {
@@ -110,7 +90,7 @@ public class MonopatinService {
         List<Monopatin> monopatines = repository.findAll();
 
         List<MonopatinDto> dtos = monopatines.stream()
-                .map(monopatin -> new MonopatinDto(monopatin.getId(), monopatin.getEstado(), monopatin.getKilometros() ,monopatin.getLatitud(), monopatin.getLongitud(), monopatin.getTiempoEnUso(), monopatin.getTiempoEnPausa(),monopatin.getParada()))
+                .map(monopatin -> new MonopatinDto(monopatin.getId(), monopatin.getEstado(), monopatin.getKilometros() ,monopatin.getLatitud(), monopatin.getLongitud(), monopatin.getTiempoEnUso(), monopatin.getTiempoEnPausa(),monopatin.getParada().getId()))
                 .collect(Collectors.toList());
 
         return dtos;
@@ -142,7 +122,7 @@ public class MonopatinService {
             List<Monopatin> monopatines = repository.getMonopatinesCercanosAMonopatin(idMonopatin, distancia);
 
             List<MonopatinDto> monopatinesCercanos = monopatines.stream()
-                    .map(monopatin -> new MonopatinDto(monopatin.getId(), monopatin.getEstado(), monopatin.getKilometros(), monopatin.getLatitud(), monopatin.getLongitud(), monopatin.getTiempoEnUso(), monopatin.getTiempoEnPausa(), monopatin.getParada()))
+                    .map(monopatin -> new MonopatinDto(monopatin.getId(), monopatin.getEstado(), monopatin.getKilometros() ,monopatin.getLatitud(), monopatin.getLongitud(), monopatin.getTiempoEnUso(), monopatin.getTiempoEnPausa(),monopatin.getParada().getId()))
                     .collect(Collectors.toList());
 
             return monopatinesCercanos;
@@ -154,7 +134,7 @@ public class MonopatinService {
     private MonopatinDto convertDto(Monopatin monopatin) {
     	
 
-        return new MonopatinDto(monopatin.getId(), monopatin.getEstado(), monopatin.getKilometros() ,monopatin.getLatitud(), monopatin.getLongitud(), monopatin.getTiempoEnUso(), monopatin.getTiempoEnPausa(),monopatin.getParada());
+        return new MonopatinDto(monopatin.getId(), monopatin.getEstado(), monopatin.getKilometros() ,monopatin.getLatitud(), monopatin.getLongitud(), monopatin.getTiempoEnUso(), monopatin.getTiempoEnPausa(),monopatin.getParada().getId());
     }
 
     public List<MonopatinDto> getAllIn(List<Integer> listaID) {

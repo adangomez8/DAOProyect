@@ -31,10 +31,7 @@ public class Monopatin {
     @ManyToOne
     @JoinColumn(name="parada_id")
     private Parada _parada;
-    
-    @ElementCollection
-    @JoinColumn(name="viaje_id")
-    List<Integer>id_viaje;
+
 
     public Monopatin(){
 
@@ -114,13 +111,6 @@ public class Monopatin {
 	public void setParada(Parada parada) {
 		this._parada = parada;
 	}
-	
-	public List<Integer> getViajeIds() {
-	    return id_viaje;
-	}
 
-	public void setViajeIds(List<Integer> viajeIds) {
-	    this.id_viaje = viajeIds;
-	}
 
 }

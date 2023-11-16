@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.sql.Date;
 import java.util.List;
@@ -19,31 +20,9 @@ public class MonopatinController {
 
     @Autowired
     private MonopatinService service;
-    
-    @PostMapping("/{monopatinId}/asociar-viaje/{viajeId}")
-    public ResponseEntity<String> asociarViajeAMonopatin(
-    		@RequestBody ViajeDto viaje,
-            @PathVariable Integer viajeId,
-            @PathVariable Integer monopatinId
-    ) {
-        try {
-            service.asociarViajeMonopatin(viaje,viajeId, monopatinId);
-            return ResponseEntity.ok("Viaje asociado exitosamente al monopatín.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al asociar el viaje al monopatín: " + e.getMessage());
-        }
-    }
-    
-    @GetMapping("/cant-viajes")
-    public ResponseEntity<?>monopatinByViaje(@RequestParam(name="cantidad")int cantidad){
-    	try {
-    		List<Monopatin>m=service.monopatinByViaje(cantidad);
-    		return ResponseEntity.status(HttpStatus.OK).body(m);
-    	}
-    	catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al realizar la consulta");
-    	}
-    }
+
+    @Autowired
+    private RestTemplate restTemplate;
     
     @GetMapping("/disponibles")
     

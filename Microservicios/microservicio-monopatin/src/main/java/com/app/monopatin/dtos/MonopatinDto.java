@@ -23,12 +23,10 @@ public class MonopatinDto {
     private int tiempoEnUso;
 
     private int tiempoEnPausa;
-    
-    private Parada parada;
 
     private int idParada;
 
-    public MonopatinDto(Integer id, String estado, int kilometros, String latitud, String longitud, int tiempoEnUso, int tiempoEnPausa,Parada parada) {
+    public MonopatinDto(Integer id, String estado, int kilometros, String latitud, String longitud, int tiempoEnUso, int tiempoEnPausa, int idParada) {
         this.id = id;
         this.estado = estado;
         this.kilometros = kilometros;
@@ -36,7 +34,7 @@ public class MonopatinDto {
         this.longitud = longitud;
         this.tiempoEnUso = tiempoEnUso;
         this.tiempoEnPausa = tiempoEnPausa;
-        this.parada=parada;
+        this.idParada = idParada;
     }
 
     public Integer getId() {
@@ -67,8 +65,7 @@ public class MonopatinDto {
         return tiempoEnPausa;
     }
 
-	public Parada get_parada() {
-		return parada;
-	}
-    
+    public int getIdParada() {
+        return idParada;
+    }
 }

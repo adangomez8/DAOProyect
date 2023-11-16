@@ -1,6 +1,5 @@
 package com.app.monopatin;
 
-import com.app.monopatin.services.MonopatinService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
