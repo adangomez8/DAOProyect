@@ -20,7 +20,13 @@ public class ViajeService {
 
     @Autowired
     private RestTemplate restTemplate;
-
+    
+    
+    @Transactional
+    
+    public void updatePrecio(double precio,Date fecha) {
+    	viajeRepository.updatePrecio(precio, fecha);
+    }
     
     @Transactional
     public double getRecaudacion(Date anio,Date mesIni,Date mesFin) {

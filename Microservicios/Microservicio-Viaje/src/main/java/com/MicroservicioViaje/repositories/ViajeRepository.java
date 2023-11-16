@@ -2,9 +2,12 @@ package com.MicroservicioViaje.repositories;
 
 import com.MicroservicioViaje.entities.Viaje;
 
+import jakarta.transaction.Transactional;
+
 import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,4 +24,10 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	@Transactional
+	@Modifying
+	@Query("UPDATE Viaje v SET v.precio= :precio WHERE v.fecha_inicio>=:fecha")
+	void updatePrecio(@Param("precio") double precio, @Param("fecha") Date fecha);
+	
+	
 }

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,20 @@ public class ViajeController {
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al listar todos los viajes");
         }
+    }
+    
+    @PutMapping("/actualizar")
+    public ResponseEntity<?>updatePrecio(@RequestParam(name="precio")double precio,@RequestParam(name="fecha")String fecha){
+    	try {
+    		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaConvertida = dateFormat.parse(fecha);
+    		viajeService.updatePrecio(precio, fechaConvertida);
+    		return ResponseEntity.status(HttpStatus.OK).body("Precios actualizados exitosamente");
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.Precios no actualizados");
+    	}
     }
     
     @GetMapping("/recaudacion")
