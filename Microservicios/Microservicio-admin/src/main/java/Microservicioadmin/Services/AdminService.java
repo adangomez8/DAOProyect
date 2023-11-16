@@ -10,6 +10,8 @@ import Microservicioadmin.Dto.DtoCuenta;
 import Microservicioadmin.Dto.DtoMonopatin;
 import Microservicioadmin.Dto.DtoParada;
 
+import java.util.List;
+
 @Service
 public class AdminService {
 	
@@ -80,6 +82,16 @@ public class AdminService {
 		}
 		else {
 			return -1;
+		}
+	}
+
+	public List<DtoMonopatin> getAllMonopatinesByYear(Integer year, Integer cantidad) {
+		ResponseEntity<List> response = template.getForEntity("http://localhost:8082/api/viaje/year/2023?cantidad=2",List.class);
+		if(response.getStatusCode().is4xxClientError()){
+
+			return null;
+		}else{
+			return response.getBody();
 		}
 	}
 }

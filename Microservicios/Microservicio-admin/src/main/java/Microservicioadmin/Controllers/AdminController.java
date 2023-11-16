@@ -14,18 +14,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import Microservicioadmin.Dto.DtoCuenta;
 import Microservicioadmin.Dto.DtoMonopatin;
 import Microservicioadmin.Dto.DtoParada;
 import Microservicioadmin.Services.AdminService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -124,6 +120,17 @@ public class AdminController {
 		}
 	}
 
+
+	@GetMapping("/monopatin/año/{year}")
+	public ResponseEntity<?> getMonopatinByYear(@PathVariable Integer year, @RequestParam(name = "cantidad") Integer cantidad){
+		
+		List<DtoMonopatin> monopatinList = service.getAllMonopatinesByYear(year,cantidad);
+		if(monopatinList != null){
+			return ResponseEntity.status(HttpStatus.OK).body(monopatinList);
+		}else{
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay viajes que cumplan la condicion");
+		}
+	}
 
 	@PostMapping("/login")
 	public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest){
