@@ -21,6 +21,7 @@ import Microservicioadmin.Dto.DtoMonopatin;
 import Microservicioadmin.Dto.DtoParada;
 import Microservicioadmin.Services.AdminService;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,6 +33,19 @@ public class AdminController {
 	AdminService service;
 	@Autowired
 	private final AuthService authService;
+	
+	
+	@PutMapping("/viaje/tarifa/{precio}/{fecha}")
+	public ResponseEntity<?>updatePrecio(@PathVariable double precio, @PathVariable Date fecha){
+		try {
+			service.updatePrecio(precio, fecha);
+			return ResponseEntity.status(HttpStatus.OK).body("Tarifa actualizada");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al actualizar tarifa");
+		}
+	}
 	
 	@GetMapping("/monopatin/reporte")
 	public ResponseEntity<?>getEstadoMonopatin(){

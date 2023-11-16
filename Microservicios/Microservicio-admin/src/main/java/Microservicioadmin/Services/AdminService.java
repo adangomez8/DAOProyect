@@ -10,6 +10,7 @@ import Microservicioadmin.Dto.DtoCuenta;
 import Microservicioadmin.Dto.DtoMonopatin;
 import Microservicioadmin.Dto.DtoParada;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -47,6 +48,10 @@ public class AdminService {
 	public void deleteCuenta(Integer id) {
 		
 		template.delete("http://localhost:8080/api/cuenta/"+id);
+	}
+	
+	public void updatePrecio(double precio,Date fecha) {
+		template.put("http://localhost:8082/api/viaje/actualizar?precio="+precio+"&fecha="+fecha,null);
 	}
 	
 	public double getRecaudacion() {
