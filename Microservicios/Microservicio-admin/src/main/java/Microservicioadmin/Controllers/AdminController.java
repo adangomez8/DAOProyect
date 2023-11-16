@@ -1,10 +1,10 @@
 package Microservicioadmin.Controllers;
 
-import Microservicioadmin.Security.DTO.AuthRequestDTO;
-import Microservicioadmin.Security.DTO.DTOJWTToken;
-import Microservicioadmin.Security.JWT.RequestFilterJWT;
-import Microservicioadmin.Security.JWT.TokenUtilJWT;
+import Microservicioadmin.Security.Model.AuthResponse;
+import Microservicioadmin.Security.Model.LoginRequest;
+import Microservicioadmin.Services.AuthService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,14 +29,13 @@ import Microservicioadmin.Services.AdminService;
 
 @RestController
 @RequestMapping("/api/admin")
+@RequiredArgsConstructor
 public class AdminController {
-	
+
 	@Autowired
 	AdminService service;
 	@Autowired
-	private AuthenticationManagerBuilder amBuilder;
-	@Autowired
-	private TokenUtilJWT tokenUtilJWT;
+	private final AuthService authService;
 	
 	@GetMapping("/monopatin/reporte")
 	public ResponseEntity<?>getEstadoMonopatin(){
@@ -63,7 +62,9 @@ public class AdminController {
 	
 	@PostMapping("/monopatin")
 	public ResponseEntity<?> saveMonopatin(@RequestBody DtoMonopatin monopatin) {
+		System.out.println(monopatin);
 		try {
+
 			service.saveMonopatin(monopatin);
 			return ResponseEntity.status(HttpStatus.CREATED).body("Monopatin agregado");
 		} catch (Exception e) {
@@ -75,6 +76,7 @@ public class AdminController {
 	public ResponseEntity<?> saveParada(@RequestBody DtoParada parada){
 		
 		try {
+
 			service.saveParada(parada);
 			return ResponseEntity.status(HttpStatus.CREATED).body("Parada agregada");
 		} catch (Exception e) {
@@ -124,13 +126,12 @@ public class AdminController {
 
 
 	@PostMapping("/login")
-	public ResponseEntity<DTOJWTToken> login(@Valid @RequestBody AuthRequestDTO r){
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(r.getUsername(),r.getPassword());
-		Authentication auth = amBuilder.getObject().authenticate(authenticationToken);
-		SecurityContextHolder.getContext().setAuthentication(auth);
-		String token = tokenUtilJWT.generateToken(auth);
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add(RequestFilterJWT.AUTHORIZATION_HEADER,RequestFilterJWT.BEARER+token);
-		return new ResponseEntity<>(new DTOJWTToken(token),httpHeaders,HttpStatus.OK);
+	public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest){
+		return ResponseEntity.ok(authService.login(loginRequest));
 	}
+	@PostMapping("/register")
+	public ResponseEntity<AuthResponse> register(@RequestBody LoginRequest loginRequest){
+		return ResponseEntity.ok(authService.register(loginRequest));
+	}
+
 }
