@@ -82,7 +82,7 @@ public class Usuario {
 
 	public void agregarCuenta(Cuenta c){
 		cuentas.add(c);
-		c.getUsuarios().add(this);
+		//c.getUsuarios().add(this);
 	}
 	@Override
 	public String toString() {

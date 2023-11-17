@@ -1,13 +1,19 @@
 package Microservicioadmin.Dto;
 
+import lombok.Data;
+
 import java.time.LocalDate;
 
+@Data
 public class DtoCuenta {
 	
 	private Integer idCuenta;
 	private double saldo;
 	private LocalDate fechaAlta;
-	
+
+	public DtoCuenta() {
+	}
+
 	public DtoCuenta(Integer idCuenta, double saldo, LocalDate fechaAlta) {
 		super();
 		this.idCuenta = idCuenta;
