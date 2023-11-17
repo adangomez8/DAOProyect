@@ -2,10 +2,12 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Microservicio-admin" />
         <module name="Microservicio (2)" />
         <module name="Microservicio (3)" />
         <module name="Microservicio-Viaje" />
@@ -13,13 +15,13 @@
         <module name="Microservicio-monopatin" />
         <module name="APIRest" />
         <module name="demo" />
+        <module name="Mantenimiento" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="APIRest (1)" target="17" />
       <module name="APIRest (2)" target="17" />
       <module name="Microservicio" target="17" />
-      <module name="Microservicio-admin" target="17" />
       <module name="Microservicio-parada" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -28,11 +30,13 @@
       <module name="APIRest" options="-parameters" />
       <module name="APIRest (1)" options="-parameters" />
       <module name="APIRest (2)" options="-parameters" />
+      <module name="Mantenimiento" options="-parameters" />
       <module name="Microservicio" options="-parameters" />
       <module name="Microservicio (1)" options="-parameters" />
       <module name="Microservicio (2)" options="-parameters" />
       <module name="Microservicio (3)" options="-parameters" />
       <module name="Microservicio-Viaje" options="-parameters" />
+      <module name="Microservicio-admin" options="-parameters" />
       <module name="Microservicio-monopatin" options="-parameters" />
       <module name="demo" options="-parameters" />
     </option>
