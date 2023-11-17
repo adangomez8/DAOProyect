@@ -46,12 +46,17 @@ public class ViajeController {
     }
     
     @GetMapping("/recaudacion")
-    public ResponseEntity<?>getRecaudacion(@RequestParam(name="anio")Date anio,@RequestParam(name="mesIni")Date mesIni,@RequestParam(name="mesFin")Date mesFin){
+    public ResponseEntity<?>getRecaudacion(@RequestParam(name="anio")String anio,@RequestParam(name="mesIni")String mesIni,@RequestParam(name="mesFin")String mesFin){
     	try {
-    		double recaudacion= viajeService.getRecaudacion(anio, mesIni, mesFin);
+    		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaAnio = dateFormat.parse(anio);
+            Date fechaMesIni = dateFormat.parse(mesIni);
+            Date fechaMesFin = dateFormat.parse(mesFin);
+    		double recaudacion= viajeService.getRecaudacion(fechaAnio, fechaMesIni, fechaMesFin);
     		return ResponseEntity.status(HttpStatus.OK).body(recaudacion);
     	}
     	catch(Exception e) {
+    		e.printStackTrace();
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error en generar la consulta");
     	}
     }
