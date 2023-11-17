@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b0b87228-2be0-42ea-a882-a1b21b83b34d",
+		"_postman_id": "226c51f7-9dcd-4e42-8966-611f85df420f",
 		"name": "TPE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27785309",
-		"_collection_link": "https://interstellar-resonance-949184.postman.co/workspace/EspecialArquitecturas~efc4d386-0b4d-49b8-943a-16a2fd72f852/collection/27785309-b0b87228-2be0-42ea-a882-a1b21b83b34d?action=share&source=collection_link&creator=27785309"
+		"_exporter_id": "11605705"
 	},
 	"item": [
 		{
@@ -744,6 +743,122 @@
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "M_MONOPATIN",
+			"item": [
+				{
+					"name": "GetAllMonopatines",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/monopatin",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"monopatin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetMonopatinId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/monopatin/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"monopatin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModificarMonopatin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 54,\r\n  \"estado\": \"Disponible\",\r\n  \"kilometros\": 0,\r\n  \"latitud\": \"string\",\r\n  \"longitud\": \"string\",\r\n  \"tiempoEnUso\": 0,\r\n  \"tiempoEnPausa\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/monopatin/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"monopatin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AgregarMonopatin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"estado\": \"Disponible\",\r\n  \"kilometros\": 5000,\r\n  \"latitud\": \"155\",\r\n  \"longitud\": \"255\",\r\n  \"tiempoEnUso\": 2500,\r\n  \"tiempoEnPausa\": 155,\r\n  \"idParada\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/monopatin",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"monopatin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BorrarMonopatin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/monopatin/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"monopatin",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
