@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "226c51f7-9dcd-4e42-8966-611f85df420f",
+		"_postman_id": "25d459ce-43ac-42c8-8c21-52bd27d77d46",
 		"name": "TPE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "11605705"
+		"_exporter_id": "27785309",
+		"_collection_link": "https://interstellar-resonance-949184.postman.co/workspace/EspecialArquitecturas~efc4d386-0b4d-49b8-943a-16a2fd72f852/collection/27785309-25d459ce-43ac-42c8-8c21-52bd27d77d46?action=share&source=collection_link&creator=27785309"
 	},
 	"item": [
 		{
@@ -53,7 +54,7 @@
 							"response": []
 						},
 						{
-							"name": "ANULAR",
+							"name": "3B",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -145,6 +146,64 @@
 							"response": []
 						},
 						{
+							"name": "3D",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMjI1NTIyLCJleHAiOjE3MDAyMjYxMjJ9.Fek1z37S30gHepCLUEE4VYRR4Uyf45pehaFUXLsDdEg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8084/api/admin/viaje/recaudacion?anio=2023&mesIni=1&mesFin=6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"api",
+										"admin",
+										"viaje",
+										"recaudacion"
+									],
+									"query": [
+										{
+											"key": "anio",
+											"value": "2023"
+										},
+										{
+											"key": "mesIni",
+											"value": "1"
+										},
+										{
+											"key": "mesFin",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "3E",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -226,6 +285,45 @@
 										"tarifa",
 										"5000",
 										"2023-11-16"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reporte",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8088/api/mantenimiento/reporte?pausa=false",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8088",
+									"path": [
+										"api",
+										"mantenimiento",
+										"reporte"
+									],
+									"query": [
+										{
+											"key": "pausa",
+											"value": "false"
+										}
 									]
 								}
 							},
@@ -721,12 +819,12 @@
 							"response": []
 						},
 						{
-							"name": "MonopatinesCercanos",
+							"name": "3G",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/usuario/1/200",
+									"raw": "http://localhost:8080/api/usuario/monopatines/cerca?latitud=50&longitud=10&distancia=5",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -735,8 +833,22 @@
 									"path": [
 										"api",
 										"usuario",
-										"1",
-										"200"
+										"monopatines",
+										"cerca"
+									],
+									"query": [
+										{
+											"key": "latitud",
+											"value": "50"
+										},
+										{
+											"key": "longitud",
+											"value": "10"
+										},
+										{
+											"key": "distancia",
+											"value": "5"
+										}
 									]
 								}
 							},
@@ -773,14 +885,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/monopatin/1",
+							"raw": "localhost:8081/monopatin/5",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
 								"monopatin",
-								"1"
+								"5"
 							]
 						}
 					},
@@ -863,96 +975,39 @@
 			]
 		},
 		{
-			"name": "Agregar monopatin",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"estado\": \"Disponible\",\r\n  \"kilometros\": 5000,\r\n  \"latitud\": \"155\",\r\n  \"longitud\": \"255\",\r\n  \"tiempoEnUso\": 2500,\r\n  \"tiempoEnPausa\": 155,\r\n  \"idParada\":5\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "M_MANTENIMIENTO",
+			"item": [
+				{
+					"name": "Change status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estado\":\"Mantenimiento\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/api/mantenimiento/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"mantenimiento",
+								"8"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8084/api/admin/monopatin",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8084",
-					"path": [
-						"api",
-						"admin",
-						"monopatin"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar monopatin",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8084/api/admin/monopatin/10",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8084",
-					"path": [
-						"api",
-						"admin",
-						"monopatin",
-						"10"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Agregar parada",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvIiwiaWF0IjoxNzAwMDk1NTI4LCJleHAiOjE3MDAwOTYxMjh9.EPTRxQperOTFDHCx4MWTXkdrPT5VjNmKVcs1CQFdSB0",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n \"id\": 50,\r\n  \"latitud\": \"5588\",\r\n  \"longitud\": \"25\"\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8084/api/admin/parada",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8084",
-					"path": [
-						"api",
-						"admin",
-						"parada"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }

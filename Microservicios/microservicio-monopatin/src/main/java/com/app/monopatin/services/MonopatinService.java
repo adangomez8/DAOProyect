@@ -116,19 +116,15 @@ public class MonopatinService {
     }
 
     @Transactional
-    public List<MonopatinDto>getMonopatinesCercanosAMonopatin(int idMonopatin, double distancia){
+    public List<MonopatinDto>getMonopatinesCercanosAMonopatin(double lat,double lon, double distancia){
+        List<Monopatin> monopatines = repository.getMonopatinesCercanosAMonopatin(lat,lon, distancia);
 
-        if(repository.findById(idMonopatin)!=null) {
-            List<Monopatin> monopatines = repository.getMonopatinesCercanosAMonopatin(idMonopatin, distancia);
+        List<MonopatinDto> monopatinesCercanos = monopatines.stream()
+                .map(monopatin -> new MonopatinDto(monopatin.getId(), monopatin.getEstado(), monopatin.getKilometros() ,monopatin.getLatitud(), monopatin.getLongitud(), monopatin.getTiempoEnUso(), monopatin.getTiempoEnPausa(),monopatin.getParada().getId()))
+                .collect(Collectors.toList());
 
-            List<MonopatinDto> monopatinesCercanos = monopatines.stream()
-                    .map(monopatin -> new MonopatinDto(monopatin.getId(), monopatin.getEstado(), monopatin.getKilometros() ,monopatin.getLatitud(), monopatin.getLongitud(), monopatin.getTiempoEnUso(), monopatin.getTiempoEnPausa(),monopatin.getParada().getId()))
-                    .collect(Collectors.toList());
+        return monopatinesCercanos;
 
-            return monopatinesCercanos;
-        } else{
-            return null;
-        }
     }
 
     private MonopatinDto convertDto(Monopatin monopatin) {

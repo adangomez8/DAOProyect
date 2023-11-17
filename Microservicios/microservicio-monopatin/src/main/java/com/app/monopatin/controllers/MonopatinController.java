@@ -108,21 +108,18 @@ public class MonopatinController {
         }
     }
 
-    @GetMapping("/cercanos/{id}/{distancia}")
-    public ResponseEntity<?>getMonopatinesCercanosAMonopatin(@PathVariable Integer id, @PathVariable double distancia){
+    @GetMapping("/cercanos")
+    public ResponseEntity<?>getMonopatinesCercanosAMonopatin(@RequestParam(name = "latitud") double latitud,
+                                                             @RequestParam(name = "longitud") double longitud,
+                                                             @RequestParam(name = "distancia") double distancia){
+        List<MonopatinDto> dto = service.getMonopatinesCercanosAMonopatin(latitud,longitud, distancia);
 
-        MonopatinDto m= service.getById(id);
-
-        if(m!=null) {
-            List<MonopatinDto> dto = service.getMonopatinesCercanosAMonopatin(id, distancia);
-
-            if (dto != null) {
-                return ResponseEntity.status(HttpStatus.OK).body(dto);
-            } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontraron monopatines cerca");
-            }
+        if (!dto.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontraron monopatines cerca");
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al listar monopatines");
+
     }
     @PostMapping("/inlist")
     public ResponseEntity<?> getMonopatinesInList(@RequestBody List<Integer> list){
