@@ -2,17 +2,11 @@ package MonopatinApp.controllers;
 
 import java.util.List;
 
+import MonopatinApp.Dto.MonopatinDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import MonopatinApp.Dto.DtoUsuario;
 import MonopatinApp.entities.Cuenta;
@@ -88,12 +82,14 @@ public class UsuarioController {
 		}
 	}
 
-	@GetMapping("/monopatinesCercanos/{id}/{distancia}")
-	public ResponseEntity<?> getMonopatinesCercanosAMonopatin(@PathVariable Integer id, @PathVariable double distancia) {
-		ResponseEntity<?> responseEntity = service.getMonopatinesCercanosAMonopatin(id, distancia);
+	@GetMapping("/monopatines/cerca")
+	public ResponseEntity<?> getMonopatinesCercanos(@RequestParam(name = "latitud") double latitud,
+															  @RequestParam(name = "longitud") double longitud,
+															  @RequestParam(name = "distancia") double distancia) {
+		List<MonopatinDto> lista = service.getMonopatinesCercanos(latitud,longitud,distancia);
 
-		if (responseEntity.getStatusCode() == HttpStatus.OK) {
-			return ResponseEntity.status(HttpStatus.OK).body(responseEntity.getBody());
+		if (!lista.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.OK).body(lista);
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontraron monopatines cerca");
 		}

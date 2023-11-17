@@ -54,6 +54,7 @@ public class ViajeController {
             Date dateI = dateFormat.parse(dateString);
             dateString = String.format("%04d-%02d-%02d", anio, mesFin, 28);
             Date dateF = dateFormat.parse(dateString);
+            System.out.println(dateI);
             System.out.println(dateF);
     		double recaudacion= viajeService.getRecaudacion(dateI,dateF);
     		return ResponseEntity.status(HttpStatus.OK).body(recaudacion);

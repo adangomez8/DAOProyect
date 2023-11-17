@@ -28,10 +28,12 @@ public class MantenimientoController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<?> changeStatus(@RequestBody Estado estado,@PathVariable Integer id){
-        DtoMonopatin monopatin = service.changeStatus(estado.getEstado(),id);
-        if(monopatin != null){
+
+        try{
+            DtoMonopatin monopatin = service.changeStatus(estado.getEstado(),id);
             return ResponseEntity.status(HttpStatus.OK).body(monopatin);
-        }else{
+        }catch (Exception e){
+
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el monopatin");
         }
     }

@@ -21,7 +21,6 @@ public class MantenimientoService {
         List<DtoMonopatin> monopatinList = getAllMonopatines();
         List<Reporte> aux = new ArrayList<>();
         if(incluyePausa){
-            System.out.println("hla");
             for(DtoMonopatin dm:monopatinList){
                 aux.add(new ReporteConPausa(dm.getId(),dm.getKilometros(),dm.getTiempoEnUso(),dm.getTiempoEnPausa()));
             }
@@ -34,8 +33,9 @@ public class MantenimientoService {
     }
     public DtoMonopatin changeStatus(String newStatus,Integer idMono){
         String url = "http://localhost:8081/monopatin/";
-        DtoMonopatin d = template.getForObject(url+idMono, DtoMonopatin.class);
-        if(d != null){
+        ResponseEntity<DtoMonopatin> response = template.getForEntity(url+idMono,DtoMonopatin.class);
+        if(response.getStatusCode().is2xxSuccessful()){
+            DtoMonopatin d = response.getBody();
             d.setEstado(newStatus);
             template.put(url+idMono,d);
             return d;

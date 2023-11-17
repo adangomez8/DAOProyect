@@ -3,6 +3,7 @@ package MonopatinApp.services;
 import java.time.LocalDate;
 import java.util.*;
 
+import MonopatinApp.Dto.MonopatinDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -89,15 +90,16 @@ public class UsuarioService {
 	}
 
 	@Transactional
-	public ResponseEntity<?> getMonopatinesCercanosAMonopatin(int id, double distancia){
+	public List<MonopatinDto> getMonopatinesCercanos(double lat,double lon,double distancia){
 
-		String url = "http://localhost:8081/monopatin//cercanos/{id}/{distancia}";
+		String url = "http://localhost:8081/monopatin/cercanos?latitud="+lat+"&longitud="+lon+"&distancia="+distancia;
 
-		Map<String, Object> urlVariables = new HashMap<>();
-		urlVariables.put("id", id);
-		urlVariables.put("distancia", distancia);
-		ResponseEntity<?> responseEntity = template.getForEntity(url, Object.class, urlVariables);
+		ResponseEntity<List> response = template.getForEntity(url,List.class);
+		if(response.getStatusCode().is2xxSuccessful()){
+			return response.getBody();
+		}else{
+			return new ArrayList<>();
+		}
 
-		return responseEntity;
 	}
 }
