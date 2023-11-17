@@ -289,45 +289,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Reporte",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8088/api/mantenimiento/reporte?pausa=false",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8088",
-									"path": [
-										"api",
-										"mantenimiento",
-										"reporte"
-									],
-									"query": [
-										{
-											"key": "pausa",
-											"value": "false"
-										}
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
@@ -1002,6 +963,45 @@
 								"api",
 								"mantenimiento",
 								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reporte",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/api/mantenimiento/reporte?pausa=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"api",
+								"mantenimiento",
+								"reporte"
+							],
+							"query": [
+								{
+									"key": "pausa",
+									"value": "false"
+								}
 							]
 						}
 					},
