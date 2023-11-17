@@ -1,6 +1,10 @@
 {
 	"info": {
+<<<<<<< HEAD
+		"_postman_id": "f4dd2699-1fca-4112-bf71-092de8cf5e05",
+=======
 		"_postman_id": "25d459ce-43ac-42c8-8c21-52bd27d77d46",
+>>>>>>> 699b5615487c66277bae4db5c704fb54bff746b6
 		"name": "TPE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27785309",
@@ -946,6 +950,115 @@
 							"path": [
 								"monopatin",
 								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetParadas",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "GetParadaId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/parada/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"parada",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BorrarParada",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/parada/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"parada",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AgregarParada",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"latitud\": \"123\",\r\n  \"longitud\": \"321\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/parada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"parada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModificarParada",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"latitud\": \"40.7155\",\r\n  \"longitud\": \"-74.0077\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/parada/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"parada",
+								"1"
 							]
 						}
 					},
