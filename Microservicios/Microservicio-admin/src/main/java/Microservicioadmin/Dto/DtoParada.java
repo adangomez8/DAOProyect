@@ -1,5 +1,8 @@
 package Microservicioadmin.Dto;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class DtoParada {
 	
 	private int id;
