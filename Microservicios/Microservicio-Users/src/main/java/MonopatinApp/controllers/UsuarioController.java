@@ -59,25 +59,25 @@ public class UsuarioController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?>update(@RequestBody Usuario u ){
+	public ResponseEntity<?>update(@RequestBody Usuario u,@PathVariable Integer id ){
 		
-		try {
-			service.update(u);
+		DtoUsuario aux =service.update(u,id);
+		if (aux != null)
 			return ResponseEntity.status(HttpStatus.OK).body(u);
 			
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("Error al modificar.Verifique que la cuenta exista");
+		else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al modificar.Verifique que la cuenta exista");
 		}
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id){
 		
-		try {
-			service.delete(id);
+		DtoUsuario aux =	service.delete(id);
+		if(aux != null)
 			return ResponseEntity.status(HttpStatus.OK).body("Usuario eliminado");
 			
-		} catch (Exception e) {
+		else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.El usuario que desea eliminar no existe");
 		}
 	}

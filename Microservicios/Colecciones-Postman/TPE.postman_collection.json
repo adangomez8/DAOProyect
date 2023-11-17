@@ -52,243 +52,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "3B",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMTkzMDE4LCJleHAiOjE3MDAxOTM2MTh9.rZsg_tBUtjefGV9uNVUknZOgfoP1V1bq2svzKaLaJYY",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8084/api/admin/cuenta/65",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8084",
-									"path": [
-										"api",
-										"admin",
-										"cuenta",
-										"65"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "3C",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMTQ1NDQzLCJleHAiOjE3MDAxNDYwNDN9.xtHvM9jUng96_4wb1yDumNnUNqPihhjVd8JVmuIh6xI",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8084/api/admin/monopatin/año/2023?cantidad=2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8084",
-									"path": [
-										"api",
-										"admin",
-										"monopatin",
-										"año",
-										"2023"
-									],
-									"query": [
-										{
-											"key": "cantidad",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "3D",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMjI1NTIyLCJleHAiOjE3MDAyMjYxMjJ9.Fek1z37S30gHepCLUEE4VYRR4Uyf45pehaFUXLsDdEg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8084/api/admin/viaje/recaudacion?anio=2023&mesIni=1&mesFin=6",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8084",
-									"path": [
-										"api",
-										"admin",
-										"viaje",
-										"recaudacion"
-									],
-									"query": [
-										{
-											"key": "anio",
-											"value": "2023"
-										},
-										{
-											"key": "mesIni",
-											"value": "1"
-										},
-										{
-											"key": "mesFin",
-											"value": "6"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "3E",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMTk0MTQxLCJleHAiOjE3MDAxOTQ3NDF9.h71jyRsX7VQwiZeRu08m5wuYCeiRVP8FkPzbLbOqK6Q",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8084/api/admin/monopatin/reporte",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8084",
-									"path": [
-										"api",
-										"admin",
-										"monopatin",
-										"reporte"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "3F",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMTk0MTQxLCJleHAiOjE3MDAxOTQ3NDF9.h71jyRsX7VQwiZeRu08m5wuYCeiRVP8FkPzbLbOqK6Q",
-											"type": "string"
-										}
-									]
-								},
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8084/api/admin/viaje/tarifa/5000/2023-11-16",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8084",
-									"path": [
-										"api",
-										"admin",
-										"viaje",
-										"tarifa",
-										"5000",
-										"2023-11-16"
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
@@ -347,6 +110,243 @@
 								"api",
 								"admin",
 								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3B",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMTkzMDE4LCJleHAiOjE3MDAxOTM2MTh9.rZsg_tBUtjefGV9uNVUknZOgfoP1V1bq2svzKaLaJYY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8084/api/admin/cuenta/65",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"admin",
+								"cuenta",
+								"65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3C",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMTQ1NDQzLCJleHAiOjE3MDAxNDYwNDN9.xtHvM9jUng96_4wb1yDumNnUNqPihhjVd8JVmuIh6xI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8084/api/admin/monopatin/año/2023?cantidad=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"admin",
+								"monopatin",
+								"año",
+								"2023"
+							],
+							"query": [
+								{
+									"key": "cantidad",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3D",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMjI1NTIyLCJleHAiOjE3MDAyMjYxMjJ9.Fek1z37S30gHepCLUEE4VYRR4Uyf45pehaFUXLsDdEg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8084/api/admin/viaje/recaudacion?anio=2023&mesIni=1&mesFin=6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"admin",
+								"viaje",
+								"recaudacion"
+							],
+							"query": [
+								{
+									"key": "anio",
+									"value": "2023"
+								},
+								{
+									"key": "mesIni",
+									"value": "1"
+								},
+								{
+									"key": "mesFin",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3E",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMTk0MTQxLCJleHAiOjE3MDAxOTQ3NDF9.h71jyRsX7VQwiZeRu08m5wuYCeiRVP8FkPzbLbOqK6Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8084/api/admin/monopatin/reporte",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"admin",
+								"monopatin",
+								"reporte"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3F",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMTk0MTQxLCJleHAiOjE3MDAxOTQ3NDF9.h71jyRsX7VQwiZeRu08m5wuYCeiRVP8FkPzbLbOqK6Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8084/api/admin/viaje/tarifa/5000/2023-11-16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"api",
+								"admin",
+								"viaje",
+								"tarifa",
+								"5000",
+								"2023-11-16"
 							]
 						}
 					},
@@ -619,7 +619,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"idCuenta\": 4,\r\n    \"saldo\": 400.55,\r\n    \"fechaAlta\": \"2023-10-25\"\r\n}",
+									"raw": "{\r\n    \"idCuenta\": 0,\r\n    \"saldo\": 400.55,\r\n    \"fechaAlta\": \"2023-10-25\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -722,6 +722,15 @@
 							"request": {
 								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"idUsuario\": 0,\r\n  \"nombre\": \"Jose\",\r\n  \"apellido\": \"Guidi\",\r\n  \"mail\": \"joseguidi@gmail\",\r\n  \"numTelefono\": 249495804\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "http://localhost:8080/api/usuario",
 									"protocol": "http",
@@ -742,8 +751,17 @@
 							"request": {
 								"method": "PUT",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"idUsuario\": 2,\r\n  \"nombre\": \"aaa\",\r\n  \"apellido\": \"Guidi\",\r\n  \"mail\": \"jose@gmail\",\r\n  \"numTelefono\": 222222\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "http://localhost:8080/api/usuario/1",
+									"raw": "http://localhost:8080/api/usuario/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -752,7 +770,7 @@
 									"path": [
 										"api",
 										"usuario",
-										"1"
+										"2"
 									]
 								}
 							},
@@ -866,7 +884,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 54,\r\n  \"estado\": \"Disponible\",\r\n  \"kilometros\": 0,\r\n  \"latitud\": \"string\",\r\n  \"longitud\": \"string\",\r\n  \"tiempoEnUso\": 0,\r\n  \"tiempoEnPausa\": 0\r\n}",
+							"raw": "{\r\n  \"id\": 54,\r\n  \"estado\": \"Disponible\",\r\n  \"kilometros\": 250,\r\n  \"latitud\": \"200\",\r\n  \"longitud\": \"55\",\r\n  \"tiempoEnUso\": 10000,\r\n  \"tiempoEnPausa\": 10,\r\n  \"idParada\":54\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -874,14 +892,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8081/monopatin/1",
+							"raw": "localhost:8081/monopatin/5",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
 								"monopatin",
-								"1"
+								"5"
 							]
 						}
 					},
@@ -894,7 +912,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"estado\": \"Disponible\",\r\n  \"kilometros\": 5000,\r\n  \"latitud\": \"155\",\r\n  \"longitud\": \"255\",\r\n  \"tiempoEnUso\": 2500,\r\n  \"tiempoEnPausa\": 155,\r\n  \"idParada\":5\r\n}",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"estado\": \"Disponible\",\r\n  \"kilometros\": 0,\r\n  \"latitud\": \"154.366\",\r\n  \"longitud\": \"25.9\",\r\n  \"tiempoEnUso\": 0,\r\n  \"tiempoEnPausa\":0,\r\n  \"parada\": {\r\n    \"id\": 2\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -920,14 +938,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/monopatin/2",
+							"raw": "localhost:8081/monopatin/3",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
 								"monopatin",
-								"2"
+								"3"
 							]
 						}
 					},

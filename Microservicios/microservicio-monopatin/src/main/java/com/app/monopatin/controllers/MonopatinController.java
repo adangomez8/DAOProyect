@@ -71,14 +71,14 @@ public class MonopatinController {
             return ResponseEntity.status(HttpStatus.OK).body(m);
         }
         else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Monopatin no encontrado");
         }
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<?>create(@RequestBody Monopatin m, @PathVariable Integer id) throws Exception {
+    @PostMapping("")
+    public ResponseEntity<?>create(@RequestBody Monopatin m) throws Exception {
         try{
-        	service.create(m,id);
+        	service.create(m);
             return ResponseEntity.status(HttpStatus.CREATED).body(m);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear monopatin, ingrese campos correctos");
@@ -93,17 +93,17 @@ public class MonopatinController {
             return ResponseEntity.status(HttpStatus.OK).body(m);
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("Error al modificar.Verifique que el monopatin exista");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al modificar.Verifique que el monopatin exista");
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?>delete(@PathVariable Integer id){
 
-        try {
-            service.delete(id);
+        MonopatinDto aux = service.delete(id);
+        if(aux != null)
             return ResponseEntity.status(HttpStatus.OK).body("Monopatin eliminado");
-        } catch (Exception e) {
+        else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. El monopatin que desea eliminar no existe");
         }
     }

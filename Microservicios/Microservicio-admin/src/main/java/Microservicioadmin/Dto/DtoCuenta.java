@@ -1,18 +1,15 @@
 package Microservicioadmin.Dto;
 
-<<<<<<< HEAD
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@NoArgsConstructor
-=======
+
+
 import lombok.Data;
 
 import java.time.LocalDate;
-
 @Data
->>>>>>> e1b5f64502fe0e1f6a8941f4ebdcd11cf87e3ac7
 public class DtoCuenta {
 	
 	private Integer idCuenta;

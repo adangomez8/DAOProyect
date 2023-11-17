@@ -58,29 +58,42 @@ public class CuentaService {
 	}
 	
 	@Transactional
-	public void create(@RequestBody Cuenta c) {
-		
-		if(!repository.existsById(c.getIdCuenta())) {	
-			repository.save(c);		
-		}
-	}
-	
-	@Transactional
-	public void update(@RequestBody Cuenta c) {
-		
-		if(repository.existsById(c.getIdCuenta())) {
-			repository.save(c);
-		}
-	}
-	
-	@Transactional
-	public void delete (@PathVariable Integer id) {
-		Optional<Cuenta>cuenta=repository.findById(id);
-		
-		if(cuenta.isPresent()) {
-			Cuenta cu= cuenta.get();
-			repository.delete(cu);
-		}
-	}
+	public DtoCuenta create(@RequestBody Cuenta c) {
 
+		if(!repository.existsById(c.getIdCuenta())) {
+			repository.save(c);
+			return transformDTO(c);
+		}else{
+			return null;
+		}
+	}
+	
+	@Transactional
+	public DtoCuenta update(Cuenta c,int id) {
+		
+		if(repository.existsById(c.getIdCuenta()) && c.getIdCuenta() == id) {
+			repository.save(c);
+			return transformDTO(c);
+		}else return null;
+	}
+	
+	@Transactional
+	public DtoCuenta delete (int id) throws Exception {
+		Optional<Cuenta>cuenta=repository.findById(id);
+
+		if(cuenta.isPresent()){
+
+			try {
+				repository.deleteById(id);
+				return transformDTO(cuenta.get());
+			}catch (Exception e){
+				throw new Exception();
+			}
+
+		}else return null;
+
+	}
+	private DtoCuenta transformDTO(Cuenta c){
+		return 	new DtoCuenta(c.getIdCuenta(),c.getSaldo(),c.getFechaAlta());
+	}
 }

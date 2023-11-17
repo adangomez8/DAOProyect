@@ -72,21 +72,24 @@ public class UsuarioService {
 	}
 	
 	@Transactional
-	public void update(@RequestBody Usuario u) {
+	public DtoUsuario update(Usuario u,Integer i) {
 		
-		if(repository.existsById(u.getIdUsuario())) {
+		if(repository.existsById(i) && u.getIdUsuario() == i) {
 			repository.save(u);
-		}
+			return transformDTO(u);
+		}else
+			return null;
 	}
 	
 	@Transactional
-	public void delete (@PathVariable Integer id) {
+	public DtoUsuario delete (@PathVariable Integer id) {
 		Optional<Usuario>user=repository.findById(id);
 		
 		if(user.isPresent()) {
 			Usuario us= user.get();
 			repository.delete(us);
-		}
+			return transformDTO(us);
+		}else return null;
 	}
 
 	@Transactional
@@ -101,5 +104,9 @@ public class UsuarioService {
 			return new ArrayList<>();
 		}
 
+	}
+
+	private DtoUsuario transformDTO(Usuario u){
+		return new DtoUsuario(u.getIdUsuario(),u.getNombre(), u.getApellido(), u.getMail(),u.getNumTelefono(),u.getCuentas());
 	}
 }

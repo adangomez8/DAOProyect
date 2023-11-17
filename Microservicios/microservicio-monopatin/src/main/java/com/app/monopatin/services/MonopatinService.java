@@ -57,31 +57,31 @@ public class MonopatinService {
 
     @SuppressWarnings("deprecation")
 	@Transactional
-    public void create(Monopatin monopatin,@PathVariable Integer id) throws Exception {
+    public void create(Monopatin monopatin) throws Exception {
         try{
         	if(!repository.existsById(monopatin.getId())) {
-        	Parada parada=pRepository.getById(id);
-        	System.out.println("entro");
+        	Parada parada=pRepository.getById(monopatin.get_parada().getId());
         	Monopatin m= new Monopatin(monopatin.getId(),monopatin.getEstado(),monopatin.getLatitud(),monopatin.getLongitud(),parada);
             repository.save(m);
         	}
             //this.convertDto(monopatin,id);
         }catch (Exception e){
         	e.printStackTrace();
-        	System.out.println("hola");
             throw new Exception(e.getMessage());
         }
     }
 
     @Transactional
-    public void delete(@PathVariable int id) {
+    public MonopatinDto delete(@PathVariable int id) {
 
         Optional<Monopatin> optionalMonopatin = repository.findById(id);
 
         if (optionalMonopatin.isPresent()) {
             Monopatin monopatin = optionalMonopatin.get();
             repository.deleteById(id);
-            this.convertDto(monopatin);
+            return convertDto(monopatin);
+        }else{
+            return null;
         }
     }
 
@@ -100,7 +100,7 @@ public class MonopatinService {
     public void update(int id, MonopatinDto monopatinDto) {
 
         Optional<Monopatin> optionalMonopatin = repository.findById(id);
-
+        Optional<Parada> optionalParada = pRepository.findById(monopatinDto.getIdParada());
         if(optionalMonopatin!=null) {
             Monopatin monopatin = optionalMonopatin.get();
 
@@ -110,7 +110,7 @@ public class MonopatinService {
             monopatin.setLongitud(monopatinDto.getLongitud());
             monopatin.setTiempoEnUso(monopatinDto.getTiempoEnUso());
             monopatin.setTiempoEnPausa(monopatinDto.getTiempoEnPausa());
-
+            monopatin.setParada(optionalParada.get());
             repository.save(monopatin);
         }
     }

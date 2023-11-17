@@ -48,30 +48,30 @@ public class CuentaController {
 			return ResponseEntity.status(HttpStatus.OK).body(c);
 		}
 		else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. La cuenta no existe");
 		}
 	}
 	
 	@PostMapping("")
 	public ResponseEntity<?>create(@RequestBody Cuenta c){
-		try {
-			service.create(c);
-			return ResponseEntity.status(HttpStatus.CREATED).body(c);
+		DtoCuenta aux =	service.create(c);
+		if(aux!=null) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(aux);
 		}
-		catch(Exception e) {
+		else{
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al dar de alta.Verifique de ingresar todos los campos requeridos");
 		}
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?>update(@RequestBody Cuenta c ){
+	public ResponseEntity<?>update(@RequestBody Cuenta c,@PathVariable int id ){
 		
-		try {
-			service.update(c);
+		DtoCuenta aux =	service.update(c,id);
+		if(aux != null)
 			return ResponseEntity.status(HttpStatus.OK).body(c);
 			
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("Error al modificar.Verifique que la cuenta exista");
+		else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al modificar.Verifique que la cuenta exista");
 		}
 	}
 	
@@ -79,11 +79,18 @@ public class CuentaController {
 	public ResponseEntity<?>delete(@PathVariable Integer id){
 		
 		try {
-			service.delete(id);
-			return ResponseEntity.status(HttpStatus.OK).body("Cuenta eliminada");
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.La cuenta que desea eliminar no existe o tiene usuarios asociados");
+			DtoCuenta dto =	service.delete(id);
+			if(dto!=null)
+				return ResponseEntity.status(HttpStatus.OK).body(dto);
+			else  {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.La cuenta que desea eliminar no existe");
+			}
+		}catch (Exception e){
+
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Tiene usuarios asociados");
 		}
+
+
 	}
 
 }
