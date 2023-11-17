@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -46,13 +47,15 @@ public class ViajeController {
     }
     
     @GetMapping("/recaudacion")
-    public ResponseEntity<?>getRecaudacion(@RequestParam(name="anio")String anio,@RequestParam(name="mesIni")String mesIni,@RequestParam(name="mesFin")String mesFin){
+    public ResponseEntity<?>getRecaudacion(@RequestParam(name="anio")int anio,@RequestParam(name="mesIni")int mesIni,@RequestParam(name="mesFin")int mesFin){
     	try {
     		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date fechaAnio = dateFormat.parse(anio);
-            Date fechaMesIni = dateFormat.parse(mesIni);
-            Date fechaMesFin = dateFormat.parse(mesFin);
-    		double recaudacion= viajeService.getRecaudacion(fechaAnio, fechaMesIni, fechaMesFin);
+            String dateString = String.format("%04d-%02d-%02d", anio, mesIni, 1);
+            Date dateI = dateFormat.parse(dateString);
+            dateString = String.format("%04d-%02d-%02d", anio, mesFin, 28);
+            Date dateF = dateFormat.parse(dateString);
+            System.out.println(dateF);
+    		double recaudacion= viajeService.getRecaudacion(dateI,dateF);
     		return ResponseEntity.status(HttpStatus.OK).body(recaudacion);
     	}
     	catch(Exception e) {

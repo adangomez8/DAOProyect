@@ -29,9 +29,9 @@ public class ViajeService {
     }
     
     @Transactional
-    public double getRecaudacion(Date anio,Date mesIni,Date mesFin) {
+    public double getRecaudacion(Date inicio,Date fin) {
     	try {
-			return  ViajeRepository.getRecaudacion(anio,mesIni,mesFin);
+			return  ViajeRepository.getRecaudacion(inicio,fin);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

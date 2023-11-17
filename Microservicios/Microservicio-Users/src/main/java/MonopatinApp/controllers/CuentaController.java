@@ -82,7 +82,7 @@ public class CuentaController {
 			service.delete(id);
 			return ResponseEntity.status(HttpStatus.OK).body("Cuenta eliminada");
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.La cuenta que desea eliminar no existe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.La cuenta que desea eliminar no existe o tiene usuarios asociados");
 		}
 	}
 

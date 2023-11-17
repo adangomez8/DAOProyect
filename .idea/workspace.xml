@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcd839bd-d5c2-4ac4-ad93-5ea041bdc97d" name="Changes" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/main/java/Microservicioadmin/Dto/DtoCuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/main/java/Microservicioadmin/Dto/DtoCuenta.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/main/java/Microservicioadmin/Dto/DtoParada.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/main/java/Microservicioadmin/Dto/DtoParada.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/test/java/Microservicioadmin/Controllers/AdminControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/test/java/Microservicioadmin/Controllers/AdminControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/test/resources/application.properties" beforeDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> e1b5f64502fe0e1f6a8941f4ebdcd11cf87e3ac7
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,8 +230,14 @@
       <workItem from="1698426021655" duration="6071000" />
       <workItem from="1700082523948" duration="1876000" />
       <workItem from="1700178281622" duration="972000" />
+<<<<<<< HEAD
       <workItem from="1700183729231" duration="3327000" />
       <workItem from="1700223024615" duration="3703000" />
+=======
+      <workItem from="1700183729231" duration="3191000" />
+      <workItem from="1700190924807" duration="543000" />
+      <workItem from="1700220887811" duration="818000" />
+>>>>>>> e1b5f64502fe0e1f6a8941f4ebdcd11cf87e3ac7
     </task>
     <servers />
   </component>
@@ -238,8 +249,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Microservicios/Microservicio-admin/src/main/java/Microservicioadmin/Controllers/AdminController.java</url>
+<<<<<<< HEAD
           <line>64</line>
           <option name="timeStamp" value="8" />
+=======
+          <line>95</line>
+          <option name="timeStamp" value="4" />
+>>>>>>> e1b5f64502fe0e1f6a8941f4ebdcd11cf87e3ac7
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

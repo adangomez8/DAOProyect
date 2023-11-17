@@ -18,10 +18,9 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
 
 	
 	@Query("SELECT SUM((v.precio * v.km_recorridos)+ v.tarifa_extra) FROM Viaje v "+
-			"WHERE YEAR(v.fecha_fin)= :anio "+
-			"AND MONTH(v.fecha_fin) BETWEEN :mesIni AND :mesFin ")
+			"WHERE v.fecha_inicio BETWEEN :inicio AND :fin")
 	static
-	double getRecaudacion(@Param("anio") Date anio,@Param("mesIni")Date mesIni,@Param("mesFin")Date mesFin) {
+	double getRecaudacion(@Param("inicio") Date inicio,@Param("fin")Date fin) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

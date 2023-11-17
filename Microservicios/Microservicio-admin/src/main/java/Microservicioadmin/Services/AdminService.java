@@ -30,9 +30,8 @@ public class AdminService {
 		template.postForObject("http://localhost:8081/parada", parada, DtoParada.class);
 	}
 	
-	public void saveCuenta(@RequestBody DtoCuenta cuenta) {
-		
-		template.postForObject("http://localhost:8080/api/cuenta", cuenta, DtoCuenta.class);
+	public DtoCuenta saveCuenta(@RequestBody DtoCuenta cuenta) {
+		return template.postForObject("http://localhost:8080/api/cuenta", cuenta, DtoCuenta.class);
 	}
 	
 	public void deleteMonopatin(Integer id) {
@@ -46,16 +45,15 @@ public class AdminService {
 	}
 	
 	public void deleteCuenta(Integer id) {
-		
-		template.delete("http://localhost:8080/api/cuenta/"+id);
+		template.getForEntity("http://localhost:8080/api/cuenta/"+id,DtoCuenta.class);
 	}
 	
-	public void updatePrecio(double precio,Date fecha) {
-		template.put("http://localhost:8082/api/viaje/actualizar?precio="+precio+"&fecha='"+fecha+"'",null);
+	public void updatePrecio(double precio,String fecha) {
+		template.put("http://localhost:8082/api/viaje/actualizar?precio="+precio+"&fecha="+fecha,null);
 	}
 	
-	public double getRecaudacion() {
-		ResponseEntity<Double>response= template.getForEntity("http://localhost:8082/api/viaje/recaudacion",Double.class);
+	public double getRecaudacion(int a,int i,int f) {
+		ResponseEntity<Double>response= template.getForEntity("http://localhost:8082/api/viaje/recaudacion?anio="+a+"&mesIni="+i+"&mesFin="+f ,Double.class);
 		
 		if(response.getStatusCode().is2xxSuccessful()) {
 			Double recaudacion= response.getBody();

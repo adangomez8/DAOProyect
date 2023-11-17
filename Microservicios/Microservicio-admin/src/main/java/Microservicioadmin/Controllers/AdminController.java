@@ -35,8 +35,9 @@ public class AdminController {
 	private final AuthService authService;
 	
 	
-	@PutMapping("/viaje/tarifa/{precio}/{fecha}")
-	public ResponseEntity<?>updatePrecio(@PathVariable double precio, @PathVariable Date fecha){
+	@PutMapping("/viaje/tarifa")
+	public ResponseEntity<?>updatePrecio(@RequestParam(name = "precio") double precio,
+										 @RequestParam(name="fecha")String fecha){
 		try {
 			service.updatePrecio(precio, fecha);
 			return ResponseEntity.status(HttpStatus.OK).body("Tarifa actualizada");
@@ -60,9 +61,12 @@ public class AdminController {
 	}
 	
 	@GetMapping("/viaje/recaudacion")
-	public ResponseEntity<?> getRecaudacion(){
+	public ResponseEntity<?> getRecaudacion(@RequestParam(name = "anio") int anio,
+											@RequestParam(name = "mesIni") int mesIni,
+											@RequestParam(name = "mesFin") int mesFin
+											){
 		try {
-			double recaudacion= service.getRecaudacion();
+			double recaudacion= service.getRecaudacion(anio,mesIni,mesFin);
 			return ResponseEntity.status(HttpStatus.OK).body(recaudacion);		
 			}
 		catch(Exception e) {
@@ -96,10 +100,11 @@ public class AdminController {
 	
 	@PostMapping("/cuenta")
 	public ResponseEntity<?> saveCuenta(@RequestBody DtoCuenta cuenta){
-		try {
-			service.saveCuenta(cuenta);
-			return ResponseEntity.status(HttpStatus.CREATED).body("Cuenta agregada");
-		} catch (Exception e) {
+
+		DtoCuenta aux =	service.saveCuenta(cuenta);
+		if(aux!=null){
+			return ResponseEntity.status(HttpStatus.CREATED).body(aux);
+		} else{
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear cuenta. Verifique que los campos sean validos");
 		}
 	}
@@ -137,7 +142,7 @@ public class AdminController {
 
 	@GetMapping("/monopatin/año/{year}")
 	public ResponseEntity<?> getMonopatinByYear(@PathVariable Integer year, @RequestParam(name = "cantidad") Integer cantidad){
-		
+
 		List<DtoMonopatin> monopatinList = service.getAllMonopatinesByYear(year,cantidad);
 		if(monopatinList != null){
 			return ResponseEntity.status(HttpStatus.OK).body(monopatinList);
