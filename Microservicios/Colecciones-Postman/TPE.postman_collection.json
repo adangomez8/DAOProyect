@@ -1,10 +1,7 @@
 {
 	"info": {
-<<<<<<< HEAD
-		"_postman_id": "f4dd2699-1fca-4112-bf71-092de8cf5e05",
-=======
 		"_postman_id": "25d459ce-43ac-42c8-8c21-52bd27d77d46",
->>>>>>> 699b5615487c66277bae4db5c704fb54bff746b6
+
 		"name": "TPE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27785309",
