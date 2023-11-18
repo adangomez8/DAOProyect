@@ -38,7 +38,7 @@ class AdminControllerTest {
     }
 
     @Test
-    void updatePrecio() throws Exception {
+    void updatePrecio() throws Exception {//cambiar valores segun sea necesario para el test
         MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.put(BASE_URL+"/viaje/tarifa/{precio}/{fecha}").queryParam("precio","10").queryParam("fecha","22/10/2023").contentType(MediaType.APPLICATION_JSON)).andReturn();
         assertEquals(200,mockResult.getResponse().getStatus());
     }
@@ -50,7 +50,7 @@ class AdminControllerTest {
     }
 
     @Test
-    void getRecaudacion() throws Exception {
+    void getRecaudacion() throws Exception {//cambiar valores segun sea necesario para el test
         MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL+"/viaje/recaudacion").queryParam("anio","2023").queryParam("mesIni","8").queryParam("mesFin","10").accept(MediaType.APPLICATION_JSON)).andReturn();
         assertEquals(200,mockResult.getResponse().getStatus());
     }
@@ -78,21 +78,21 @@ class AdminControllerTest {
 
     @Test
     void deleteMonopatin() throws Exception {
-        int id=1;
+        int id=20;
         MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.delete(BASE_URL+"/monopatin/"+id).contentType(MediaType.APPLICATION_JSON)).andReturn();
         assertEquals(200,mockResult.getResponse().getStatus());
     }
 
     @Test
     void deleteParada() throws Exception {
-        int id=1;
+        int id=20;
         MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.delete(BASE_URL+"/parada/"+id).contentType(MediaType.APPLICATION_JSON)).andReturn();
         assertEquals(200,mockResult.getResponse().getStatus());
     }
 
     @Test
     void deleteCuenta() throws Exception {
-        int id=1;
+        int id=20;
         MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.delete(BASE_URL+"/cuenta/"+id).contentType(MediaType.APPLICATION_JSON)).andReturn();
         assertEquals(200,mockResult.getResponse().getStatus());
     }
@@ -109,14 +109,14 @@ class AdminControllerTest {
 
     private DtoCuenta crearCuenta(){
         DtoCuenta cuenta=new DtoCuenta();
-        cuenta.setIdCuenta(2);;
+        cuenta.setIdCuenta(20);;
         cuenta.setFechaAlta(null);
         cuenta.setSaldo(30.0);
         return cuenta;
     }
     private DtoParada crearParada(){
         DtoParada parada=new DtoParada();
-        parada.setId(1);
+        parada.setId(20);
         parada.setLatitud("300");
         parada.setLongitud("3000");
         parada.setMonopatines(3);
@@ -125,7 +125,7 @@ class AdminControllerTest {
 
     private DtoMonopatin crearMonopatin(){
         DtoMonopatin monopatin=new DtoMonopatin();
-        monopatin.setId(1);
+        monopatin.setId(20);
         monopatin.setEstado("Disponible");
         monopatin.setKilometros(5000);
         monopatin.setLatitud("30");

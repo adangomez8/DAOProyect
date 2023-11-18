@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fcd839bd-d5c2-4ac4-ad93-5ea041bdc97d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/test/java/Microservicioadmin/Controllers/AdminControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/test/java/Microservicioadmin/Controllers/AdminControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Microservicios/microservicio-monopatin/src/main/java/com/app/monopatin/services/MonopatinService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/microservicio-monopatin/src/main/java/com/app/monopatin/services/MonopatinService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
