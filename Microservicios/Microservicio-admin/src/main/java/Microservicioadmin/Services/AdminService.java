@@ -21,13 +21,12 @@ public class AdminService {
 	
 	public void saveMonopatin(@RequestBody DtoMonopatin monopatin) {
 
-
 		template.postForObject("http://localhost:8081/monopatin", monopatin, DtoMonopatin.class);
 	}
 	
 	public void saveParada(@RequestBody DtoParada parada) {
 		
-		template.postForObject("http://localhost:8081/parada", parada, DtoParada.class);
+		template.postForObject("http://localhost:8081/api/parada", parada, DtoParada.class);
 	}
 	
 	public DtoCuenta saveCuenta(@RequestBody DtoCuenta cuenta) {
@@ -41,7 +40,7 @@ public class AdminService {
 	
 	public void deleteParada(Integer id) {
 		
-		template.delete("http://localhost:8081/parada/"+id);
+		template.delete("http://localhost:8081/api/parada/"+id);
 	}
 	
 	public void deleteCuenta(Integer id) {
@@ -89,7 +88,8 @@ public class AdminService {
 	}
 
 	public List<DtoMonopatin> getAllMonopatinesByYear(Integer year, Integer cantidad) {
-		ResponseEntity<List> response = template.getForEntity("http://localhost:8082/api/viaje/year/2023?cantidad=2",List.class);
+
+		ResponseEntity<List> response = template.getForEntity("http://localhost:8082/api/viaje/year/"+year+"?cantidad="+cantidad,List.class);
 		if(response.getStatusCode().is4xxClientError()){
 
 			return null;

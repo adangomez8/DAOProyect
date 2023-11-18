@@ -57,10 +57,11 @@ public class MonopatinService {
 
     @SuppressWarnings("deprecation")
 	@Transactional
-    public void create(Monopatin monopatin) throws Exception {
+    public void create(MonopatinDto monopatin) throws Exception {
         try{
         	if(!repository.existsById(monopatin.getId())) {
-        	Parada parada=pRepository.getById(monopatin.get_parada().getId());
+        	Parada parada=pRepository.getById(monopatin.getIdParada());
+            System.out.println(parada);
         	Monopatin m= new Monopatin(monopatin.getId(),monopatin.getEstado(),monopatin.getLatitud(),monopatin.getLongitud(),parada);
             repository.save(m);
         	}

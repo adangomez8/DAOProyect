@@ -109,7 +109,7 @@ public class ViajeController {
     public ResponseEntity<?> getInYear(@PathVariable int year,@RequestParam(name = "cantidad") int cant){
         List<Integer> list = viajeService.getAllViajesInYear(year, cant);
         if(list.isEmpty()){
-           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay viajes que cumplan la condicion");
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay viajes que cumplan la condicion");
         }else{
             List<MonopatinDto> listMonopatin = viajeService.getAllMonopatines(list);
             return ResponseEntity.status(HttpStatus.OK).body(listMonopatin);

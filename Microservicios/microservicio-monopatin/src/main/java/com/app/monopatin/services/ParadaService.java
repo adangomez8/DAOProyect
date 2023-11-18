@@ -23,7 +23,7 @@ public class ParadaService {
     public ParadaDto getById(@PathVariable Integer id) {
 
         Optional<Parada> parada= repository.findById(id);
-
+        System.out.println(parada);
         if(parada.isPresent()) {
             return (this.convertDto(parada.get()));
         }

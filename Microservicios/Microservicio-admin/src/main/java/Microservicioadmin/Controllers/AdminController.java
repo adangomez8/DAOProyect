@@ -103,6 +103,7 @@ public class AdminController {
 
 		DtoCuenta aux =	service.saveCuenta(cuenta);
 		if(aux!=null){
+			System.out.println("bien");
 			return ResponseEntity.status(HttpStatus.CREATED).body(aux);
 		} else{
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear cuenta. Verifique que los campos sean validos");

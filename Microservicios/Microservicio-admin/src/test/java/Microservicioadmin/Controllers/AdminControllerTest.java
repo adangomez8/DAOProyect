@@ -51,7 +51,7 @@ class AdminControllerTest {
 
     @Test
     void getRecaudacion() throws Exception {
-        MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL+"/viaje/recaudacion").accept(MediaType.APPLICATION_JSON)).andReturn();
+        MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL+"/viaje/recaudacion").queryParam("anio","2023").queryParam("mesIni","8").queryParam("mesFin","10").accept(MediaType.APPLICATION_JSON)).andReturn();
         assertEquals(200,mockResult.getResponse().getStatus());
     }
 
@@ -78,39 +78,39 @@ class AdminControllerTest {
 
     @Test
     void deleteMonopatin() throws Exception {
-        MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.put(BASE_URL+"/monopatin/{id}").queryParam("id","1").contentType(MediaType.APPLICATION_JSON)).andReturn();
+        int id=1;
+        MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.delete(BASE_URL+"/monopatin/"+id).contentType(MediaType.APPLICATION_JSON)).andReturn();
         assertEquals(200,mockResult.getResponse().getStatus());
     }
 
     @Test
     void deleteParada() throws Exception {
-        MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.put(BASE_URL+"/parada/{id}").queryParam("id","1").contentType(MediaType.APPLICATION_JSON)).andReturn();
+        int id=1;
+        MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.delete(BASE_URL+"/parada/"+id).contentType(MediaType.APPLICATION_JSON)).andReturn();
         assertEquals(200,mockResult.getResponse().getStatus());
     }
 
     @Test
     void deleteCuenta() throws Exception {
-        MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.put(BASE_URL+"/cuenta/{id}").queryParam("id","1").contentType(MediaType.APPLICATION_JSON)).andReturn();
+        int id=1;
+        MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.delete(BASE_URL+"/cuenta/"+id).contentType(MediaType.APPLICATION_JSON)).andReturn();
         assertEquals(200,mockResult.getResponse().getStatus());
     }
 
     @Test
-    void getMonopatinByYear() {
+    void getMonopatinByYear() throws Exception {
+        int year=2023;
+        MvcResult mockResult=mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL+"/monopatin/año/"+year).queryParam("cantidad","1").contentType(MediaType.APPLICATION_JSON)).andReturn();
+        assertEquals(200,mockResult.getResponse().getStatus());
     }
 
-    @Test
-    void login() {
-    }
 
-    @Test
-    void register() {
-    }
 
 
     private DtoCuenta crearCuenta(){
         DtoCuenta cuenta=new DtoCuenta();
-        cuenta.setIdCuenta(1);;
-        cuenta.setFechaAlta(LocalDate.now());
+        cuenta.setIdCuenta(2);;
+        cuenta.setFechaAlta(null);
         cuenta.setSaldo(30.0);
         return cuenta;
     }
@@ -130,7 +130,7 @@ class AdminControllerTest {
         monopatin.setKilometros(5000);
         monopatin.setLatitud("30");
         monopatin.setLongitud("333");
-        monopatin.setIdParada(3);
+        monopatin.setIdParada(2);
         monopatin.setTiempoEnPausa(2);
         monopatin.setTiempoEnUso(10);
         return monopatin;

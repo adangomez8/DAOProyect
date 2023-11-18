@@ -5,6 +5,7 @@ import com.app.monopatin.dtos.ViajeDto;
 import com.app.monopatin.entitys.Monopatin;
 import com.app.monopatin.entitys.Parada;
 import com.app.monopatin.services.MonopatinService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,6 @@ public class MonopatinController {
     @Autowired
     private MonopatinService service;
 
-    @Autowired
-    private RestTemplate restTemplate;
     
     @GetMapping("/disponibles")
     
@@ -76,8 +75,10 @@ public class MonopatinController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?>create(@RequestBody Monopatin m) throws Exception {
+    public ResponseEntity<?>create(@RequestBody MonopatinDto m) throws Exception {
+
         try{
+
         	service.create(m);
             return ResponseEntity.status(HttpStatus.CREATED).body(m);
         }catch(Exception e){
