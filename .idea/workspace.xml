@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcd839bd-d5c2-4ac4-ad93-5ea041bdc97d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/test/java/Microservicioadmin/Services/AdminServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Microservicios/Microservicio-admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/Microservicio-admin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/main/java/Microservicioadmin/Services/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/Microservicio-admin/src/main/java/Microservicioadmin/Services/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Microservicios/microservicio-monopatin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/microservicio-monopatin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Microservicios/microservicio-monopatin/src/main/java/com/app/monopatin/controllers/MonopatinController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/microservicio-monopatin/src/main/java/com/app/monopatin/controllers/MonopatinController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Microservicios/microservicio-monopatin/src/main/java/com/app/monopatin/dtos/MonopatinDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/microservicio-monopatin/src/main/java/com/app/monopatin/dtos/MonopatinDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Microservicios/microservicio-monopatin/src/main/java/com/app/monopatin/services/MonopatinService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Microservicios/microservicio-monopatin/src/main/java/com/app/monopatin/services/MonopatinService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +78,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AdminServiceTest.getAllMonopatinesByYear">
+  <component name="RunManager" selected="Spring Boot.MicroservicioMonopatinApplication">
     <configuration name="AdminServiceTest.getAllMonopatinesByYear" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Microservicio-admin" />
       <extension name="coverage">
@@ -149,22 +143,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.updatePrecio" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Microservicio-admin" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Microservicioadmin.Services.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Microservicioadmin.Services" />
-      <option name="MAIN_CLASS_NAME" value="Microservicioadmin.Services.AdminServiceTest" />
-      <option name="METHOD_NAME" value="updatePrecio" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ApiRestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="APIRest" />
@@ -197,6 +175,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MicroservicioMonopatinApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="Microservicio-monopatin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.app.monopatin.MicroservicioMonopatinApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.app.monopatin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MicroservicioViajeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="Microservicio-Viaje" />
@@ -207,11 +199,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.MicroservicioMonopatinApplication" />
         <item itemvalue="JUnit.AdminServiceTest.getAllMonopatinesByYear" />
         <item itemvalue="JUnit.AdminServiceTest.getCantMonopatinMantenimiento" />
         <item itemvalue="JUnit.AdminServiceTest.getCantMonopatinDisponible" />
         <item itemvalue="JUnit.AdminServiceTest.getRecaudacion" />
-        <item itemvalue="JUnit.AdminServiceTest.updatePrecio" />
       </list>
     </recent_temporary>
   </component>

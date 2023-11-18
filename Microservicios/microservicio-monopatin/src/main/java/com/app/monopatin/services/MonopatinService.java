@@ -60,8 +60,9 @@ public class MonopatinService {
     public void create(MonopatinDto monopatin) throws Exception {
         try{
         	if(!repository.existsById(monopatin.getId())) {
+            System.out.println(monopatin);
         	Parada parada=pRepository.getById(monopatin.getIdParada());
-            System.out.println(parada);
+
         	Monopatin m= new Monopatin(monopatin.getId(),monopatin.getEstado(),monopatin.getLatitud(),monopatin.getLongitud(),parada);
             repository.save(m);
 
