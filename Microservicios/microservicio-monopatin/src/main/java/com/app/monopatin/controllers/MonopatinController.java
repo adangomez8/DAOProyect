@@ -78,7 +78,6 @@ public class MonopatinController {
     public ResponseEntity<?>create(@RequestBody MonopatinDto m) throws Exception {
 
         try{
-
         	service.create(m);
             return ResponseEntity.status(HttpStatus.CREATED).body(m);
         }catch(Exception e){

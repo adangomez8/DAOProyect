@@ -4,6 +4,8 @@ package com.app.monopatin.dtos;
 import com.app.monopatin.entitys.Parada;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Getter;
 

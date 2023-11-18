@@ -64,6 +64,7 @@ public class MonopatinService {
             System.out.println(parada);
         	Monopatin m= new Monopatin(monopatin.getId(),monopatin.getEstado(),monopatin.getLatitud(),monopatin.getLongitud(),parada);
             repository.save(m);
+
         	}
             //this.convertDto(monopatin,id);
         }catch (Exception e){

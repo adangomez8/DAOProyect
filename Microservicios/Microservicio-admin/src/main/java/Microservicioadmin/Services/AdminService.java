@@ -44,7 +44,7 @@ public class AdminService {
 	}
 	
 	public void deleteCuenta(Integer id) {
-		template.getForEntity("http://localhost:8080/api/cuenta/"+id,DtoCuenta.class);
+		template.delete("http://localhost:8080/api/cuenta/"+id);
 	}
 	
 	public void updatePrecio(double precio,String fecha) {
