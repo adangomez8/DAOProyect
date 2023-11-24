@@ -116,7 +116,7 @@ class AdminServiceTest {
     }
 
     @Test
-    void getAllMonopatinesByYear() {
+    void getAllMonopatinesByYear() throws Exception{
         List<DtoMonopatin> monopatines = Arrays.asList(new DtoMonopatin(), new DtoMonopatin());
         ResponseEntity<List> responseEntity = new ResponseEntity<>(monopatines, HttpStatus.OK);
         when(restTemplate.getForEntity(anyString(), eq(List.class)))

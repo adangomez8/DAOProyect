@@ -144,10 +144,14 @@ public class AdminController {
 	@GetMapping("/monopatin/año/{year}")
 	public ResponseEntity<?> getMonopatinByYear(@PathVariable Integer year, @RequestParam(name = "cantidad") Integer cantidad){
 
-		List<DtoMonopatin> monopatinList = service.getAllMonopatinesByYear(year,cantidad);
-		if(monopatinList != null){
-			return ResponseEntity.status(HttpStatus.OK).body(monopatinList);
-		}else{
+		try{
+			List<DtoMonopatin> monopatinList = service.getAllMonopatinesByYear(year,cantidad);
+			if(monopatinList != null){
+				return ResponseEntity.status(HttpStatus.OK).body(monopatinList);
+			}else{
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay viajes que cumplan la condicion");
+			}
+		}catch (Exception e){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay viajes que cumplan la condicion");
 		}
 	}

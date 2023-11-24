@@ -87,14 +87,19 @@ public class AdminService {
 		}
 	}
 
-	public List<DtoMonopatin> getAllMonopatinesByYear(Integer year, Integer cantidad) {
+	public List<DtoMonopatin> getAllMonopatinesByYear(Integer year, Integer cantidad) throws Exception {
+		String url = "http://localhost:8082/api/viaje/year/"+year+"?cantidad="+cantidad;
+		try{
+			ResponseEntity<List> response = template.getForEntity(url,List.class);
 
-		ResponseEntity<List> response = template.getForEntity("http://localhost:8082/api/viaje/year/"+year+"?cantidad="+cantidad,List.class);
-		if(response.getStatusCode().is4xxClientError()){
+			if(response.getStatusCode().is4xxClientError()){
 
-			return null;
-		}else{
-			return response.getBody();
+				return null;
+			}else{
+				return response.getBody();
+			}
+		}catch (Exception e){
+			throw new Exception(e.getMessage());
 		}
 	}
 }

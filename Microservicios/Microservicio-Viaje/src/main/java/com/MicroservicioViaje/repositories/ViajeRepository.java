@@ -28,6 +28,6 @@ public interface ViajeRepository extends JpaRepository<Viaje, Integer> {
 	@Query("SELECT v.id_monopatin FROM Viaje v " +
 			"WHERE FUNCTION('YEAR', v.fecha_inicio) = :year " +
 			"GROUP BY v.id_monopatin " +
-			"HAVING COUNT(v.id_monopatin) > :cant")
+			"HAVING COUNT(*) > :cant")
 	List<Integer> getAllIn(@Param("year") int year, @Param("cant") int cant);
 }

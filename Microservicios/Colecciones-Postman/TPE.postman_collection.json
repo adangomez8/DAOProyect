@@ -1,7 +1,6 @@
 {
 	"info": {
 		"_postman_id": "25d459ce-43ac-42c8-8c21-52bd27d77d46",
-
 		"name": "TPE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27785309",
@@ -318,7 +317,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwMTk0MTQxLCJleHAiOjE3MDAxOTQ3NDF9.h71jyRsX7VQwiZeRu08m5wuYCeiRVP8FkPzbLbOqK6Q",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3NlIiwiaWF0IjoxNzAwNjA4OTM4LCJleHAiOjE3MDA2MDk1Mzh9.GfqpZx6LM__WFAGLDBVjbDp7p7c7prnmRHUWu7i8iHM",
 									"type": "string"
 								}
 							]
@@ -335,7 +334,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8084/api/admin/viaje/tarifa/5000/2023-11-16",
+							"raw": "http://localhost:8084/api/admin/viaje/tarifa?precio=5000&fecha=2023-11-16",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -345,9 +344,17 @@
 								"api",
 								"admin",
 								"viaje",
-								"tarifa",
-								"5000",
-								"2023-11-16"
+								"tarifa"
+							],
+							"query": [
+								{
+									"key": "precio",
+									"value": "5000"
+								},
+								{
+									"key": "fecha",
+									"value": "2023-11-16"
+								}
 							]
 						}
 					},
@@ -947,115 +954,6 @@
 							"path": [
 								"monopatin",
 								"3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetParadas",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "GetParadaId",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8081/api/parada/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"parada",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "BorrarParada",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8081/api/parada/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"parada",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AgregarParada",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"id\": 0,\r\n  \"latitud\": \"123\",\r\n  \"longitud\": \"321\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/api/parada",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"parada"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ModificarParada",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"id\": 0,\r\n  \"latitud\": \"40.7155\",\r\n  \"longitud\": \"-74.0077\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/api/parada/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"parada",
-								"1"
 							]
 						}
 					},
